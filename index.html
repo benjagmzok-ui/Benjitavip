@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mercado Pago - Tienda Oficial</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body { background-color: #f5f5f5; color: #333; font-family: sans-serif; }
+        .mp-blue { background-color: #009ee3; }
+        .card-shadow { box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
+        .modal-overlay { background: rgba(0,0,0,0.7); backdrop-filter: blur(2px); }
+    </style>
+</head>
+<body>
+
+    <nav class="bg-white p-4 shadow-sm flex justify-between items-center border-b border-gray-100">
+        <img src="https://logotipous.com/wp-content/uploads/2021/11/mercado-pago-logo.png" alt="Mercado Pago" class="h-6">
+        <div class="text-zinc-400 text-xs font-bold uppercase"><i class="fas fa-shield-alt mr-1"></i> Pago 100% Seguro</div>
+    </nav>
+
+    <main class="max-w-md mx-auto p-4 mt-4">
+        <div class="bg-white rounded-xl overflow-hidden card-shadow">
+            <div class="bg-white p-10 flex justify-center border-b border-gray-50">
+                <img src="https://http2.mlstatic.com/frontend-assets/ml-web-navigation/ui-navigation/5.21.22/mercadopago/logo__large.png" class="w-full object-contain h-20">
+            </div>
+            <div class="p-6">
+                <div class="mb-4">
+                    <span class="bg-blue-100 text-blue-600 text-[10px] font-bold px-2 py-1 rounded">PRODUCTO DIGITAL</span>
+                    <h2 class="text-xl font-bold text-gray-800 mt-2">APK Mercado Pago Falso</h2>
+                    <p class="text-gray-400 text-sm mt-1">Versión Full Premium 2026</p>
+                </div>
+                
+                <div class="mb-6">
+                    <span class="text-3xl font-light text-gray-900">$ 4.500</span>
+                    <span class="text-sm text-gray-400 font-medium"> ARS</span>
+                </div>
+
+                <button onclick="openModal()" class="w-full mp-blue text-white font-bold py-4 rounded-lg shadow-md hover:bg-blue-500 transition-all uppercase tracking-wide">
+                    Comprar Producto
+                </button>
+            </div>
+        </div>
+
+        <div class="mt-6 flex items-center justify-center gap-4 text-zinc-400">
+            <i class="fab fa-cc-visa text-2xl"></i>
+            <i class="fab fa-cc-mastercard text-2xl"></i>
+            <i class="fas fa-university text-xl"></i>
+        </div>
+    </main>
+
+    <div id="paymentModal" class="hidden fixed inset-0 modal-overlay flex items-center justify-center z-[100] p-4">
+        <div class="bg-white w-full max-w-sm rounded-2xl overflow-hidden shadow-2xl">
+            <div class="mp-blue p-5 text-white flex justify-between items-center">
+                <span class="font-bold">Datos de Transferencia</span>
+                <button onclick="closeModal()"><i class="fas fa-times"></i></button>
+            </div>
+
+            <div class="p-6">
+                <div class="space-y-4 mb-6">
+                    <div class="bg-blue-50 p-4 rounded-xl border border-blue-100">
+                        <p class="text-[10px] text-blue-400 uppercase font-black mb-1">Alias de Destino</p>
+                        <p class="text-lg font-mono font-bold text-blue-900 italic">dupe.benja2026</p>
+                    </div>
+
+                    <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                        <p class="text-[10px] text-gray-400 uppercase font-black mb-1">Titular de la Cuenta</p>
+                        <p class="text-md font-bold text-gray-800 uppercase">Benjamin Dario Gomez</p>
+                    </div>
+                </div>
+
+                <a href="https://wa.me/3364546172?text=Hola,%20ya%20realize%20el%20pago%20de%20la%20APK%20del%20mercado%20pago%20falso,%20aquí%20tienes%20el%20comprobante." 
+                   class="flex items-center justify-center gap-2
+                  
