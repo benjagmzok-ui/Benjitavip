@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda Oficial - Pago Seguro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body { background-color: #f5f5f5; font-family: sans-serif; margin: 0; }
+        .mp-blue { background-color: #009ee3; }
+        #cartelPago { display: none; position: fixed; inset: 0; z-index: 999; background: rgba(0,0,0,0.8); align-items: center; justify-content: center; padding: 15px; }
+        .visible { display: flex !important; }
+    </style>
+</head>
+<body>
+
+    <nav class="bg-white p-4 shadow-sm flex justify-between items-center border-b border-gray-100">
+        <span class="text-[#009ee3] font-bold text-lg italic">Mercado Pago</span>
+        <div class="text-zinc-400 text-[10px] font-bold uppercase"><i class="fas fa-shield-alt mr-1"></i> Pago Seguro</div>
+    </nav>
+
+    <main class="max-w-md mx-auto p-4 mt-2">
+        <div class="bg-white rounded-[30px] overflow-hidden shadow-xl border border-gray-100">
+            <div class="bg-[#fff000] p-8 flex justify-center">
+                <img src="https://logodownload.org/wp-content/uploads/2019/06/mercado-pago-logo-0.png" class="h-20 w-auto">
+            </div>
+            
+            <div class="p-8 text-center">
+                <span class="bg-blue-50 text-blue-500 text-[10px] font-black px-4 py-1 rounded-full uppercase">Disponible</span>
+                <h2 class="text-2xl font-black text-gray-800 mt-4 uppercase italic">APK Mercado Pago Falso</h2>
+                <p class="text-gray-500 text-sm mt-3 font-medium leading-tight">
+                    Pagos con QR funcionando. Llega en 5 minutos y después desaparece. Errores actualizado.
+                </p>
+                
+                <div class="my-6">
+                    <span class="text-4xl font-black text-gray-900">$ 4.500</span>
+                </div>
+
+                <button onclick="document.getElementById('cartelPago').classList.add('visible')" 
+                        class="w-full mp-blue text-white font-black py-5 rounded-2xl shadow-lg active:scale-95 transition-all uppercase text-lg">
+                    Comprar Producto
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <div id="cartelPago">
+        <div class="bg-white w-full max-w-sm rounded-[25px] overflow-hidden shadow-2xl">
+            <div class="mp-blue p-5 text-white flex justify-between items-center">
+                <span class="font-black uppercase text-xs tracking-widest">Finalizar Pago</span>
+                <button onclick="document.getElementById('cartelPago').classList.remove('visible')" class="text-2xl">&times;</button>
+            </div>
+
+            <div class="p-6">
+                <div class="bg-yellow-50 border border-yellow-200 p-4 rounded-2xl text-center mb-4">
+                    <p class="text-[10px] text-yellow-600 uppercase font-black mb-1">Total a transferir</p>
+                    <p class="text-3xl font-black text-gray-800">$ 4.500</p>
+                </div>
+
+                <div class="space-y-3 mb-6">
+                    <div class="bg-blue-50 p-4 rounded-xl border border-blue-100">
+                        <p class="text-[9px] text-blue-400 uppercase font-black mb-1">Alias de Destino</p>
+                        <p class="text-lg font-mono font-black text-blue-900 italic">dupe.benja2026</p>
+                    </div>
+
+                    <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                        <p class="text-[9px] text-gray-400 uppercase font-black mb-1 text-zinc-500">Titular</p>
+                        <p class="text-md font-black text-gray-800 uppercase">Benjamin Dario Gomez</p>
+                    </div>
+                </div>
+
+                <a href="https://wa.me/3364546172?text=Hola%20Benja,%20ya%20realice%20el%20pago%20correctamente.%0A%0A*Producto:*%20APK%20Mercado%20Pago%20Falso%0A*Monto:*%20$4.500%0A*Titular:*%20Benjamin%20Dario%20Gomez%0A%0AAdjunto%20comprobante%20aqui." 
+                   class="flex items-center justify-center gap-3 w-full bg-[#25d366] text-white font-black py-5 rounded-2xl mb-2 shadow-xl active:scale-95 transition-all uppercase">
+                    <i class="fab fa-whatsapp text-2xl"></i> Enviar Comprobante
+                </a>
+                <p class="text-[9px] text-center text-zinc-400 font-bold uppercase tracking-tighter italic">La entrega es automatica tras el envio</p>
+            </div>
+        </div>
+    </div>
+
+</body>
+                                                                                                    </html>
+                                                                                                    
