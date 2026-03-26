@@ -3,81 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SMM Panel Pro | Official</title>
+    <title>Admin Panel | Internal Use</title>
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         :root {
-            --bg: #0b0e14;
-            --card: #151921;
-            --accent: #3b82f6;
-            --text: #ffffff;
-            --border: #262c3a;
+            --bg: #05070a;
+            --card: #11141d;
+            --accent: #00f2ea; /* Color neón profesional */
+            --input-bg: #1a1f2b;
+            --text: #e2e8f0;
         }
 
         body {
             background-color: var(--bg);
             color: var(--text);
-            font-family: 'Inter', system-ui, sans-serif;
+            font-family: 'Inter', sans-serif;
             margin: 0;
             padding: 20px;
             display: flex;
             justify-content: center;
+            align-items: center;
+            min-height: 100vh;
         }
 
-        .panel-container {
+        .admin-panel {
             width: 100%;
-            max-width: 450px;
+            max-width: 400px;
             background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 24px;
+            border: 1px solid #2d3748;
+            border-radius: 20px;
             padding: 30px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         }
 
         .header { text-align: center; margin-bottom: 30px; }
-        .header h1 { font-size: 1.8rem; margin: 0; color: var(--accent); }
-        .header p { color: #64748b; font-size: 0.9rem; }
+        .header h1 { 
+            font-size: 1.4rem; 
+            letter-spacing: 2px; 
+            text-transform: uppercase; 
+            color: var(--accent);
+            margin: 0;
+        }
+        .header p { font-size: 0.8rem; color: #718096; margin-top: 5px; }
 
-        .form-group { margin-bottom: 20px; }
-        label { display: block; margin-bottom: 8px; font-size: 0.85rem; color: #94a3b8; font-weight: 600; }
+        .field { margin-bottom: 20px; }
+        label { 
+            display: block; 
+            font-size: 0.75rem; 
+            font-weight: 700; 
+            margin-bottom: 8px; 
+            color: #a0aec0;
+            text-transform: uppercase;
+        }
 
-        select, input {
+        input, select {
             width: 100%;
             padding: 14px;
-            background: #1e2530;
-            border: 1px solid var(--border);
-            border-radius: 12px;
+            background: var(--input-bg);
+            border: 1px solid #2d3748;
+            border-radius: 10px;
             color: white;
             font-size: 1rem;
-            box-sizing: border-box;
             outline: none;
-            transition: border 0.3s;
+            box-sizing: border-box;
+            transition: all 0.3s;
         }
 
-        select:focus, input:focus { border-color: var(--accent); }
-
-        .price-box {
-            background: rgba(59, 130, 246, 0.1);
-            border: 1px dashed var(--accent);
-            padding: 15px;
-            border-radius: 12px;
-            text-align: center;
-            margin: 25px 0;
+        input:focus, select:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 10px rgba(0, 242, 234, 0.2);
         }
 
-        .price-label { font-size: 0.8rem; color: #3b82f6; display: block; }
-        .price-value { font-size: 1.8rem; font-weight: bold; }
-
-        .btn-send {
-            background: var(--accent);
-            color: white;
-            border: none;
+        .btn-execute {
             width: 100%;
             padding: 16px;
-            border-radius: 14px;
-            font-size: 1.1rem;
-            font-weight: bold;
+            background: var(--accent);
+            color: #000;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 800;
+            text-transform: uppercase;
             cursor: pointer;
+            margin-top: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -85,98 +93,82 @@
             transition: transform 0.2s;
         }
 
-        .btn-send:active { transform: scale(0.98); }
+        .btn-execute:active { transform: scale(0.96); }
 
-        .footer-tag { text-align: center; margin-top: 20px; font-size: 0.7rem; color: #475569; }
+        .footer {
+            margin-top: 25px;
+            text-align: center;
+            font-size: 0.7rem;
+            color: #4a5568;
+        }
     </style>
 </head>
 <body>
 
-<div class="panel-container">
+<div class="admin-panel">
     <div class="header">
-        <h1>SMM PANEL PRO</h1>
-        <p>Selecciona tu servicio de crecimiento</p>
+        <h1>Internal System</h1>
+        <p>Gestión de Pedidos de Crecimiento</p>
     </div>
 
-    <div class="form-group">
-        <label>PLATAFORMA</label>
-        <select id="platform" onchange="updateServices()">
-            <option value="ig">Instagram</option>
-            <option value="tk">TikTok</option>
-            <option value="wa">WhatsApp</option>
+    <div class="field">
+        <label>Nombre de Usuario / Link</label>
+        <input type="text" id="user" placeholder="@usuario o link completo...">
+    </div>
+
+    <div class="field">
+        <label>Plataforma</label>
+        <select id="platform">
+            <option value="Instagram">Instagram</option>
+            <option value="TikTok">TikTok</option>
+            <option value="WhatsApp">WhatsApp (Canal)</option>
         </select>
     </div>
 
-    <div class="form-group">
-        <label>SERVICIO</label>
-        <select id="service" onchange="calculate()">
-            </select>
+    <div class="field">
+        <label>Tipo de Servicio</label>
+        <select id="service">
+            <option>Seguidores</option>
+            <option>Likes / Me gusta</option>
+            <option>Vistas (Views)</option>
+            <option>Miembros de Canal</option>
+            <option>Reacciones</option>
+        </select>
     </div>
 
-    <div class="form-group">
-        <label>CANTIDAD</label>
-        <input type="number" id="amount" value="100" min="10" oninput="calculate()">
+    <div class="field">
+        <label>Cantidad a Enviar</label>
+        <input type="number" id="qty" placeholder="Ej: 5000">
     </div>
 
-    <div class="price-box">
-        <span class="price-label">TOTAL A PAGAR</span>
-        <span class="price-value" id="total">$0.00</span>
-    </div>
-
-    <button class="btn-send" onclick="sendOrder()">
-        <i data-lucide="zap"></i> ENVIAR PEDIDO
+    <button class="btn-execute" onclick="procesar()">
+        <i data-lucide="send"></i> Ejecutar Pedido
     </button>
 
-    <div class="footer-tag">https://njagmzok-ui.github.io</div>
+    <div class="footer">
+        https://njagmzok-ui.github.io
+    </div>
 </div>
 
 <script>
-    const services = {
-        ig: [
-            { name: "Seguidores Reales", price: 0.005 },
-            { name: "Likes (Me gusta)", price: 0.002 },
-            { name: "Vistas Reels", price: 0.001 },
-            { name: "Miembros Canal IG", price: 0.008 }
-        ],
-        tk: [
-            { name: "Seguidores", price: 0.004 },
-            { name: "Likes TikTok", price: 0.002 },
-            { name: "Vistas Video", price: 0.0005 }
-        ],
-        wa: [
-            { name: "Miembros Canal WA", price: 0.01 },
-            { name: "Reacciones Post", price: 0.003 }
-        ]
-    };
-
-    function updateServices() {
-        const platform = document.getElementById('platform').value;
-        const serviceSelect = document.getElementById('service');
-        serviceSelect.innerHTML = "";
-        
-        services[platform].forEach(s => {
-            let opt = document.createElement('option');
-            opt.value = s.price;
-            opt.innerHTML = s.name;
-            serviceSelect.appendChild(opt);
-        });
-        calculate();
-    }
-
-    function calculate() {
-        const price = document.getElementById('service').value;
-        const amount = document.getElementById('amount').value;
-        const total = (price * amount).toFixed(2);
-        document.getElementById('total').innerHTML = "$" + total;
-    }
-
-    function sendOrder() {
-        alert("¡Pedido recibido! Procesando solicitud...");
-    }
-
-    // Inicializar
-    updateServices();
     lucide.createIcons();
+
+    function procesar() {
+        const usuario = document.getElementById('user').value;
+        const plataforma = document.getElementById('platform').value;
+        const cantidad = document.getElementById('qty').value;
+        const servicio = document.getElementById('service').value;
+
+        if(!usuario || !cantidad) {
+            alert("⚠️ Por favor completa todos los datos.");
+            return;
+        }
+
+        alert(`✅ PROCESANDO: \n\n${servicio} para ${plataforma}\nUsuario: ${usuario}\nCantidad: ${cantidad}`);
+        
+        // Aquí podrías agregar código para que te llegue un mensaje o se guarde
+        console.log("Pedido ejecutado internamente");
+    }
 </script>
 
 </body>
