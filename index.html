@@ -2,37 +2,71 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Socio Benja VIP</title>
     <style>
-        body { background: radial-gradient(#900, #000); color: white; font-family: sans-serif; text-align: center; padding: 20px; }
-        .card { background: #000; border: 2px solid red; border-radius: 20px; padding: 20px; max-width: 350px; margin: auto; box-shadow: 0 0 20px red; }
+        body { background: radial-gradient(#900, #000); color: white; font-family: sans-serif; text-align: center; padding: 20px; margin: 0; }
+        .card, .gal-card { background: #000; border: 2px solid red; border-radius: 20px; padding: 20px; max-width: 350px; margin: auto; box-shadow: 0 0 20px red; display: block; }
+        .gal-card { display: none; margin-top: 20px; }
         .vip { background: gold; color: #000; padding: 5px; border-radius: 10px; font-weight: bold; font-size: 12px; }
         h1 { font-size: 1.5rem; margin: 10px 0; }
         .stars { color: gold; margin-bottom: 20px; }
         label { display: block; text-align: left; font-size: 12px; color: #888; margin: 10px 0 5px; }
         input, select { width: 100%; padding: 12px; background: #111; border: 1px solid #333; border-radius: 10px; color: white; box-sizing: border-box; }
         .btn { background: red; color: white; border: none; padding: 15px; border-radius: 10px; width: 100%; font-weight: bold; margin-top: 20px; cursor: pointer; }
+        .btn-gal { background: none; border: 1px solid gold; color: gold; margin-top: 15px; }
+        
+        /* Galería */
+        .price-list { text-align: left; margin: 15px 0; color: #fff; border-top: 1px solid #333; padding-top: 10px;}
+        .img-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 20px; }
+        .thumb { width: 100%; border: 1px solid #333; border-radius: 8px; cursor: pointer; }
+        .btn-back { background: #333; margin-top: 20px; }
+        
+        /* Visor Imagen Grande */
+        #ov { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 100; justify-content: center; align-items: center; }
+        #ovi { max-width: 90%; max-height: 90%; border: 2px solid white; border-radius: 10px;}
     </style>
 </head>
 <body>
-    <div class="card">
+    
+    <div id="ov" onclick="this.style.display='none'"><img id="ovi" src=""></div>
+
+    <div class="card" id="main">
         <span class="vip">ACCESO EXCLUSIVO</span>
         <h1>SOCIO BENJA VIP</h1>
-        <div class="stars">★★★★★ 4.98/5</div>
+        <div class="stars">★★★★★ 4.98/5 (Verificado)</div>
         
         <label>USUARIO / LINK</label>
-        <input type="text" id="u" placeholder="@usuario...">
-
+        <input type="text" placeholder="@usuario...">
         <label>PLATAFORMA</label>
-        <select><option>Instagram</option><option>TikTok</option><option>WhatsApp</option></select>
-
-        <label>SERVICIO</label>
-        <select><option>Seguidores</option><option>Likes</option><option>Vistas</option></select>
-
+        <select><option>Instagram</option><option>TikTok</option></select>
         <label>CANTIDAD</label>
-        <input type="number" id="c" placeholder="Ej: 5000">
+        <input type="number" placeholder="Ej: 5000">
 
-        <button class="btn" onclick="alert('✅ ENVIADO AL SISTEMA VIP')">EJECUTAR PEDIDO</button>
+        <button class="btn">EJECUTAR PEDIDO VIP</button>
+        <button class="btn btn-gal" onclick="showGal()">Verificar Instagram ★</button>
     </div>
-    <p style="font-size:10px; color:#444;">njagmzok-ui.github.io</p>
+
+    <div class="gal-card" id="gal">
+        <h1>SERVICIOS DE VERIFICACIÓN</h1>
+        <div class="price-list">
+            <b>★ 1 Mes:</b> 15,000 ARS<br>
+            <b>★ 1 Año + 3 Meses VIP:</b> 50,000 ARS
+        </div>
+        <p style="font-size:12px; color:#aaa;">Toca una imagen para ampliar</p>
+        <div class="img-grid">
+            <img src="https://i.ibb.co/image-6.png" class="thumb" onclick="openOv(this.src)">
+            <img src="https://i.ibb.co/image-7.png" class="thumb" onclick="openOv(this.src)">
+            <img src="https://i.ibb.co/image-8.png" class="thumb" onclick="openOv(this.src)">
+        </div>
+        <button class="btn btn-back" onclick="hideGal()">Volver</button>
+    </div>
+
+    <p style="font-size:10px; color:#444;">njagmzok-ui.github.io | Socio Benja VIP © 2024</p>
+
+    <script>
+        function showGal() { document.getElementById('main').style.display='none'; document.getElementById('gal').style.display='block'; }
+        function hideGal() { document.getElementById('main').style.display='block'; document.getElementById('gal').style.display='none'; }
+        function openOv(s) { document.getElementById('ov').style.display='flex'; document.getElementById('ovi').src=s; }
+    </script>
 </body>
 </html>
