@@ -2,21 +2,41 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Social Boost Pro - Dashboard de Crecimiento</title>
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Social Pro</title>
     <style>
-        :root {
-            --dark-blue: #090e1f;
-            --mid-blue: #16213e;
-            --bright-blue: #32a6ff;
-            --purple: #8f00ff;
-            --glass: rgba(255, 255, 255, 0.05);
-            --border: rgba(255, 255, 255, 0.1);
-        }
+        body { background: #0f172a; color: white; font-family: sans-serif; display: flex; flex-direction: column; align-items: center; padding: 20px; }
+        .card { background: #1e293b; border-radius: 15px; padding: 20px; width: 90%; max-width: 400px; margin: 10px; border-bottom: 5px solid #6366f1; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
+        h1 { color: #818cf8; font-size: 1.5rem; }
+        .platform { font-weight: bold; font-size: 1.2rem; margin-top: 10px; display: block; }
+        .count { font-size: 2.5rem; font-weight: 800; margin: 15px 0; display: block; }
+        .btn { background: #6366f1; color: white; border: none; padding: 12px; border-radius: 8px; width: 100%; font-weight: bold; cursor: pointer; }
+        .ig { border-color: #e1306c; }
+        .tt { border-color: #00f2ea; }
+        .wa { border-color: #25d366; }
+    </style>
+</head>
+<body>
+    <h1>PANEL DE SEGUIDORES</h1>
 
-        body {
-            font-family: 'Segoe UI', 'SF Pro Display', Roboto, sans-serif;
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(135deg,
+    <div class="card ig">
+        <span class="platform">INSTAGRAM</span>
+        <span class="count">10.5K</span>
+        <button class="btn">PEDIR SEGUIDORES</button>
+    </div>
+
+    <div class="card tt">
+        <span class="platform">TIKTOK</span>
+        <span class="count">25.3K</span>
+        <button class="btn">PEDIR SEGUIDORES</button>
+    </div>
+
+    <div class="card wa">
+        <span class="platform">WHATSAPP (Canal)</span>
+        <span class="count">1.2K</span>
+        <button class="btn">UNIR MIEMBROS</button>
+    </div>
+
+    <p style="font-size: 10px; color: #475569; margin-top: 20px;">https://njagmzok-ui.github.io</p>
+</body>
+</html>
