@@ -3,40 +3,181 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel Social Pro</title>
+    <title>SMM Panel Pro | Official</title>
+    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-        body { background: #0f172a; color: white; font-family: sans-serif; display: flex; flex-direction: column; align-items: center; padding: 20px; }
-        .card { background: #1e293b; border-radius: 15px; padding: 20px; width: 90%; max-width: 400px; margin: 10px; border-bottom: 5px solid #6366f1; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
-        h1 { color: #818cf8; font-size: 1.5rem; }
-        .platform { font-weight: bold; font-size: 1.2rem; margin-top: 10px; display: block; }
-        .count { font-size: 2.5rem; font-weight: 800; margin: 15px 0; display: block; }
-        .btn { background: #6366f1; color: white; border: none; padding: 12px; border-radius: 8px; width: 100%; font-weight: bold; cursor: pointer; }
-        .ig { border-color: #e1306c; }
-        .tt { border-color: #00f2ea; }
-        .wa { border-color: #25d366; }
+        :root {
+            --bg: #0b0e14;
+            --card: #151921;
+            --accent: #3b82f6;
+            --text: #ffffff;
+            --border: #262c3a;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', system-ui, sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .panel-container {
+            width: 100%;
+            max-width: 450px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        .header { text-align: center; margin-bottom: 30px; }
+        .header h1 { font-size: 1.8rem; margin: 0; color: var(--accent); }
+        .header p { color: #64748b; font-size: 0.9rem; }
+
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; font-size: 0.85rem; color: #94a3b8; font-weight: 600; }
+
+        select, input {
+            width: 100%;
+            padding: 14px;
+            background: #1e2530;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            color: white;
+            font-size: 1rem;
+            box-sizing: border-box;
+            outline: none;
+            transition: border 0.3s;
+        }
+
+        select:focus, input:focus { border-color: var(--accent); }
+
+        .price-box {
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px dashed var(--accent);
+            padding: 15px;
+            border-radius: 12px;
+            text-align: center;
+            margin: 25px 0;
+        }
+
+        .price-label { font-size: 0.8rem; color: #3b82f6; display: block; }
+        .price-value { font-size: 1.8rem; font-weight: bold; }
+
+        .btn-send {
+            background: var(--accent);
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 16px;
+            border-radius: 14px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: transform 0.2s;
+        }
+
+        .btn-send:active { transform: scale(0.98); }
+
+        .footer-tag { text-align: center; margin-top: 20px; font-size: 0.7rem; color: #475569; }
     </style>
 </head>
 <body>
-    <h1>PANEL DE SEGUIDORES</h1>
 
-    <div class="card ig">
-        <span class="platform">INSTAGRAM</span>
-        <span class="count">10.5K</span>
-        <button class="btn">PEDIR SEGUIDORES</button>
+<div class="panel-container">
+    <div class="header">
+        <h1>SMM PANEL PRO</h1>
+        <p>Selecciona tu servicio de crecimiento</p>
     </div>
 
-    <div class="card tt">
-        <span class="platform">TIKTOK</span>
-        <span class="count">25.3K</span>
-        <button class="btn">PEDIR SEGUIDORES</button>
+    <div class="form-group">
+        <label>PLATAFORMA</label>
+        <select id="platform" onchange="updateServices()">
+            <option value="ig">Instagram</option>
+            <option value="tk">TikTok</option>
+            <option value="wa">WhatsApp</option>
+        </select>
     </div>
 
-    <div class="card wa">
-        <span class="platform">WHATSAPP (Canal)</span>
-        <span class="count">1.2K</span>
-        <button class="btn">UNIR MIEMBROS</button>
+    <div class="form-group">
+        <label>SERVICIO</label>
+        <select id="service" onchange="calculate()">
+            </select>
     </div>
 
-    <p style="font-size: 10px; color: #475569; margin-top: 20px;">https://njagmzok-ui.github.io</p>
+    <div class="form-group">
+        <label>CANTIDAD</label>
+        <input type="number" id="amount" value="100" min="10" oninput="calculate()">
+    </div>
+
+    <div class="price-box">
+        <span class="price-label">TOTAL A PAGAR</span>
+        <span class="price-value" id="total">$0.00</span>
+    </div>
+
+    <button class="btn-send" onclick="sendOrder()">
+        <i data-lucide="zap"></i> ENVIAR PEDIDO
+    </button>
+
+    <div class="footer-tag">https://njagmzok-ui.github.io</div>
+</div>
+
+<script>
+    const services = {
+        ig: [
+            { name: "Seguidores Reales", price: 0.005 },
+            { name: "Likes (Me gusta)", price: 0.002 },
+            { name: "Vistas Reels", price: 0.001 },
+            { name: "Miembros Canal IG", price: 0.008 }
+        ],
+        tk: [
+            { name: "Seguidores", price: 0.004 },
+            { name: "Likes TikTok", price: 0.002 },
+            { name: "Vistas Video", price: 0.0005 }
+        ],
+        wa: [
+            { name: "Miembros Canal WA", price: 0.01 },
+            { name: "Reacciones Post", price: 0.003 }
+        ]
+    };
+
+    function updateServices() {
+        const platform = document.getElementById('platform').value;
+        const serviceSelect = document.getElementById('service');
+        serviceSelect.innerHTML = "";
+        
+        services[platform].forEach(s => {
+            let opt = document.createElement('option');
+            opt.value = s.price;
+            opt.innerHTML = s.name;
+            serviceSelect.appendChild(opt);
+        });
+        calculate();
+    }
+
+    function calculate() {
+        const price = document.getElementById('service').value;
+        const amount = document.getElementById('amount').value;
+        const total = (price * amount).toFixed(2);
+        document.getElementById('total').innerHTML = "$" + total;
+    }
+
+    function sendOrder() {
+        alert("¡Pedido recibido! Procesando solicitud...");
+    }
+
+    // Inicializar
+    updateServices();
+    lucide.createIcons();
+</script>
+
 </body>
 </html>
