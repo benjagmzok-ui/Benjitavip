@@ -14,6 +14,7 @@
             --whatsapp: #2ecc71;
             --bank: #3498db;
             --border: #1a1a1a;
+            --red-vip: #ff4d4d;
         }
 
         body {
@@ -34,6 +35,7 @@
             box-sizing: border-box;
         }
 
+        /* --- HEADER --- */
         .header {
             text-align: center;
             margin-bottom: 25px;
@@ -41,21 +43,55 @@
             border-bottom: 2px solid var(--border);
         }
 
-        .header h1 span { color: var(--accent); font-weight: 800; }
+        .header h1 span { color: var(--accent); font-weight: 800; text-shadow: 0 0 15px rgba(241, 196, 15, 0.2); }
 
-        .trust-pills {
-            background-color: rgba(255, 255, 255, 0.03);
-            border: 1px solid var(--border);
-            border-radius: 15px;
-            padding: 15px;
+        /* --- NUEVO: ESTADÍSTICAS DE CONFIANZA --- */
+        .stats-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
             margin-bottom: 25px;
-            font-size: 0.75rem;
-            color: #cbd5e0;
         }
 
-        .trust-pills i { color: var(--accent); margin-right: 8px; }
+        .stat-card {
+            background: linear-gradient(145deg, #111, #050505);
+            border: 1px solid var(--border);
+            padding: 15px;
+            border-radius: 15px;
+            text-align: center;
+        }
 
-        .platform-section { margin-bottom: 30px; }
+        .stat-card i { color: var(--accent); font-size: 1.2rem; margin-bottom: 8px; }
+        .stat-card div { font-weight: 800; font-size: 1.1rem; color: #fff; }
+        .stat-card p { font-size: 0.65rem; color: #718096; margin: 5px 0 0 0; text-transform: uppercase; }
+
+        /* --- NUEVO: INFORMACIÓN DE CALIDAD --- */
+        .info-box {
+            background-color: rgba(241, 196, 15, 0.03);
+            border: 1px dashed var(--accent);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .info-box h2 {
+            font-size: 0.9rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .info-box p {
+            font-size: 0.8rem;
+            color: #cbd5e0;
+            line-height: 1.5;
+            margin-bottom: 0;
+        }
+
+        .platform-section { margin-bottom: 35px; }
 
         .platform-header {
             display: flex;
@@ -75,33 +111,33 @@
         .product-card {
             background-color: var(--card-dark);
             border: 1px solid var(--border);
-            border-radius: 15px;
-            padding: 15px;
+            border-radius: 18px;
+            padding: 20px;
             text-align: center;
             cursor: pointer;
             transition: 0.3s;
         }
 
-        .product-card:hover { border-color: var(--accent); }
+        .product-card:hover { border-color: var(--accent); box-shadow: 0 0 15px rgba(241, 196, 15, 0.1); }
 
-        .product-card .qty { font-size: 1.3rem; font-weight: 800; }
+        .product-card .qty { font-size: 1.4rem; font-weight: 800; color: #fff; }
 
-        .product-card .price { color: var(--accent); font-weight: bold; margin-top: 5px; }
+        .product-card .price { color: var(--accent); font-weight: bold; margin-top: 5px; font-size: 1.1rem; }
 
         .buy-btn {
             background-color: var(--whatsapp);
             color: #fff;
             border: none;
-            border-radius: 8px;
-            padding: 10px;
-            font-size: 0.75rem;
+            border-radius: 10px;
+            padding: 12px;
+            font-size: 0.8rem;
             font-weight: bold;
-            margin-top: 12px;
+            margin-top: 15px;
             width: 100%;
             cursor: pointer;
         }
 
-        /* --- MODAL ELITE --- */
+        /* --- MODAL --- */
         .modal {
             display: none;
             position: fixed;
@@ -109,29 +145,30 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
+            background-color: rgba(0, 0, 0, 0.95);
             justify-content: center;
             align-items: center;
             z-index: 2000;
-            backdrop-filter: blur(8px);
+            backdrop-filter: blur(10px);
         }
 
         .modal-content {
             background-color: #0c0c0c;
             border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 25px;
+            border-radius: 25px;
+            padding: 30px;
             width: 90%;
             max-width: 360px;
             text-align: center;
+            position: relative;
         }
 
         .payment-step {
             text-align: left;
             background-color: #000;
             border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 15px;
+            border-radius: 15px;
+            padding: 18px;
             margin-bottom: 15px;
         }
 
@@ -141,35 +178,42 @@
             width: 100%;
             background: #111;
             border: 1px solid #333;
-            padding: 12px;
-            border-radius: 8px;
+            padding: 14px;
+            border-radius: 10px;
             color: white;
             font-size: 1rem;
             box-sizing: border-box;
-            margin-top: 5px;
         }
 
-        .user-input:focus { border-color: var(--accent); outline: none; }
-
         .alias-box {
-            font-size: 1rem; color: white; background: #111; padding: 10px; border-radius: 8px; font-weight: bold; display: flex; justify-content: space-between; align-items: center;
+            font-size: 1rem; color: white; background: #111; padding: 12px; border-radius: 10px; font-weight: bold; display: flex; justify-content: space-between; align-items: center;
         }
 
         .wa-final-btn {
             background-color: var(--whatsapp);
             color: #fff;
-            border-radius: 12px;
-            padding: 15px;
+            border-radius: 15px;
+            padding: 18px;
             font-weight: bold;
             text-decoration: none;
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 10px;
-            margin-top: 15px;
+            margin-top: 20px;
+            font-size: 1rem;
         }
 
-        .close-btn { color: #555; position: absolute; top: 15px; right: 15px; cursor: pointer; }
+        .close-btn { color: #555; position: absolute; top: 20px; right: 20px; cursor: pointer; }
+
+        .footer {
+            text-align: center;
+            font-size: 0.75rem;
+            color: #444;
+            margin-top: 50px;
+            border-top: 1px solid var(--border);
+            padding-top: 25px;
+        }
     </style>
 </head>
 <body>
@@ -180,8 +224,26 @@
         <p>Elite Social Growth Systems</p>
     </div>
 
-    <div class="trust-pills">
-        <i class="fas fa-shield-alt"></i> Acreditación Automática por Transferencia Bancaria.
+    <div class="stats-container">
+        <div class="stat-card">
+            <i class="fas fa-users"></i>
+            <div>+542</div>
+            <p>Clientes Activos</p>
+        </div>
+        <div class="stat-card">
+            <i class="fas fa-check-double"></i>
+            <div>100%</div>
+            <p>Seguro y Real</p>
+        </div>
+    </div>
+
+    <div class="info-box">
+        <h2><i class="fas fa-shield-check"></i> Calidad Garantizada VIP</h2>
+        <p>
+            Nuestros seguidores cuentan con <b>perfiles reales</b>, fotos y biografía activa. 
+            Ofrecemos un sistema <b>sin caídas</b> y de la mejor calidad del mercado para asegurar que tu perfil crezca de forma orgánica y empieces a generar ingresos con tu marca personal. 
+            Tu éxito es nuestra prioridad.
+        </p>
     </div>
 
     <div class="platform-section">
@@ -200,10 +262,10 @@
                 <div class="price">$60.000</div>
                 <button class="buy-btn">Comprar</button>
             </div>
-            <div class="product-card" onclick="openPaymentModal('Instagram', '100.000', '80.000')">
-                <div class="qty">100k</div>
+            <div class="product-card" style="grid-column: span 2;" onclick="openPaymentModal('Instagram', '100.000', '80.000')">
+                <div class="qty">100.000 Seguidores</div>
                 <div class="price">$80.000</div>
-                <button class="buy-btn">Comprar</button>
+                <button class="buy-btn">Comprar Pack Elite</button>
             </div>
         </div>
     </div>
@@ -214,10 +276,10 @@
             <h2>TikTok VIP</h2>
         </div>
         <div class="product-grid">
-            <div class="product-card" onclick="openPaymentModal('TikTok', '20.000', '35.000')">
-                <div class="qty">20k</div>
+            <div class="product-card" style="grid-column: span 2;" onclick="openPaymentModal('TikTok', '20.000', '35.000')">
+                <div class="qty">20.000 Seguidores</div>
                 <div class="price">$35.000</div>
-                <button class="buy-btn">Comprar</button>
+                <button class="buy-btn">Comprar Ahora</button>
             </div>
         </div>
     </div>
@@ -225,38 +287,44 @@
     <div class="platform-section">
         <div class="platform-header">
             <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WA">
-            <h2>WhatsApp Channels</h2>
+            <h2>Canales WhatsApp</h2>
         </div>
-        <div class="product-card" style="width:100%; box-sizing:border-box;" onclick="openPaymentModal('Canal WhatsApp', '100k + 70k Reacciones', '65.000')">
+        <div class="product-card" style="width:100%; border: 2px solid var(--accent);" onclick="openPaymentModal('Canal WhatsApp', '100k + 70k Reacciones', '65.000')">
             <div class="qty">100k + 70k Reacciones</div>
             <div class="price">$65.000</div>
-            <button class="buy-btn">Comprar Super Combo</button>
+            <button class="buy-btn">Comprar Super Combo 🔥</button>
         </div>
+    </div>
+
+    <div class="footer">
+        © 2026 Socio Benja VIP - Benjamín Gomez<br>
+        Plataforma Segura | Acreditación Bancaria<br>
+        WhatsApp Directo: +54 9 336 454-6172
     </div>
 </div>
 
 <div class="modal" id="paymentModal">
-    <div class="modal-content" style="position:relative;">
+    <div class="modal-content">
         <span class="close-btn" onclick="closeModal()">✕</span>
-        <h3 id="modal-title">Finalizar Pedido</h3>
+        <h3 style="margin-top:0;">Confirmar Pedido</h3>
 
         <div class="payment-step">
             <span class="step-label">PASO 1: TU USUARIO</span>
-            <input type="text" id="target-user" class="user-input" placeholder="@tu_usuario o Link">
+            <input type="text" id="target-user" class="user-input" placeholder="@usuario o link del perfil">
         </div>
 
         <div class="payment-step">
-            <span class="step-label">PASO 2: TRANSFERENCIA</span>
-            <p style="font-size: 0.8rem; margin:0 0 5px 0;">Monto: <b id="modal-price" style="color:var(--accent);">$0</b></p>
+            <span class="step-label">PASO 2: TRANSFERENCIA BANCARIA</span>
+            <p style="font-size: 0.8rem; margin:0 0 8px 0;">Monto: <b id="modal-price" style="color:var(--accent);">$0</b></p>
             <div class="alias-box">
                 <span>Seguidoresarg3</span>
                 <i class="fas fa-copy" style="color:var(--bank); cursor:pointer;" onclick="copyText('Seguidoresarg3')"></i>
             </div>
-            <p style="font-size:0.7rem; color:#888; margin-top:5px;">Titular: Benjamin Gomez</p>
+            <p style="font-size:0.7rem; color:#888; margin-top:8px;">Titular: <b>Benjamin Gomez</b></p>
         </div>
 
         <a href="javascript:void(0)" onclick="sendToWhatsApp()" class="wa-final-btn">
-            <i class="fab fa-whatsapp"></i> Enviar Comprobante
+            <i class="fab fa-whatsapp"></i> Notificar Pago
         </a>
     </div>
 </div>
@@ -268,25 +336,27 @@
         currentData = { platform, quantity, price };
         document.getElementById('modal-price').innerText = `$${price}`;
         document.getElementById('paymentModal').style.display = 'flex';
+        document.body.style.overflow = 'hidden';
     }
 
     function closeModal() {
         document.getElementById('paymentModal').style.display = 'none';
+        document.body.style.overflow = 'auto';
     }
 
     function copyText(text) {
         navigator.clipboard.writeText(text);
-        alert("Alias copiado, socio.");
+        alert("Alias 'Seguidoresarg3' copiado con éxito.");
     }
 
     function sendToWhatsApp() {
         const user = document.getElementById('target-user').value;
         if(!user) {
-            alert("Por favor, ingresa tu usuario o link.");
+            alert("Por favor, ingresa tu usuario.");
             return;
         }
 
-        const message = `Hola Benja Gomez, quiero los ${currentData.quantity} seguidores para ${currentData.platform}.\n\n✅ Usuario: ${user}\n💰 Monto: $${currentData.price}\n\nYa realicé la transferencia al alias Seguidoresarg3. ¿Me confirmas?`;
+        const message = `Hola Benja Gomez, quiero los ${currentData.quantity} seguidores para ${currentData.platform}.\n\n✅ Usuario/Link: ${user}\n💰 Monto: $${currentData.price}\n\nYa realicé la transferencia al alias Seguidoresarg3. ¿Me confirmas el pedido?`;
         const phoneNumber = "5493364546172";
         window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
     }
