@@ -6,176 +6,77 @@
     <title>Avia Masters Elite | Socio Benja</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root { --blue-dark: #000b1a; --accent: #ff1a1a; --gold: #f1c40f; --text: #ffffff; }
-        body { margin: 0; background: var(--blue-dark); color: white; font-family: 'Inter', sans-serif; overflow: hidden; display: flex; justify-content: center; }
-        .game-container { width: 100%; max-width: 440px; height: 100vh; position: relative; background: radial-gradient(circle, #001a33 0%, #000 100%); display: flex; flex-direction: column; }
+        :root { --bg-dark: #000714; --gold: #f1c40f; --accent: #ff1a1a; --border: #1a1a1a; }
+        body { margin: 0; background: var(--bg-dark); color: white; font-family: 'Segoe UI', sans-serif; overflow: hidden; display: flex; justify-content: center; height: 100vh; }
+        
+        .game-wrapper { width: 100%; max-width: 440px; height: 100vh; position: relative; background: radial-gradient(circle at center, #001f5c 0%, #000 80%); display: flex; flex-direction: column; overflow: hidden; }
 
         /* HEADER */
-        .top-ui { padding: 15px; display: flex; justify-content: space-between; align-items: center; z-index: 30; }
-        .balance-box { background: rgba(255,255,255,0.1); padding: 5px 15px; border-radius: 20px; border: 1px solid var(--gold); }
-        .balance-box span { color: var(--gold); font-weight: bold; font-size: 0.9rem; }
+        .header-pro { padding: 15px; display: flex; justify-content: space-between; align-items: center; z-index: 50; }
+        .balance-pill { background: rgba(255,255,255,0.08); border: 1px solid var(--gold); padding: 6px 15px; border-radius: 20px; box-shadow: 0 0 10px rgba(241, 196, 15, 0.2); }
+        .balance-pill span { color: var(--gold); font-weight: 900; font-size: 0.95rem; }
 
-        /* AREA DE VUELO */
-        .sky-scene { flex-grow: 1; position: relative; overflow: hidden; }
-        #avia-logo { width: 150px; position: absolute; top: 20px; left: 50%; transform: translateX(-50%); opacity: 0.7; }
+        /* TOASTS (Notificaciones) */
+        #toast-container { position: absolute; top: 75px; width: 100%; display: flex; flex-direction: column; align-items: center; z-index: 40; pointer-events: none; }
+        .toast { background: rgba(46, 204, 113, 0.1); border: 1px solid #2ecc71; color: #2ecc71; padding: 8px 15px; border-radius: 8px; margin-bottom: 5px; font-size: 0.7rem; animation: slideIn 0.5s ease; border-left: 3px solid #2ecc71; }
+        @keyframes slideIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* ESCENA DE VUELO */
+        .sky-scene { flex-grow: 1; position: relative; overflow: hidden; margin-top: 100px; display: flex; justify-content: center; align-items: flex-end; }
+        #avia-logo-top { width: 140px; position: absolute; top: 10px; left: 50%; transform: translateX(-50%); opacity: 0.6; }
+
+        /* Portaviones */
+        #carrier { position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%); width: 280px; transition: transform 0.5s ease-out; }
+
+        /* Avión y Etiqueta */
+        #plane-container { position: absolute; bottom: 25%; left: 35%; transition: transform 0.1s linear, bottom 0.1s linear, left 0.1s linear; display: none; flex-direction: column; align-items: center; }
+        .bet-tag { background: none; color: #f1c40f; font-weight: bold; font-size: 13px; transform: rotate(-15deg); margin-bottom: -15px; z-index: 10;}
+        #plane-obj { width: 65px; height: 65px; filter: drop-shadow(0 0 10px rgba(255,26,26,0.6)); }
+
+        /* UI INFERIOR */
+        .bottom-ui { width: 100%; position: absolute; bottom: 0; z-index: 60; background: linear-gradient(to top, #000 85%, rgba(0,0,0,0)); padding-bottom: 20px;}
+
+        /* Panel de Estadísticas (Altitud, Distancia, Multiplicador) */
+        .stats-panel { background: rgba(0,0,0,0.7); border-top: 1px solid rgba(255,255,255,0.1); padding: 10px 20px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 5px; text-align: center;}
+        .stat-col { border-right: 1px solid rgba(255,255,255,0.05); }
+        .stat-col:last-child { border-right: none; }
+        .stat-label { font-size: 0.6rem; color: #666; font-weight: bold; text-transform: uppercase; margin-bottom: 3px; }
+        .stat-val { font-size: 0.95rem; font-weight: bold; color: white; }
+
+        /* Controles Principales */
+        .main-controls { padding: 20px; background: #000; text-align: center; }
+        .multi-main { font-size: 3.8rem; font-weight: 900; color: white; text-shadow: 0 0 20px rgba(255,255,255,0.2); margin-top: -15px;}
         
-        #plane-wrapper { position: absolute; bottom: 20%; left: 10%; transition: transform 0.1s linear; display: none; flex-direction: column; align-items: center; }
-        .plane-img { width: 70px; filter: drop-shadow(0 0 10px rgba(255,0,0,0.5)); }
-        .bet-tag { background: rgba(241, 196, 15, 0.9); color: black; font-weight: 900; padding: 2px 8px; border-radius: 5px; font-size: 0.7rem; margin-bottom: -10px; transform: rotate(-10deg); z-index: 5; }
-
-        #carrier { position: absolute; bottom: 15%; left: -50px; width: 300px; opacity: 0.8; }
-
-        /* CONTADORES */
-        .stats-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 5px; padding: 10px; background: rgba(0,0,0,0.6); border-top: 1px solid #1a1a1a; }
-        .stat-item { text-align: center; }
-        .stat-label { font-size: 0.6rem; color: #666; font-weight: bold; }
-        .stat-val { font-size: 0.9rem; font-weight: bold; }
-
-        /* CONTROLES */
-        .controls { padding: 20px; background: #000; display: flex; flex-direction: column; align-items: center; gap: 15px; }
-        .multi-main { font-size: 3.5rem; font-weight: 900; color: var(--text); text-shadow: 0 0 20px rgba(255,255,255,0.2); margin-top: -10px; }
+        /* Iconos de Velocidad */
+        .speed-nav { display: flex; gap: 12px; background: rgba(255,255,255,0.05); padding: 6px 12px; border-radius: 20px; border: 1px solid #1a1a1a; margin: 10px auto; display: none;}
         
-        .speed-bar { display: flex; gap: 15px; margin-bottom: 5px; opacity: 0.5; }
-        .btn-action { width: 80px; height: 80px; border-radius: 50%; border: 5px solid white; background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.2s; }
-        .btn-action i { font-size: 2rem; color: white; }
-        .btn-action.betting { border-color: var(--gold); background: var(--gold); }
-        .btn-action.betting i { color: black; }
-
-        /* TOASTS */
-        #toast-wrap { position: absolute; top: 80px; width: 100%; display: flex; flex-direction: column; align-items: center; pointer-events: none; }
-        .toast { background: rgba(0,255,0,0.1); border: 1px solid #2ecc71; padding: 8px 15px; border-radius: 10px; margin-bottom: 5px; font-size: 0.7rem; color: #2ecc71; animation: fadeInUp 0.5s ease; }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        /* Botón Jugar (Clonando el del video) */
+        #play-btn { width: 75px; height: 75px; border-radius: 50%; border: 4px solid #fff; background: transparent; cursor: pointer; position: relative; display: flex; align-items: center; justify-content: center; margin-top: -10px;}
+        #play-btn::after { content: ''; position: absolute; border-style: solid; border-width: 15px 0 15px 25px; border-color: transparent transparent transparent #fff; left: 55%; }
+        
+        #play-btn.playing { border-color: var(--gold); }
+        #play-btn.playing i { font-size: 2.2rem; color: var(--gold); }
+        #play-btn.playing::after { display: none; }
+        
+        #btn-icon { display: none; }
+        #play-btn.playing #btn-icon { display: block; }
     </style>
 </head>
 <body>
 
-<div class="game-container">
-    <div id="toast-wrap"></div>
+<div class="game-wrapper">
+    <div id="toast-container"></div>
 
-    <div class="top-ui">
-        <div class="balance-box"><span>$ <span id="main-bal">100.000,00</span></span></div>
-        <i class="fas fa-bars" style="color: #444;"></i>
+    <div class="header-pro">
+        <div class="balance-pill"><span>$ <span id="main-bal">100.000,00</span></span></div>
+        <i class="fas fa-bars" style="color: #555;"></i>
     </div>
 
     <div class="sky-scene">
-        <img src="https://i.ibb.co/6y1ZkX8/clouds.png" style="position:absolute; width:100%; top:20%; opacity:0.3;">
-        <img src="https://i.ibb.co/image-6.png" id="avia-logo">
-        <img src="https://i.ibb.co/Xz9Z4H2/carrier.png" id="carrier">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJgAAABkCAYAAACHzO2sAAAABmJLR0QA/wD/AP+gvaeTAAABfklEQVR4nO3buW3CYBBA0S8iU0CGo4isEwKiiKyTAqJIbIMCEgUkU0CGo4hMkRFCIuN9P66e0/h9Y4+9b8+dM9/vH+67P/++bO/77f/+HwAAAAAAbjW+/f5+/X9799t66p37f/326889zXvv3X/35/65p3vvvb899zXvvXf/3Z/7557uvfceAAAAAAAAAAAAAAAAAAAAAAAAAADAa849zXvvAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADjVuf957fN3e/fbeuidevffee5zXvPe+/YDAAAAwK3Gt9+/zXvv3Xf37759X9+e+9tz9+8+z3vv3Xf39wEAADj1p/w9/t693v3mve//nffv7fPvP/f7v/c/zzv/++ff/57vPu9+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAADfOve9H577vB/u/9zXvf/e/ef+7u/9Xb/9/HOe+7v/+849zft+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD+NOf33fHn9c9//+effN6957nvvfc8773nve+/b/5v7e+ef1z/935fXvPfe9+67//fvf3u+ff177nvfeeAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADA==" id="avia-logo-top" alt="Avia Masters Logo">
 
-        <div id="plane-wrapper">
-            <div class="bet-tag">500.00 ARS</div>
-            <img src="https://i.ibb.co/zXW4S9N/plane.png" class="plane-img">
-        </div>
-    </div>
+        <img src="data:image/png;base64,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" id="carrier" alt="Portaviones">
 
-    <div class="stats-grid">
-        <div class="stat-item"><div class="stat-label">ALTITUD</div><div class="stat-val" id="val-alt">0,0m</div></div>
-        <div class="stat-item"><div class="stat-label">DISTANCIA</div><div class="stat-val" id="val-dist">0,0m</div></div>
-        <div class="stat-item"><div class="stat-label">MULTIPLICADOR</div><div class="stat-val" id="val-multi">×1,0</div></div>
-    </div>
-
-    <div class="controls">
-        <div class="multi-main" id="big-multi">1.00x</div>
-        <div class="speed-bar">
-            <span>🐢</span><span>🚶</span><span>🐇</span><span>⚡</span>
-        </div>
-        <button class="btn-action" id="main-btn" onclick="handleGame()">
-            <i class="fas fa-play" id="btn-icon"></i>
-        </button>
-        <p style="font-size:0.6rem; color:#444;">APUESTA FIJA: $500.00</p>
-    </div>
-</div>
-
-<script>
-    let bal = 100000;
-    let playing = false;
-    let multiplier = 1.0;
-    let gameLoop;
-    let crashPoint;
-
-    function updateUI() {
-        document.getElementById('main-bal').innerText = bal.toLocaleString('es-AR', {minimumFractionDigits:2});
-    }
-
-    function handleGame() {
-        if (!playing) {
-            if (bal < 500) return alert("Saldo insuficiente");
-            startFlight();
-        } else {
-            cashOut();
-        }
-    }
-
-    function startFlight() {
-        bal -= 500;
-        playing = true;
-        multiplier = 1.0;
-        crashPoint = 1.2 + (Math.random() * 4); // El crash ocurre entre 1.2 y 5.2x
-        
-        updateUI();
-        document.getElementById('main-btn').classList.add('betting');
-        document.getElementById('btn-icon').className = 'fas fa-hand-holding-usd';
-        document.getElementById('plane-wrapper').style.display = 'flex';
-        document.getElementById('plane-wrapper').style.transform = `translate(0, 0)`;
-        document.getElementById('carrier').style.transform = `translateX(-100%)`;
-        document.getElementById('carrier').style.transition = `2s`;
-
-        gameLoop = setInterval(() => {
-            multiplier += 0.03;
-            let mStr = multiplier.toFixed(2);
-            document.getElementById('big-multi').innerText = mStr + "x";
-            document.getElementById('val-multi').innerText = "×" + mStr;
-            document.getElementById('val-alt').innerText = (multiplier * 12.5).toFixed(1) + "m";
-            document.getElementById('val-dist').innerText = (multiplier * 45).toFixed(1) + "m";
-            
-            // Movimiento del avión
-            let posX = (multiplier - 1) * 40;
-            let posY = (multiplier - 1) * -30;
-            document.getElementById('plane-wrapper').style.transform = `translate(${posX}px, ${posY}px)`;
-
-            if (multiplier >= crashPoint) {
-                explode();
-            }
-        }, 80);
-    }
-
-    function cashOut() {
-        clearInterval(gameLoop);
-        let win = 500 * multiplier;
-        bal += win;
-        alert("¡COBRASTE CON ÉXITO!\nGanancia: $" + win.toFixed(2));
-        resetGame();
-    }
-
-    function explode() {
-        clearInterval(gameLoop);
-        alert("¡EL AVIÓN SE ALEJÓ!\nPerdiste la apuesta.");
-        resetGame();
-    }
-
-    function resetGame() {
-        playing = false;
-        document.getElementById('main-btn').classList.remove('betting');
-        document.getElementById('btn-icon').className = 'fas fa-play';
-        document.getElementById('plane-wrapper').style.display = 'none';
-        document.getElementById('carrier').style.transform = `translateX(0)`;
-        document.getElementById('big-multi').innerText = "1.00x";
-        updateUI();
-    }
-
-    // Simulador de otros ganadores
-    setInterval(() => {
-        const names = ["Lucas R.", "Martina P.", "Santi_01", "Gaby Mendoza", "Socio_VIP"];
-        const name = names[Math.floor(Math.random()*names.length)];
-        const amount = (Math.random()*5000 + 500).toFixed(0);
-        const toast = document.createElement('div');
-        toast.className = 'toast';
-        toast.innerText = `${name} ganó $${amount} en Avia Masters`;
-        document.getElementById('toast-wrap').appendChild(toast);
-        setTimeout(() => toast.remove(), 3000);
-    }, 7000);
-
-    updateUI();
-</script>
-</body>
-</html>
+        <div id="plane-container">
+            <div id="bet-tag-dynamic">500.00 ARS</div>
+            <img src="data:image/png;base64,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9/n8H7wfo//r/Kfsf/T/0v+L9Iftb/f8N+n+/v///f/5//D/8Tf/N67+X///Wb8Pvb//b+l/R+9NveH/6//195u4U+//5//X/P///wP4G///A+hX4H/6v//+X//+/4X/X/9v83fD73bT5Xb3+UfeN2Y75XbH+W+v//7v93/L98f//u//R/0v+/w/7v+L///P//v/v/n/H90/H92/T97vR/3vB9v7+b/+77NfL3f533f8P7h///Z9p/jPOf/wPnf/8PjP//9D/C/4v5S///P9F/y////X/H9/fS//vKfeL8B//f9L+H9f/P/7b43/r+9//R9v/n/S///5z5S/S///R//8A//8A//8A//8A/BfwX8F+OfgP558N///L///wP//+f/z//D/8v///A9/fXf5vFfd/E/5T/nO//1f9/wfo/0P4B95f7u5v7v7+H+//AfoP6H+E9of+F/v/SfdN/D9N/C9N/E9T/W9T/S9S/R9S/A+S/v/kH0D7A94f2O9U9n//L////x////D/+/8H/wf6N9Nf93M//4fv39O///tX+lf9//P//v8v///B///C//9B//+E//+f/f8D/XfE963uB+1P/Tfwf5P+M+MvA/wX/F/T/yvwX+7v1XwN//8O//8O/wf+3+bvvN///xP//A9F9S///8H//+b9//Mv4R8B/xf///D///A/B9/vMfoL+G8y/gfyf6G//+3///6f+3+N/t//7/rv3N///xf+/7b43/7///8D/2fxD///xf9f+1/Bf3H9X+9PvN+i+xf6P+3+E9bvbPoL2J9E/hvxHwH//+7//v+O///A//fW//fxF+Bf4b7Z/N3wP7X/u/4H/i/N//X/P//vD/A/8f+L///5v5S+2fR9zP5G/M7P//v////y/////7vT//f5//8vFffv4h+G8bvxO///A/9v//8j/r/35v5b69+g/////zN5B/P///xf/r/////v5B8H9I///r/////H/xf/X+9PxX/V+8Oxf725H/3///6X///5/uX///wP/z/////n5x/S//f5v1b2x9T+j/S/0/6X//+b9T///v//////3O///7m4B8B/mP+f//Wb83vUe0r8D+//A////b9//Nf0P7b9P/u/wL/Z/M//u/G90u8v17277E+N//////b+YfYXwP6H9z///////xf725G/O7X7+D8E/MfYXwT///v///////v5//g+SfxH7U/9Pxf/H////b+r///7v6v+B+3ftb9B/pX/V+8T7j/////b+ofYPxf7B/xf////6v//////y/////f6H+O///8H//////f/v/H///A///D/XfI/uPwX/H/A/U/wT///S///3//////f///xf//////xP///xf+l/p///v+X+YfA/hXwX////4//x///6H9z/WfS///////B/////E96Xun7m+N//xf6X6E///////+l/IfoT///2//////v9U/g////S///39//6vS/SfxH/L/xf/S//9v9j9r9if+YvAf8x//////7n4B///xf/W+vfwT8F//////7H+h////Bf/n5L//////9z///////zP0H8D///////2P9U9ifNfoHxf8x//////6H+D7of8x/////xf/4v0//8S9D+X//+xf4R8B////////H/////X/H////b/v7//wP///w////A/l/pfv5P////U/B/////Bfyn+X6X677n9M///r//////f///3//////+l//+X//////E9R//////S/B/////xP/n5J//////+p/pf7W//////xf//////S//8H////7f9h//+5//////5P/4v/b+7+D////////B///////wP///////H///9h//////G//////+U////yPxf//////E/T/////4/vT+D///////W9Pxf/H///yn//////S///YfYvxf///////ynxf/X7+B///////xfxf9T///U//6H+H+H///u/////v////n/////39L96fvT+D/A/////4v9X8R9D+7///A////A//8X///wP//4P//6H+D+D////4P/X/wT///U/lf9X8n9L///U///p/4v/n+X//////3O////b///YfB/0/vL+t///S//////wP///4P/f//////v7H+N//////8H+H///A///A/l/////4v9//L9v8h8j/A/////U////B/////xPxf6vBfxXxfxf5T/X/4//E////xf/T+vD9xf+n//+A//////E////xf7v6E//////8H/E//////8T/F/3///////B//+9////B///////U9Q///////9h//+5/uP//////B///////xfwP8D////////xf+t///yn//////xf8X7u5///B/////D///////h////A////A/S////////4/4v4b8v7S//////5v/n/////xf/39L//////7H9U////+1////YfY////yn/S///+T///Yvxfyn+G/r/////v9j///6vT///////X9Pxf/xfxf8T+G+YfwX5/vA/1P/3//////E////4P8X/xfxf///E/xf8P8v9v///B///////yn//////B////Y////xf+T////////xf8n/5f6X9D////////X//////8n///4v8n/5f///+X//////8n/U/ynyn/5vxf9j9i/Yf////wP///////7H//////A///S////X//////5v//////4H///////syn//////S/Yvzfxf+B/L//B///////4v///////B///////p////YfYnxfxfzf//////U////U//////E//U//U//X///yn/1//X//X////h//////4X////U//yn//yn///X//yn////////G////yn//+l///////xf//////+D/////S///4P9//J/5P+V//////8T+U////4v8n/5f5X/////p///////f//xf////////X////3/////n5R//////E///X///V/yn/l////9X///////D/yf+l///E9z/U////B///////G//////yn/yf//yn////6f//////v/G/v////yH+W//////yn+Y//////6f+Y//////+1///Yf4P////4v//////8T+U///E////X///////xf///////G////yn//yn/xf8vxf//yn/U/yn8n/p///////D////p////xf9f6f/////A///A///xf/n4D8p//////8T8R9h///////S///////X///////D////5f/E/x////xf4X9X+F///////p///p///////p///D////2//Y/A/////A//A///////U//////xf///xf/U///////T9B///9b9j///////+D///////G//////yn//////p///U////3/////X/H////xf8n/D///////+l+S//+p//////xf//yn////////+V///1f/////E////A/////8T/R///xf8n/4/D/4P///////B////yn///////X///wP8H//////syn//////X+H+D/A/n+8D/////4v//////A/////A//////E////3//////xf//////xf9H+A/wP+B/39fxf+H/////v/////X///B/////U9T////83vU/////H///X//u///H////xf+B+l+E+F/X//U////E////9b+b/5/pfU//////G////////Bf8n///////n5v6n7b+r+T////////xf/X///yn/yf/l/9b+79f939b////////+D+R///////F/////X///yn/yn/yf/A////xf////yf//yn///X///////B///////wP///////5v9f///xf/X///p//yn//////syn//yf//U/S////////7f/////xf//////v////8X/H////A////U////+1///X///p/wP//G9U/T9X//////0v//////B///G//////yn//U//U/S/////////3//////xf////5vxf/yf+n/1/S/af4////xf/B//////syn/6v//+H//////A//xf//A//////S//////wP///////6v//+X//wP///////+X//syn/6v/E+9PvX7X//U/pfoT//////0v//B///yf/A///8n/xf/p//+T///S/8T/G9G///pfoT//////xf/n//////U////X///////xf9H//////9H/P//////Yf4////X///U////A/G+B+X///xf/R/////G/yf//X////6v////p///U////////xf/X///////+1/Y///YfYn////9b+5/rf/u7A///////A///X///////8T////////Syn/8n///////xf///////X///////X/afwP////////p///8n/////xf+l/p///U////D//U//9b9P1/pf0X//A/n+C/3//3//6X4X6v9f6f1foT//////+1+xfT//4H+5//////1P8j//9T+H///A///yn/yf///////A///A////Syn///4P8X/H/l/qfsL9K9ifN/Kfn5H+7////U//A/R/hfxf0//3///E/Bfxf8v/E///////+H+H///B///////+l/3///////A/yn+D9X///////8D///+r6T7X///0v//B/S/D/////X/9X+vfwXxf8X/U////xf///////Bfxf//yn9X/1/6X+l+l/S///////yf//w////yn///////X/B//////D////1f//////xf//yf/A/xf/U/xf/U//A////A///A////S//////wP///4P/xfxf////6X8j//+p/wP/T838Z8X8X/X9D//////X/v////A///////B//////Syn//////xf//////S/yn//////p///u/////4v////4H/T////U/yn//////6v///xf//U/Yf4P/H+D/xfxf8T+G+B/v////U/Bf7n7C+xf4nxf8P8v+r+p+Q+F///////+l/3///u///4P//////8X/v////wP////A///4P////8v///yf8n//////D/////D///A/yn/U////8n/p///3///u///4P///////5v8P/g///////6v6n6n5H+A//yn////////8D///////+l/G//////yf+j/f///wP//U9S/0///4P///xf9H/T9H9f/U9D+U9U////X9D+U9D//////A///4H//////B/////xf///////A////yf8A///yf//X///////Syn//n//////xf//p//A////U///////xf///////A///A/////X///////xf8T/5vxf/U///////X//wP+l/IfoT/////6n//////G///X//+H///yf//yf8n/yf9T+p/X//+H//////+r///wfxf4vxf4Pxf8T+D8v+vxf8X7u5///B/////D///////X////3///S///////xf+T////////S/yn/U////G///G//////yf//////YfD+9//////D/4H9b9B/pXxfxfwX8P/O//pfoD/A/E+E/Bf///3///////4H///////G/S9X/yf///////V/pfyn9f////8T+G///1//4X///yn+D//p///xf/T//////p////u/////B////xf////////S96Xuf////4H8p/F/p///X//////8T///X///YfYXwX8F+yf+5/////7f////X//yn/D///////U///////Syn//yn/4f///X//////xf9H////////+D////xf/X///yn/yf/yf//////S/pfsf4H8R+Q+xfm/D////B//////B//+t////////xf6n7b+r/wP////////1v9T+M/YnX//U9P+U9D+p/U//////yn//////Bf///////1f/////E////X/yf//p///xf////E9R///////S/X7V+1foT6h+D9H9v9j9C9B//wP/////4v//////U//+t///u///////S//////8T8R9h///////u////u/YfYn+l/yf//xf4nxf8X+n/wf//u//v////3/////wP/yf8n////////S9G9j///////7f////G/yf//X///X//X////+X/wP5j//8D/F///A///xf/T+F/U/p////xf4f6h8T9E///////+n7X6pfoT///xf6P9///wf4X///X+H////+p//////X///yf////6v6n7b+7+D/H//U+l/////Syn/yn/wf///D///////B///////wP///////5v/yf8A/yf//xf/X9X+F///////9X///////2//wP///////+H/A////8X+1/G//////yf//////Syn/yn//U//U//yf+l///////X//yf//////p//yn///////pfoT///V+U9af8T83+p+6fkf7v//////G////V////5v8P////2/6X//////X///9b///yf////yf//+1////p//6X5A////xf/B///wf7C/afU/n+1/Bfxf8X/X/X/6X+p/yn9D/O/yf8n///////X/yn/yf/A////xf////xf////8X/0v0v2n7b////////X//////yf/B////yf/D/5vxf/p///p////////U/T/l/D/pXzf4vxb5X//p/U9j/jPhf1//2//////H////////syn/S////p/9f+X//X//////+l/9f/X///////yf///////U/wf+n///+X//D//////xf9X/U////U///////+H/////G//////yf//////yf//U////////V/2fzf/0v5X/yf/E////xf8n/wP5n/yf8A/xf/S///////yf//4v9v/////Yf9P/l////////A///A///yn/yf8n//wP//+l+V9qfB/3///////Syn/wP7D/af9N///X//p//yn+F/G//////xf////xf/5vxf8f8X/H/l////////Syn//X///////xf/B//////8n/U/yf//U///U///xf8n/D/0v2L8n/n5P//////4H///////syn//////syn/A///+H////////p/yn//n//////yf+n////wf4H///A///yn//X///yn/p//H9v/////U/D/5v///////G//////yn//////U//+r///D/////yf///////8n//n/8T/H////A/D/5vxf//////+X///////E9p+6flfxHwP8D/D/xv//v///////D////X///p///w////D//////U9U////yn8D+A////6n//A/yn8X+H////5P/yf8A//////w////w////A///+1///////4H//////B/////G//////syn//////A////A//////yf+A/yf+T+p//////8T/p///////xf//E////X///////p///p//+H///yf//yn/yf8n/yf///////X///syn////////A///////D////X//+l///////xf////U///D////X///////p///+1///Syn///////p//A///+H///////+H///A///////D////X///xf+T/yf////////6n//p///xf//////X///xf//yn///U/yn+X+p+yfBfX/5H/U///+D///////G//////yn+S/xf/G//////yf//////v////+H//8X8L8n//xfxfwX8F+O9i+E+D/////8T/R///+X//6X//8D///D////+X///u///D////4H///////wP//////wP///4P+X///wP//+r///////8n//////+H+H///B///////+l/3///////u//////u/////u/////6f4H/u//////u/w////A///yn/A///////u/4v7v6n9p//////A////X///A////X///u/F/X/6f//U////3///U/xf+n//+H//////A//8X8n+D/U///////B///////5v/U//A///////U/F/F/D////5H8X70+M/F///////yf//p//p///6X4X8F9b939B//8D/////v/////D////yf//////p///yf//////yn+Y/xf+A/yn/T////8T8H/A/////Syn/6X8n9f+r9v////////X//////B///yf////+V93////U////////U////+H////////5f/A///////U///Syn//xfxf/l/xf8A////wf///A///w////D/0//wf+T/lf5X/pfxb5v9f+X/U///////X//w////yn///////+l///yf//////xf//yn////////D///yf/A///8n///////yf8T////////+1/Yvxf5v6H/U9D+U9U///T9afU////Syn//////Syn///yf//B//////yn//////B///U////G///G//////yf//////xf///////yn////////yf/B/xf////6v+T+X/pfyf/yf8A/5//+p9X////Syn//A///D////U///Syn///////yn///////X/X//yn/A////X/X/X////B///////G//////4v/YfYXwX7V+D////////U/af9N////////6v6n43/n5X/xf8n///////xf////A//// Syn/A//////yf//Syn//xf/k///////v////yn+A/////U////////v7u////////A///Syn//wf///xf//////xf////X//////yf+V//////// Syn/p///A/U/xf4nxf8f//wf///xf//////+1//////X///xf/yf// Syn///U///D////w////1f/5P/////0v7H//4f//////Syn///////A///yf8A////xf///////U///////V///////X/v///6X+A/// Syn/p//////U////xf////w////B///////X///////Syn//n/3////////D///////+r+V// Syn/wf// wf8n/5f///////u/pfxP5X////xf5v9X/wf8D/S/////// Syn///E/wf///////V+D+A///0v/yf+p/S/S/Yv//////S9H/T9H//wf4X/X9D////9T///p/w/u7u9z////////5f/l///wf8n//////p///U/l///////yf//p/3/// Syn///////+V///4P//yf8n///////+D///yf/yf//n//////S//////// Syn///////9X//////
