@@ -3,172 +3,173 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Socio Benja VIP | Plataforma Premium</title>
+    <title>Socio Benja VIP | Elite</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root {
-            --bg: #050505;
-            --card: #0f0f0f;
-            --accent: #ff1a1a;
-            --gold: #f1c40f;
-            --text-main: #e0e0e0;
-            --text-sub: #888;
-            --border: #1a1a1a;
-        }
+        :root { --bg: #050505; --card: #0f0f0f; --accent: #ff1a1a; --gold: #f1c40f; --border: #1a1a1a; }
+        body { background: var(--bg); color: #e0e0e0; font-family: 'Segoe UI', sans-serif; margin: 0; display: flex; justify-content: center; min-height: 100vh; }
+        .wrapper { width: 100%; max-width: 400px; padding: 15px; box-sizing: border-box; }
+        
+        .card { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); display: none; }
+        .active { display: block; animation: fadeIn 0.3s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        body {
-            background-color: var(--bg);
-            color: var(--text-main);
-            font-family: sans-serif;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-
-        .main-wrapper { width: 100%; max-width: 400px; padding: 20px; box-sizing: border-box; }
-
-        .card {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 24px;
-            padding: 25px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.9), 0 0 15px rgba(255,0,0,0.1);
-            display: none;
-        }
-
-        .active-view { display: block; }
-
-        .header { text-align: center; margin-bottom: 20px; }
-        .header h1 { font-size: 1.5rem; color: white; text-shadow: 0 0 10px var(--accent); margin: 0; }
-
-        .form-group { margin-bottom: 15px; text-align: left; }
-        label { display: block; font-size: 0.7rem; color: #888; margin-bottom: 5px; font-weight: bold; }
-        input { 
-            width: 100%; padding: 14px; background: #000; border: 1px solid var(--border); border-radius: 12px; 
-            color: white; outline: none; box-sizing: border-box;
-        }
-
-        .btn { 
-            width: 100%; padding: 15px; border: none; border-radius: 12px; font-weight: bold; 
-            cursor: pointer; transition: 0.2s; display: flex; align-items: center; justify-content: center; gap: 10px;
-        }
+        h1 { font-size: 1.3rem; text-align: center; color: white; text-shadow: 0 0 10px var(--accent); }
+        input { width: 100%; padding: 12px; background: #000; border: 1px solid var(--border); border-radius: 10px; color: white; margin: 8px 0; box-sizing: border-box; }
+        .btn { width: 100%; padding: 14px; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; transition: 0.2s; text-transform: uppercase; }
         .btn-main { background: var(--accent); color: white; }
+
+        .balance-box { background: linear-gradient(145deg, #111, #000); border: 1px solid var(--border); border-radius: 15px; padding: 15px; text-align: center; margin-bottom: 15px; }
+        .bal-val { font-size: 2.2rem; font-weight: 800; color: white; margin: 5px 0; }
+        .btn-wa { background: var(--gold); color: black; font-size: 0.8rem; text-decoration: none; display: block; padding: 10px; border-radius: 8px; margin-top: 10px; font-weight: bold; }
+
+        /* JUEGO PROFESIONAL */
+        .game-container { background: #080808; border: 1px solid var(--border); border-radius: 15px; padding: 15px; text-align: center; position: relative; overflow: hidden; }
+        .game-header { font-size: 0.8rem; color: var(--accent); font-weight: bold; margin-bottom: 10px; }
         
-        .user-info { display: flex; align-items: center; gap: 12px; background: #151515; padding: 12px; border-radius: 15px; margin-bottom: 15px; }
-        .user-avatar { width: 40px; height: 40px; background: #222; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--accent); }
-
-        .balance-card { background: #000; border: 1px solid var(--border); border-radius: 15px; padding: 20px; text-align: center; margin-bottom: 20px; }
-        .balance-val { font-size: 2rem; font-weight: 800; color: white; margin: 5px 0; }
+        #game-stage { height: 180px; display: flex; justify-content: center; align-items: flex-end; padding-bottom: 20px; }
+        .balloon-svg { width: 60px; transition: transform 0.1s cubic-bezier(0.17, 0.67, 0.83, 0.67); filter: drop-shadow(0 0 10px rgba(255,0,0,0.5)); }
         
-        .btn-deposit { background: var(--gold); color: black; font-size: 0.8rem; padding: 10px; border-radius: 8px; text-decoration: none; display: block; margin-top: 10px; }
-
-        .game-area { background: #080808; border: 1px solid var(--border); border-radius: 15px; padding: 15px; text-align: center; }
-        #balloon { font-size: 3.5rem; cursor: pointer; display: inline-block; transition: transform 0.1s; }
-
-        .footer { text-align: center; font-size: 10px; color: #333; margin-top: 20px; }
+        .game-info { display: flex; justify-content: space-between; font-size: 0.75rem; border-top: 1px solid #1a1a1a; pt: 10px; margin-top: 10px; }
+        .cost-tag { background: #200; color: #f55; padding: 2px 8px; border-radius: 5px; font-size: 0.7rem; }
     </style>
 </head>
 <body>
 
-<div class="main-wrapper">
-
-    <div class="card active-view" id="view-register">
-        <div class="header"><h1>REGISTRO VIP</h1></div>
-        <div class="form-group">
-            <label>USUARIO</label>
-            <input type="text" id="reg-user" placeholder="Tu nombre...">
-        </div>
-        <div class="form-group">
-            <label>CONTRASEÑA</label>
-            <input type="password" id="reg-pass" placeholder="Segura...">
-        </div>
-        <button class="btn btn-main" onclick="register()">CREAR CUENTA</button>
-        <p style="text-align:center; font-size:12px; color:#555; margin-top:15px;" onclick="switchView('view-login')">¿Ya tienes cuenta? <span style="color:red">Entrar</span></p>
+<div class="wrapper">
+    <div class="card active" id="view-reg">
+        <h1>REGISTRO VIP</h1>
+        <input type="text" id="r-u" placeholder="Usuario">
+        <input type="password" id="r-p" placeholder="Contraseña">
+        <button class="btn btn-main" onclick="reg()">CREAR CUENTA</button>
+        <p style="text-align:center; font-size:12px; color:#555" onclick="sw('view-login')">¿Ya eres socio? Entrar</p>
     </div>
 
-    <div class="card" id="view-dashboard">
-        <div class="user-info">
-            <div class="user-avatar"><i class="fas fa-crown"></i></div>
-            <div>
-                <h3 id="display-username" style="margin:0; font-size:1rem;">Usuario</h3>
-                <p style="margin:0; font-size:11px; color:gray;">Socio Verificado</p>
-            </div>
-            <i class="fas fa-sign-out-alt" onclick="logout()" style="margin-left:auto; color:#444;"></i>
+    <div class="card" id="view-login">
+        <h1>LOGIN VIP</h1>
+        <input type="text" id="l-u" placeholder="Usuario">
+        <input type="password" id="l-p" placeholder="Contraseña">
+        <button class="btn btn-main" onclick="log()">ACCEDER</button>
+    </div>
+
+    <div class="card" id="view-dash">
+        <div style="display:flex; align-items:center; margin-bottom:15px;">
+            <i class="fas fa-user-circle" style="font-size:1.5rem; color:red"></i>
+            <span id="user-name" style="margin-left:10px; font-weight:bold;">Usuario</span>
+            <i class="fas fa-sign-out-alt" onclick="exit()" style="margin-left:auto; color:#444"></i>
         </div>
 
-        <div class="balance-card">
-            <div style="font-size:10px; color:gold;">SALDO ACTUAL</div>
-            <div class="balance-val" id="display-balance">$0.00</div>
-            <a href="https://wa.me/5493364546172?text=Hola%20Benja%20quiero%20recargar%20saldo%20mi%20usuario%20es:" target="_blank" class="btn-deposit">
-                <i class="fas fa-university"></i> CARGAR SALDO / TRANSFERENCIA
+        <div class="balance-box">
+            <div style="font-size:0.7rem; color:gold;">MI SALDO DISPONIBLE</div>
+            <div class="bal-val" id="user-bal">$0.00</div>
+            <a href="https://wa.me/5493364546172?text=Hola%20Benja%20quiero%20recargar%20saldo%20en%20mi%20cuenta" class="btn-wa">
+                <i class="fas fa-dollar-sign"></i> RECARGAR POR TRANSFERENCIA
             </a>
         </div>
 
-        <div class="game-area">
-            <div style="font-size:11px; color:red; margin-bottom:10px;">JUEGO DEL GLOBO VIP</div>
-            <div id="balloon" onclick="inflate()">🎈</div>
-            <div style="font-size:11px; color:#555; margin-top:10px;">Clicks: <span id="clicks" style="color:white">0</span> | Récord: <span id="record" style="color:white">0</span></div>
+        <div class="game-container">
+            <div class="game-header">GLOBO VIP <span class="cost-tag">COSTO: $100</span></div>
+            
+            <div id="game-stage" onclick="play()">
+                <svg id="balloon-obj" class="balloon-svg" viewBox="0 0 30 40">
+                    <path d="M15 0 C22 0 28 8 28 18 C28 28 22 35 15 35 C8 35 2 28 2 18 C2 8 8 0 15 0" fill="#ff1a1a"/>
+                    <rect x="14" y="35" width="2" height="5" fill="#333"/>
+                </svg>
+            </div>
+
+            <div id="game-overlay" style="display:none; position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:10; flex-direction:column; justify-content:center; align-items:center;">
+                <p id="over-msg" style="color:white; font-weight:bold;"></p>
+                <button class="btn btn-main" style="width:120px; font-size:0.7rem;" onclick="resetGame()">REINTENTAR</button>
+            </div>
+
+            <div class="game-info">
+                <span>CLICKS: <b id="c-count">0</b></span>
+                <span>RÉCORD: <b id="c-rec">0</b></span>
+            </div>
+            <p id="bal-error" style="color:red; font-size:10px; margin-top:10px; display:none;">⚠️ Saldo insuficiente para jugar</p>
         </div>
-
-        <div class="footer">njagmzok-ui.github.io | Socio Benja VIP</div>
+        
+        <p style="text-align:center; font-size:9px; color:#222; margin-top:20px;">njagmzok-ui.github.io | Benjamin Delgadillo</p>
     </div>
-
 </div>
 
 <script>
-    function switchView(id) {
-        document.querySelectorAll('.card').forEach(c => c.style.display = 'none');
-        document.getElementById(id).style.display = 'block';
+    let uAct = "";
+    function sw(id){ document.querySelectorAll('.card').forEach(c=>c.classList.remove('active')); document.getElementById(id).classList.add('active'); }
+    
+    function reg(){
+        let u=document.getElementById('r-u').value, p=document.getElementById('r-p').value;
+        if(!u||!p) return;
+        let db = JSON.parse(localStorage.getItem('db_v2')||'{}');
+        if(db[u]) return alert("Usuario ocupado");
+        db[u] = {p, b:0, r:0};
+        localStorage.setItem('db_v2', JSON.stringify(db));
+        uAct = u; load();
     }
 
-    function register() {
-        const u = document.getElementById('reg-user').value;
-        const p = document.getElementById('reg-pass').value;
-        if(!u || !p) return alert("Completa los datos");
+    function log(){
+        let u=document.getElementById('l-u').value, p=document.getElementById('l-p').value;
+        let db = JSON.parse(localStorage.getItem('db_v2')||'{}');
+        if(db[u] && db[u].p === p){ uAct = u; load(); } else { alert("Datos incorrectos"); }
+    }
+
+    function load(){
+        let db = JSON.parse(localStorage.getItem('db_v2'))[uAct];
+        document.getElementById('user-name').innerText = uAct;
+        document.getElementById('user-bal').innerText = `$${db.b.toFixed(2)}`;
+        document.getElementById('c-rec').innerText = db.r;
+        if(db.b < 100) document.getElementById('bal-error').style.display='block';
+        sw('view-dash');
+    }
+
+    function exit(){ uAct=""; sw('view-reg'); }
+
+    // LÓGICA DEL JUEGO
+    let size = 1, clicks = 0, isPopped = false;
+    function play(){
+        if(isPopped) return;
+        let db = JSON.parse(localStorage.getItem('db_v2'));
         
-        let users = JSON.parse(localStorage.getItem('users_benja') || '{}');
-        if(users[u]) return alert("Usuario ya existe");
-        
-        users[u] = { pass: p, balance: 0, record: 0 };
-        localStorage.setItem('users_benja', JSON.stringify(users));
-        alert("Cuenta creada!");
-        localStorage.setItem('active_benja', u);
-        load();
-    }
+        if(db[uAct].b < 100){
+            document.getElementById('bal-error').style.display='block';
+            return;
+        }
 
-    function load() {
-        const user = localStorage.getItem('active_benja');
-        if(!user) return switchView('view-register');
-        const data = JSON.parse(localStorage.getItem('users_benja'))[user];
-        document.getElementById('display-username').innerText = user;
-        document.getElementById('display-balance').innerText = `$${data.balance.toFixed(2)}`;
-        document.getElementById('record').innerText = data.record;
-        switchView('view-dashboard');
-    }
+        // Descontar saldo solo al primer click de la partida
+        if(clicks === 0){
+            db[uAct].b -= 100;
+            localStorage.setItem('db_v2', JSON.stringify(db));
+            document.getElementById('user-bal').innerText = `$${db[uAct].b.toFixed(2)}`;
+            document.getElementById('bal-error').style.display='none';
+        }
 
-    function logout() { localStorage.removeItem('active_benja'); location.reload(); }
+        clicks++;
+        size += 0.15;
+        document.getElementById('c-count').innerText = clicks;
+        document.getElementById('balloon-obj').style.transform = `scale(${size})`;
 
-    let size = 1, count = 0;
-    function inflate() {
-        count++;
-        size += 0.1;
-        document.getElementById('clicks').innerText = count;
-        document.getElementById('balloon').style.transform = `scale(${size})`;
-        if(size > 2.5) {
-            alert("¡PUM! Explotó.");
-            const user = localStorage.getItem('active_benja');
-            let users = JSON.parse(localStorage.getItem('users_benja'));
-            if(count > users[user].record) {
-                users[user].record = count;
-                localStorage.setItem('users_benja', JSON.stringify(users));
+        if(size > 2.8) {
+            isPopped = true;
+            document.getElementById('balloon-obj').style.opacity = '0';
+            document.getElementById('over-msg').innerText = "💥 ¡EL GLOBO EXPLOTÓ! ("+clicks+" clicks)";
+            document.getElementById('game-overlay').style.display = 'flex';
+            
+            if(clicks > db[uAct].r){
+                db[uAct].r = clicks;
+                localStorage.setItem('db_v2', JSON.stringify(db));
+                document.getElementById('c-rec').innerText = clicks;
             }
-            location.reload();
         }
     }
 
-    window.onload = load;
+    function resetGame(){
+        size = 1; clicks = 0; isPopped = false;
+        document.getElementById('balloon-obj').style.opacity = '1';
+        document.getElementById('balloon-obj').style.transform = 'scale(1)';
+        document.getElementById('c-count').innerText = '0';
+        document.getElementById('game-overlay').style.display = 'none';
+        load(); // Revisa si todavía tiene saldo
+    }
 </script>
 </body>
 </html>
