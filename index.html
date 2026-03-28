@@ -90,6 +90,7 @@
             margin-bottom: 0;
         }
 
+        /* --- PRODUCTOS --- */
         .platform-section { margin-bottom: 35px; }
 
         .platform-header {
@@ -136,7 +137,7 @@
             cursor: pointer;
         }
 
-        /* --- NUEVO: PREGUNTAS FRECUENTES (FAQ) --- */
+        /* --- FAQ --- */
         .faq-section {
             margin-bottom: 40px;
             background-color: #0c0c0c;
@@ -175,10 +176,10 @@
             color: #aaa;
             line-height: 1.5;
             margin-top: 10px;
-            display: none;
+            display: none; /* Oculto por defecto */
         }
 
-        .faq-answer.open { display: block; }
+        .faq-answer.open { display: block; } /* Clase para mostrar */
 
         /* --- MODAL --- */
         .modal {
@@ -283,9 +284,8 @@
     <div class="info-box">
         <h2><i class="fas fa-shield-check"></i> Calidad Garantizada VIP</h2>
         <p>
-            Nuestros seguidores cuentan con <b>perfiles reales</b>, fotos y biografía activa. 
-            Ofrecemos un sistema <b>sin caídas</b> y de la mejor calidad del mercado para asegurar que tu perfil crezca de forma orgánica y empieces a generar ingresos con tu marca personal. 
-            Tu éxito es nuestra prioridad.
+            Nuestros seguidores cuentan con <b>perfiles reales</b>, fotos y biografía activa.
+            Ofrecemos un sistema <b>sin caídas</b> y de la mejor calidad del mercado para asegurar que tu perfil crezca de forma orgánica y empieces a generar ingresos.
         </p>
     </div>
 
@@ -295,17 +295,17 @@
             <h2>Instagram VIP</h2>
         </div>
         <div class="product-grid">
-            <div class="product-card" onclick="openPaymentModal('Instagram', '20.000', '30.000')">
+            <div class="product-card" onclick="openPaymentModal('Instagram', '20k', '30.000')">
                 <div class="qty">20k</div>
                 <div class="price">$30.000</div>
                 <button class="buy-btn">Comprar</button>
             </div>
-            <div class="product-card" onclick="openPaymentModal('Instagram', '50.000', '60.000')">
+            <div class="product-card" onclick="openPaymentModal('Instagram', '50k', '60.000')">
                 <div class="qty">50k</div>
                 <div class="price">$60.000</div>
                 <button class="buy-btn">Comprar</button>
             </div>
-            <div class="product-card" style="grid-column: span 2;" onclick="openPaymentModal('Instagram', '100.000', '80.000')">
+            <div class="product-card" style="grid-column: span 2;" onclick="openPaymentModal('Instagram', '100k', '80.000')">
                 <div class="qty">100.000 Seguidores</div>
                 <div class="price">$80.000</div>
                 <button class="buy-btn">Comprar Pack Elite</button>
@@ -319,7 +319,7 @@
             <h2>TikTok VIP</h2>
         </div>
         <div class="product-grid">
-            <div class="product-card" style="grid-column: span 2;" onclick="openPaymentModal('TikTok', '20.000', '35.000')">
+            <div class="product-card" style="grid-column: span 2;" onclick="openPaymentModal('TikTok', '20k', '35.000')">
                 <div class="qty">20.000 Seguidores</div>
                 <div class="price">$35.000</div>
                 <button class="buy-btn">Comprar Ahora</button>
@@ -344,23 +344,22 @@
         
         <div class="faq-item">
             <div class="faq-question" onclick="toggleFaq(this)">¿Es seguro para mi cuenta? <i class="fas fa-chevron-down"></i></div>
-            <div class="faq-answer">Totalmente. Usamos métodos orgánicos de alta calidad que cumplen con las normas de las plataformas. No necesitas dar tu contraseña, solo tu usuario. Tu cuenta está 100% segura con nosotros.</div>
+            <div class="faq-answer">Totalmente. Usamos métodos orgánicos que cumplen con las normas. No necesitas dar tu contraseña, solo tu usuario.</div>
         </div>
 
         <div class="faq-item">
             <div class="faq-question" onclick="toggleFaq(this)">¿Cuánto tardan en llegar? <i class="fas fa-chevron-down"></i></div>
-            <div class="faq-answer">El proceso de envío comienza automáticamente tras notificar el pago. Dependiendo del pack elegido, los seguidores llegarán de forma progresiva y natural en un plazo de 24 a 72 horas para asegurar la calidad.</div>
+            <div class="faq-answer">El proceso inicia tras notificar el pago. Los seguidores llegan de forma natural en un plazo de 24 a 72 horas.</div>
         </div>
 
         <div class="faq-item">
             <div class="faq-question" onclick="toggleFaq(this)">¿Qué método de pago aceptan? <i class="fas fa-chevron-down"></i></div>
-            <div class="faq-answer">Por seguridad y rapidez, aceptamos únicamente Transferencia Bancaria Directa o MercadoPago (vía Alias). Una vez transferido, nos envías el comprobante por WhatsApp y activamos el servicio.</div>
+            <div class="faq-answer">Aceptamos Transferencia Bancaria Directa o MercadoPago (vía Alias).</div>
         </div>
     </div>
 
     <div class="footer">
         © 2026 Socio Benja VIP - Benjamín Gomez<br>
-        Plataforma Segura | Acreditación Bancaria<br>
         WhatsApp Directo: +54 9 336 454-6172
     </div>
 </div>
@@ -376,7 +375,7 @@
         </div>
 
         <div class="payment-step">
-            <span class="step-label">PASO 2: TRANSFERENCIA BANCARIA</span>
+            <span class="step-label">PASO 2: TRANSFERENCIA</span>
             <p style="font-size: 0.8rem; margin:0 0 8px 0;">Monto: <b id="modal-price" style="color:var(--accent);">$0</b></p>
             <div class="alias-box">
                 <span>Seguidoresarg3</span>
@@ -394,9 +393,9 @@
 <script>
     let currentData = {};
 
-    // Función para el FAQ
+    // FUNCIÓN FAQ CORREGIDA
     function toggleFaq(element) {
-        const answer = element.nextURI;
+        const answer = element.nextElementSibling; // Corregido: busca el bloque de abajo
         answer.classList.toggle('open');
         const icon = element.querySelector('i');
         icon.classList.toggle('fa-chevron-up');
@@ -427,7 +426,7 @@
             return;
         }
 
-        const message = `Hola Benja Gomez, quiero los ${currentData.quantity} seguidores para ${currentData.platform}.\n\n✅ Usuario/Link: ${user}\n💰 Monto: $${currentData.price}\n\nYa realicé la transferencia al alias Seguidoresarg3. ¿Me confirmas el pedido?`;
+        const message = `Hola Benja Gomez, quiero los ${currentData.quantity} seguidores para ${currentData.platform}.\n\n✅ Usuario/Link: ${user}\n💰 Monto: $${currentData.price}\n\nYa realicé la transferencia al alias Seguidoresarg3.`;
         const phoneNumber = "5493364546172";
         window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
     }
