@@ -3,173 +3,324 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Socio Benja VIP | Elite</title>
+    <title>Socio Benja | Plataforma de Gestión de Crecimiento</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root { --bg: #050505; --card: #0f0f0f; --accent: #ff1a1a; --gold: #f1c40f; --border: #1a1a1a; }
-        body { background: var(--bg); color: #e0e0e0; font-family: 'Segoe UI', sans-serif; margin: 0; display: flex; justify-content: center; min-height: 100vh; }
-        .wrapper { width: 100%; max-width: 400px; padding: 15px; box-sizing: border-box; }
-        
-        .card { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); display: none; }
-        .active { display: block; animation: fadeIn 0.3s; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        :root {
+            --bg: #030303;
+            --card: #0c0c0c;
+            --accent: #ff1a1a; /* Rojo Neón Benja */
+            --gold: #f1c40f;
+            --text-main: #e0e0e0;
+            --text-sub: #718096;
+            --border: #1a1a1a;
+            --success: #2ecc71;
+            --warning: #f1c40f;
+        }
 
-        h1 { font-size: 1.3rem; text-align: center; color: white; text-shadow: 0 0 10px var(--accent); }
-        input { width: 100%; padding: 12px; background: #000; border: 1px solid var(--border); border-radius: 10px; color: white; margin: 8px 0; box-sizing: border-box; }
-        .btn { width: 100%; padding: 14px; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; transition: 0.2s; text-transform: uppercase; }
-        .btn-main { background: var(--accent); color: white; }
+        body {
+            background-color: var(--bg);
+            color: var(--text-main);
+            font-family: 'Inter', -apple-system, sans-serif; /* Fuente tipo Apple, súper profesional */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
 
-        .balance-box { background: linear-gradient(145deg, #111, #000); border: 1px solid var(--border); border-radius: 15px; padding: 15px; text-align: center; margin-bottom: 15px; }
-        .bal-val { font-size: 2.2rem; font-weight: 800; color: white; margin: 5px 0; }
-        .btn-wa { background: var(--gold); color: black; font-size: 0.8rem; text-decoration: none; display: block; padding: 10px; border-radius: 8px; margin-top: 10px; font-weight: bold; }
+        /* --- CONTENEDOR GENERAL --- */
+        .main-wrapper {
+            width: 100%;
+            max-width: 440px;
+            padding: 15px;
+            box-sizing: border-box;
+        }
 
-        /* JUEGO PROFESIONAL */
-        .game-container { background: #080808; border: 1px solid var(--border); border-radius: 15px; padding: 15px; text-align: center; position: relative; overflow: hidden; }
-        .game-header { font-size: 0.8rem; color: var(--accent); font-weight: bold; margin-bottom: 10px; }
-        
-        #game-stage { height: 180px; display: flex; justify-content: center; align-items: flex-end; padding-bottom: 20px; }
-        .balloon-svg { width: 60px; transition: transform 0.1s cubic-bezier(0.17, 0.67, 0.83, 0.67); filter: drop-shadow(0 0 10px rgba(255,0,0,0.5)); }
-        
-        .game-info { display: flex; justify-content: space-between; font-size: 0.75rem; border-top: 1px solid #1a1a1a; pt: 10px; margin-top: 10px; }
-        .cost-tag { background: #200; color: #f55; padding: 2px 8px; border-radius: 5px; font-size: 0.7rem; }
+        /* --- ESTILOS DE TARJETA (PANEL) --- */
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 28px;
+            padding: 30px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.8), 0 0 15px rgba(255, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+            display: none; /* Oculto por defecto */
+        }
+
+        .active-view { display: block; animation: fadeIn 0.4s; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* --- HEADER DEL PANEL --- */
+        .header { text-align: center; margin-bottom: 35px; }
+        .header h1 { 
+            font-size: 1.4rem; 
+            letter-spacing: 2px; 
+            text-transform: uppercase; 
+            color: white; 
+            margin: 0; 
+            text-shadow: 0 0 10px var(--accent);
+        }
+        .header p { font-size: 0.8rem; color: var(--text-sub); margin-top: 5px; }
+
+        /* --- PANTALLA DE ACCESO PROFESIONAL --- */
+        .access-header { text-align: center; margin-bottom: 40px; }
+        .access-title { font-size: 1.6rem; font-weight: 800; color: white; margin: 0; }
+        .access-subtitle { font-size: 0.85rem; color: var(--text-sub); margin-top: 8px; font-weight: 500;}
+
+        /* --- FORMULARIOS --- */
+        .form-group { margin-bottom: 25px; text-align: left; }
+        label { display: flex; align-items: center; gap: 10px; font-size: 0.75rem; font-weight: 700; color: #ccc; text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1px;}
+        label i { color: var(--accent); font-size: 14px;}
+        input { 
+            width: 100%; padding: 18px; background: #000000; border: 1px solid var(--border); border-radius: 14px; 
+            color: white; font-size: 1.1rem; outline: none; box-sizing: border-box; transition: all 0.3s;
+        }
+        input:focus { border-color: var(--accent); box-shadow: 0 0 15px rgba(255, 0, 0, 0.15); }
+
+        .btn { 
+            width: 100%; padding: 18px; border: none; border-radius: 16px; font-size: 1.1rem; font-weight: 800; 
+            text-transform: uppercase; cursor: pointer; display: flex; align-items: center; justify-content: center; 
+            gap: 12px; transition: transform 0.2s, box-shadow 0.2s; letter-spacing: 1px;
+        }
+        .btn-main { background: linear-gradient(to right, var(--accent), #aa0000); color: white; }
+        .btn-main:active { transform: scale(0.97); }
+        .btn-wa { background: var(--gold); color: black; font-size: 0.9rem; padding: 14px; border-radius: 12px; margin-top: 15px; }
+
+        .link-swap { text-align: center; margin-top: 25px; font-size: 0.85rem; color: var(--text-sub); }
+        .link-swap a { color: var(--accent); text-decoration: none; font-weight: 700; }
+
+        /* --- DASHBOARD DEL SOCIO --- */
+        .top-bar { display: flex; align-items: center; gap: 15px; background: #111; padding: 15px 20px; border-radius: 18px; margin-bottom: 25px; }
+        .user-avatar { width: 45px; height: 45px; background: #222; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; color: var(--accent); border: 2px solid var(--border); }
+        .user-details h2 { font-size: 1.1rem; margin: 0; color: white; font-weight: 700;}
+        .user-details p { font-size: 0.75rem; color: var(--text-sub); margin: 0; }
+
+        /* Tarjeta de Saldo */
+        .balance-card { background: linear-gradient(135deg, #111, #000); border: 1px solid var(--border); border-radius: 18px; padding: 25px; text-align: center; margin-bottom: 30px; }
+        .balance-label { font-size: 0.7rem; color: var(--gold); text-transform: uppercase; letter-spacing: 2px; }
+        .balance-value { font-size: 2.8rem; font-weight: 900; color: white; margin: 5px 0; font-feature-settings: "tnum"; }
+
+        /* JUEGO DEL GLOBO (Estilo Analítico/Avanzado) */
+        .game-area { background: #080808; border: 1px solid var(--border); border-radius: 20px; padding: 20px; margin-bottom: 30px; text-align: center; position: relative;}
+        .game-title { font-size: 0.85rem; color: var(--accent); text-transform: uppercase; font-weight: 700; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center;}
+        .cost-tag { background: rgba(255, 26, 26, 0.1); color: #f55; padding: 3px 10px; border-radius: 8px; font-size: 0.75rem;}
+
+        #balloon-canvas-container { 
+            height: 200px; background: #000; border: 1px solid #1a1a1a; border-radius: 12px; cursor: pointer; position: relative; overflow: hidden;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+        }
+
+        /* El Globo - Gráfico de Radar */
+        #radar-obj {
+            width: 100px; height: 100px; border-radius: 50%; background: radial-gradient(circle, rgba(255, 26, 26, 0.2) 0%, rgba(0,0,0,0) 70%);
+            border: 2px solid #500; position: relative; transition: all 0.1s ease-out; display: flex; align-items: center; justify-content: center;
+        }
+        #radar-obj::after { content: '🎈'; font-size: 2.5rem; position: relative; }
+        #radar-obj.is-near { border-color: var(--accent); background-color: rgba(255, 26, 26, 0.05); }
+
+        /* Marcadores Analíticos */
+        .analitic-marker { position: absolute; border-top: 1px dashed #222; width: 100%; color: #333; font-size: 0.65rem; left: 0; text-align: left; padding-left: 5px;}
+        .marker-1 { bottom: 25%; }
+        .marker-2 { bottom: 50%; }
+        .marker-3 { bottom: 75%; }
+
+        .game-stats { display: flex; justify-content: space-around; font-size: 0.8rem; color: var(--text-sub); margin-top: 15px; border-top: 1px solid var(--border); pt: 15px;}
+        .stat-val { color: white; font-weight: bold; }
+
+        /* SECCIÓN DE SOPORTE E INFO DETALLADA (Nuevo) */
+        .info-section { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 15px; padding: 20px; text-align: left;}
+        .info-title { font-size: 0.9rem; font-weight: 700; color: white; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; gap: 8px; }
+        .info-title i { color: var(--gold); }
+        .info-list { margin: 0; padding-left: 15px; color: var(--text-sub); font-size: 0.8rem; line-height: 1.6; }
+        .info-list li { margin-bottom: 8px; }
+        .info-list li b { color: white; }
+
+        .footer { text-align: center; font-size: 0.7rem; color: #333; margin-top: 40px; }
     </style>
 </head>
 <body>
 
-<div class="wrapper">
-    <div class="card active" id="view-reg">
-        <h1>REGISTRO VIP</h1>
-        <input type="text" id="r-u" placeholder="Usuario">
-        <input type="password" id="r-p" placeholder="Contraseña">
-        <button class="btn btn-main" onclick="reg()">CREAR CUENTA</button>
-        <p style="text-align:center; font-size:12px; color:#555" onclick="sw('view-login')">¿Ya eres socio? Entrar</p>
-    </div>
+<div class="main-wrapper">
 
-    <div class="card" id="view-login">
-        <h1>LOGIN VIP</h1>
-        <input type="text" id="l-u" placeholder="Usuario">
-        <input type="password" id="l-p" placeholder="Contraseña">
-        <button class="btn btn-main" onclick="log()">ACCEDER</button>
-    </div>
-
-    <div class="card" id="view-dash">
-        <div style="display:flex; align-items:center; margin-bottom:15px;">
-            <i class="fas fa-user-circle" style="font-size:1.5rem; color:red"></i>
-            <span id="user-name" style="margin-left:10px; font-weight:bold;">Usuario</span>
-            <i class="fas fa-sign-out-alt" onclick="exit()" style="margin-left:auto; color:#444"></i>
+    <div class="card active-view" id="view-access">
+        <div class="access-header">
+            <div class="access-title">ACCESO AL SISTEMA</div>
+            <div class="access-subtitle">Plataforma de Gestión y Crecimiento VIP</div>
         </div>
 
-        <div class="balance-box">
-            <div style="font-size:0.7rem; color:gold;">MI SALDO DISPONIBLE</div>
-            <div class="bal-val" id="user-bal">$0.00</div>
-            <a href="https://wa.me/5493364546172?text=Hola%20Benja%20quiero%20recargar%20saldo%20en%20mi%20cuenta" class="btn-wa">
-                <i class="fas fa-dollar-sign"></i> RECARGAR POR TRANSFERENCIA
+        <div class="form-group">
+            <label><i class="fas fa-id-card"></i> Identificador Único</label>
+            <input type="text" id="access-user" placeholder="Ingresa tu identificador...">
+        </div>
+        <div class="form-group">
+            <label><i class="fas fa-shield-alt"></i> Contraseña de Acceso</label>
+            <input type="password" id="access-pass" placeholder="••••••••••••">
+        </div>
+
+        <button class="btn btn-main" onclick="access()">
+            <i class="fas fa-sign-in-alt"></i> Validar Acceso
+        </button>
+
+        <p style="text-align:center; font-size:0.8rem; color:var(--text-sub); margin-top:30px;">Si no tienes acceso, consulta con el Administrador.</p>
+    </div>
+
+    <div class="card" id="view-dashboard">
+        
+        <div class="top-bar">
+            <div class="user-avatar"><i class="fas fa-user-crown"></i></div>
+            <div class="user-details">
+                <h2 id="dashboard-username">SOCIO</h2>
+                <p>Identificación Verificada</p>
+            </div>
+            <a href="#" onclick="exit()" style="margin-left:auto; color:var(--text-sub); font-size:1.2rem; display:flex; align-items:center; gap:5px;"><i class="fas fa-sign-out-alt"></i><span style="font-size:0.7rem">SALIR</span></a>
+        </div>
+
+        <div class="balance-card">
+            <div class="balance-label">DISPONIBILIDAD DE SALDO</div>
+            <div class="balance-value" id="dashboard-balance">$0.00</div>
+            <a href="https://wa.me/5493364546172?text=Hola%20Benja%20quiero%20recargar%20saldo%20en%20Socio%20Benja%20mi%20identificador%20es:" target="_blank" class="btn btn-wa">
+                <i class="fas fa-money-bill-transfer"></i> GESTIONAR RECARGA POR TRANSFERENCIA
             </a>
         </div>
 
-        <div class="game-container">
-            <div class="game-header">GLOBO VIP <span class="cost-tag">COSTO: $100</span></div>
+        <div class="game-area">
+            <div class="game-title">
+                Monitor del Globo VIP <span class="cost-tag">COSTO POR INTENTO: $100</span>
+            </div>
             
-            <div id="game-stage" onclick="play()">
-                <svg id="balloon-obj" class="balloon-svg" viewBox="0 0 30 40">
-                    <path d="M15 0 C22 0 28 8 28 18 C28 28 22 35 15 35 C8 35 2 28 2 18 C2 8 8 0 15 0" fill="#ff1a1a"/>
-                    <rect x="14" y="35" width="2" height="5" fill="#333"/>
-                </svg>
+            <div id="balloon-canvas-container" onclick="inflateBalloon()">
+                <div class="analitic-marker marker-1">2.0x RISK</div>
+                <div class="analitic-marker marker-2">4.0x RISK</div>
+                <div class="analitic-marker marker-3">6.0x RISK</div>
+
+                <div id="radar-obj"></div>
             </div>
 
-            <div id="game-overlay" style="display:none; position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:10; flex-direction:column; justify-content:center; align-items:center;">
-                <p id="over-msg" style="color:white; font-weight:bold;"></p>
-                <button class="btn btn-main" style="width:120px; font-size:0.7rem;" onclick="resetGame()">REINTENTAR</button>
+            <div class="game-stats">
+                <div>Intento: <span id="game-clicks" class="stat-val">1.00x</span></div>
+                <div>Récord VIP: <span id="game-record" class="stat-val">1.00x</span></div>
             </div>
-
-            <div class="game-info">
-                <span>CLICKS: <b id="c-count">0</b></span>
-                <span>RÉCORD: <b id="c-rec">0</b></span>
-            </div>
-            <p id="bal-error" style="color:red; font-size:10px; margin-top:10px; display:none;">⚠️ Saldo insuficiente para jugar</p>
+            <p style="font-size:0.7rem; color:#555; margin-top:10px;">¡Analiza el gráfico! Infla el globo sin romper el sistema para ganar prestigio.</p>
         </div>
-        
-        <p style="text-align:center; font-size:9px; color:#222; margin-top:20px;">njagmzok-ui.github.io | Benjamin Delgadillo</p>
+
+        <div class="info-section">
+            <div class="info-title"><i class="fas fa-info-circle"></i> SOPORTE E INFORMACIÓN</div>
+            <ul class="info-list">
+                <li>El monto **mínimo** de recarga es de **$5,000 ARS**.</li>
+                <li>Para garantizar la máxima seguridad, las recargas se realizan **vía transferencia bancaria**.</li>
+                <li>Una vez realizada la transferencia, el saldo se **autoacredita** en tu cuenta de Socio Benja en un plazo máximo de 10 minutos.</li>
+                <li>Para consultas técnicas o problemas con la acreditación, utiliza el botón de recarga para contactar directamente.</li>
+            </ul>
+        </div>
+
+        <div class="footer">
+            https://njagmzok-ui.github.io | Socio Benja | Gestión VIP © 2024
+        </div>
     </div>
+
 </div>
 
 <script>
-    let uAct = "";
-    function sw(id){ document.querySelectorAll('.card').forEach(c=>c.classList.remove('active')); document.getElementById(id).classList.add('active'); }
-    
-    function reg(){
-        let u=document.getElementById('r-u').value, p=document.getElementById('r-p').value;
-        if(!u||!p) return;
-        let db = JSON.parse(localStorage.getItem('db_v2')||'{}');
-        if(db[u]) return alert("Usuario ocupado");
-        db[u] = {p, b:0, r:0};
-        localStorage.setItem('db_v2', JSON.stringify(db));
-        uAct = u; load();
+    // --- GESTIÓN DE VISTAS (Más Fluido) ---
+    function switchView(viewId) {
+        document.querySelectorAll('.card').forEach(card => card.classList.remove('active-view'));
+        document.getElementById(viewId).classList.add('active-view');
     }
 
-    function log(){
-        let u=document.getElementById('l-u').value, p=document.getElementById('l-p').value;
-        let db = JSON.parse(localStorage.getItem('db_v2')||'{}');
-        if(db[u] && db[u].p === p){ uAct = u; load(); } else { alert("Datos incorrectos"); }
-    }
+    // --- ACCESO DEL SOCIO ---
+    function access() {
+        const user = document.getElementById('access-user').value.trim();
+        const pass = document.getElementById('access-pass').value;
 
-    function load(){
-        let db = JSON.parse(localStorage.getItem('db_v2'))[uAct];
-        document.getElementById('user-name').innerText = uAct;
-        document.getElementById('user-bal').innerText = `$${db.b.toFixed(2)}`;
-        document.getElementById('c-rec').innerText = db.r;
-        if(db.b < 100) document.getElementById('bal-error').style.display='block';
-        sw('view-dash');
-    }
-
-    function exit(){ uAct=""; sw('view-reg'); }
-
-    // LÓGICA DEL JUEGO
-    let size = 1, clicks = 0, isPopped = false;
-    function play(){
-        if(isPopped) return;
-        let db = JSON.parse(localStorage.getItem('db_v2'));
+        if (!user || !pass) { alert("⚠️ Identificador y contraseña obligatorios."); return; }
         
-        if(db[uAct].b < 100){
-            document.getElementById('bal-error').style.display='block';
-            return;
-        }
-
-        // Descontar saldo solo al primer click de la partida
-        if(clicks === 0){
-            db[uAct].b -= 100;
-            localStorage.setItem('db_v2', JSON.stringify(db));
-            document.getElementById('user-bal').innerText = `$${db[uAct].b.toFixed(2)}`;
-            document.getElementById('bal-error').style.display='none';
-        }
-
-        clicks++;
-        size += 0.15;
-        document.getElementById('c-count').innerText = clicks;
-        document.getElementById('balloon-obj').style.transform = `scale(${size})`;
-
-        if(size > 2.8) {
-            isPopped = true;
-            document.getElementById('balloon-obj').style.opacity = '0';
-            document.getElementById('over-msg').innerText = "💥 ¡EL GLOBO EXPLOTÓ! ("+clicks+" clicks)";
-            document.getElementById('game-overlay').style.display = 'flex';
-            
-            if(clicks > db[uAct].r){
-                db[uAct].r = clicks;
-                localStorage.setItem('db_v2', JSON.stringify(db));
-                document.getElementById('c-rec').innerText = clicks;
-            }
+        // Simulación de validación (Socio Benja VIP)
+        if (user === "Socio Benja" && pass === "VIP") {
+            loadDashboard();
+            switchView('view-dashboard');
+        } else {
+            alert("❌ Identificador o contraseña incorrectos.\nConsulta con el Administrador de Socio Benja.");
         }
     }
 
-    function resetGame(){
-        size = 1; clicks = 0; isPopped = false;
-        document.getElementById('balloon-obj').style.opacity = '1';
-        document.getElementById('balloon-obj').style.transform = 'scale(1)';
-        document.getElementById('c-count').innerText = '0';
-        document.getElementById('game-overlay').style.display = 'none';
-        load(); // Revisa si todavía tiene saldo
+    // --- CARGAR DASHBOARD ---
+    function loadDashboard() {
+        document.getElementById('dashboard-username').innerText = "BENJAmaster"; // Simulado
+        document.getElementById('dashboard-balance').innerText = `$0.00`;
+        document.getElementById('game-record').innerText = `1.00x`; // Récord simulado
     }
+
+    // --- LOGOUT ---
+    function exit() {
+        // En un sistema estático en GitHub Pages, simplemente recargamos para borrar la simulación
+        location.reload(); 
+    }
+
+    // --- JUEGO DEL GLOBO AVANZADO (Inflate & Crash) ---
+    let balloonRisk = 1.0;
+    let crashPoint = 0;
+    const maxRisk = 8.0; // Sistema se rompe en 8x
+    const radarObj = document.getElementById('radar-obj');
+
+    function inflateBalloon() {
+        // En un panel estático en GitHub, solo simulamos el juego, sin quitar saldo real.
+        
+        balloonRisk += 0.1; // Aumentar riesgo 0.1x por click
+        
+        // UI Analítica del juego (simulado)
+        document.getElementById('game-clicks').innerText = `${balloonRisk.toFixed(2)}x`;
+        radarObj.style.transform = `scale(${1 + (balloonRisk - 1) * 0.2})`;
+
+        // Cambiar color si está cerca del Crash
+        if (balloonRisk > 6.0) {
+            radarObj.classList.add('is-near');
+        } else {
+            radarObj.classList.remove('is-near');
+        }
+
+        // Lógica de Crash (Punto de Explosión Simulada)
+        // Simulamos un crash point aleatorio por partida para el panel estático
+        if (crashPoint === 0) {
+            crashPoint = (Math.random() * (maxRisk - 2.0) + 2.0).toFixed(1); // Crash entre 2x y 8x
+        }
+
+        if (balloonRisk >= crashPoint) {
+            popBalloon();
+        }
+    }
+
+    function popBalloon() {
+        // En un panel estático, solo simulamos la explosión.
+        radarObj.innerText = "💥"; // Efecto de explosión simulada
+        radarObj.style.transform = "scale(1)"; // Resetear visualmente
+        radarObj.classList.remove('is-near');
+        
+        // En un panel estático, no guardamos récords reales.
+        const currentRecordText = document.getElementById('game-record').innerText;
+        const currentRecord = parseFloat(currentRecordText.replace('x', ''));
+
+        if (balloonRisk > currentRecord) {
+            document.getElementById('game-record').innerText = `${balloonRisk.toFixed(2)}x`;
+            alert(`💥 CRASH! ¡NUEVO RÉCORD VIP de Socio Benja con ${balloonRisk.toFixed(2)}x de riesgo!`);
+        } else {
+            alert(`💥 CRASH DETECTADO! El gráfico se rompió en ${balloonRisk.toFixed(2)}x.\n¡Mejora tu análisis!`);
+        }
+
+        // Resetear Juego
+        setTimeout(() => {
+            radarObj.innerText = "";
+            balloonRisk = 1.0;
+            crashPoint = 0; // Nuevo punto de crash simulado para la siguiente partida
+            document.getElementById('game-clicks').innerText = "1.00x";
+            radarObj.style.transform = "scale(1)";
+        }, 1800); 
+    }
+
 </script>
+
 </body>
 </html>
