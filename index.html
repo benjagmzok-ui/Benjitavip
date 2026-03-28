@@ -3,237 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Socio Benja | Elite Gaming Platform</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>Avia Masters | Socio Benja Replica</title>
     <style>
-        :root { --bg: #050505; --card: #0d0d0d; --accent: #ff1a1a; --gold: #f1c40f; --border: #1a1a1a; --text: #ffffff; --success: #2ecc71; }
+        body { margin: 0; padding: 0; background-color: #000; color: white; font-family: 'Segoe UI', sans-serif; overflow: hidden; height: 100vh; display: flex; justify-content: center; align-items: center; }
+        #game-stage { width: 100%; max-width: 440px; height: 100vh; background: radial-gradient(circle at center, #001f5c 0%, #000 70%); position: relative; overflow: hidden; display: flex; flex-direction: column; }
         
-        body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; margin: 0; display: flex; justify-content: center; min-height: 100vh; overflow-x: hidden; }
-        .container { width: 100%; max-width: 440px; padding: 15px; box-sizing: border-box; }
+        /* Logo Superior */
+        .logo-top { text-align: center; margin-top: 15px; width: 100%; display: flex; justify-content: center; position: absolute; top: 0;}
+        .logo-top img { width: 140px; opacity: 0.6; }
+
+        /* Escena Principal: Cielo y Mar */
+        #main-scene { flex-grow: 1; position: relative; display: flex; justify-content: center; align-items: center; margin-top: 100px; }
         
-        .card { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 25px; display: none; animation: fadeIn 0.4s ease; box-shadow: 0 20px 50px rgba(0,0,0,0.8); }
-        .active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* HEADER & TRUST */
-        .trust-badge { display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 0.7rem; color: var(--success); margin-bottom: 10px; font-weight: bold; }
-        .rating { color: var(--gold); font-size: 0.9rem; margin-bottom: 20px; text-align: center; }
-
-        /* INPUTS */
-        .input-box { margin-bottom: 15px; }
-        .input-box label { display: block; font-size: 0.7rem; color: var(--accent); font-weight: 800; margin-bottom: 5px; text-transform: uppercase; }
-        input { width: 100%; padding: 14px; background: #000; border: 1px solid var(--border); border-radius: 12px; color: white; box-sizing: border-box; outline: none; }
-
-        .btn { width: 100%; padding: 16px; border: none; border-radius: 14px; font-weight: 800; cursor: pointer; text-transform: uppercase; display: flex; align-items: center; justify-content: center; gap: 10px; transition: 0.2s; text-decoration: none; }
-        .btn-main { background: var(--accent); color: white; }
-        .btn-gold { background: var(--gold); color: black; font-size: 0.8rem; margin-top: 10px; }
-        .btn-outline { background: transparent; border: 1px solid var(--border); color: #666; font-size: 0.7rem; margin-top: 10px; }
-
-        /* BALANCE */
-        .balance-card { background: linear-gradient(135deg, #111, #000); border: 1px solid var(--border); border-radius: 20px; padding: 20px; text-align: center; margin-bottom: 20px; }
-        .bal-val { font-size: 2.3rem; font-weight: 900; margin: 5px 0; color: white; }
-
-        /* JUEGOS */
-        .game-nav { display: flex; gap: 10px; margin-bottom: 20px; }
-        .nav-tab { flex: 1; padding: 10px; text-align: center; background: #111; border-radius: 10px; font-size: 0.7rem; font-weight: bold; cursor: pointer; border: 1px solid var(--border); }
-        .nav-tab.active { border-color: var(--accent); color: var(--accent); }
-
-        .game-box { border: 1px solid #1a1a1a; border-radius: 20px; background: #000; padding: 20px; position: relative; text-align: center; }
+        /* Nubes */
+        #clouds { position: absolute; width: 100%; height: 50%; top: 20%; background-image: url('https://i.ibb.co/6y1ZkX8/clouds.png'); background-repeat: no-repeat; background-size: contain; background-position: center; opacity: 0.5; }
         
-        /* PENALTY GAME */
-        .penalty-area { height: 150px; background: #0a2e0a; border-radius: 10px; position: relative; overflow: hidden; margin: 15px 0; border: 2px solid #1e4d1e; }
-        .goal { width: 80px; height: 50px; border: 2px solid white; border-bottom: none; margin: 0 auto; position: relative; top: 10px; }
-        .ball { width: 20px; height: 20px; background: white; border-radius: 50%; position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); transition: 0.5s; }
+        /* Mar */
+        #ocean { position: absolute; bottom: 15%; width: 100%; height: 10%; background-color: #001f5c; border-top: 1px solid rgba(255,255,255,0.1); }
 
-        /* NOTIFICACIONES FALSAS REALES */
-        #toast-container { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 350px; z-index: 999; }
-        .toast { background: rgba(20,20,20,0.95); border: 1px solid var(--border); padding: 12px; border-radius: 12px; margin-top: 10px; display: flex; align-items: center; gap: 10px; font-size: 0.75rem; animation: slideUp 0.5s ease; border-left: 3px solid var(--success); }
-        @keyframes slideUp { from { opacity:0; transform: translateY(20px); } to { opacity:1; transform: translateY(0); } }
+        /* Portaviones */
+        #carrier { position: absolute; bottom: 18%; width: 280px; left: 50%; transform: translateX(-50%); z-index: 5; background-image: url('https://i.ibb.co/Xz9Z4H2/carrier.png'); background-repeat: no-repeat; background-size: contain; background-position: center; height: 80px; }
 
-        .legal-info { font-size: 0.65rem; color: #444; text-align: center; margin-top: 20px; line-height: 1.5; }
+        /* Avion y Etiqueta de Dinero */
+        #plane-container { position: absolute; z-index: 10; left: 35%; bottom: 25%; display: flex; flex-direction: column; align-items: center;}
+        #plane-label { background: none; color: #f1c40f; font-weight: bold; font-size: 13px; transform: rotate(-15deg); margin-bottom: -15px;}
+        #plane { width: 60px; height: 60px; background-image: url('https://i.ibb.co/zXW4S9N/plane.png'); background-repeat: no-repeat; background-size: contain; background-position: center; }
+
+        /* --- UI INFERIOR (CONTROLES) --- */
+        #ui-bottom { width: 100%; position: absolute; bottom: 0; padding-bottom: 20px; display: flex; flex-direction: column; align-items: center; z-index: 20; background: linear-gradient(to top, #000 80%, rgba(0,0,0,0));}
+        
+        /* Iconos de Velocidad (Tarta, Peatón, Conejo) */
+        #speed-icons { display: flex; gap: 15px; background: rgba(0,31,92,0.8); padding: 8px 15px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); margin-bottom: 10px; opacity: 0.7;}
+        .speed-icon { color: #fff; font-size: 1.2rem; cursor: pointer;}
+        .speed-icon.active { border: 2px solid white; border-radius: 50%; padding: 2px; }
+
+        /* Panel de Estadísticas (Altitud, Distancia, Multiplicador) */
+        #stats-panel { background: rgba(0,31,92,0.8); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 10px 20px; width: 85%; display: flex; justify-content: space-around; font-size: 11px; margin-bottom: 15px;}
+        .stat-col { text-align: center; }
+        .stat-label { color: rgba(255,255,255,0.5); text-transform: uppercase; margin-bottom: 3px;}
+        .stat-val { font-size: 14px; font-weight: bold; color: white;}
+
+        /* Botón Jugar (Play) */
+        #play-btn { width: 70px; height: 70px; border-radius: 50%; border: 4px solid #fff; background: none; position: relative; cursor: pointer;}
+        #play-btn::after { content: ''; position: absolute; top: 50%; left: 55%; transform: translate(-50%, -50%); border-style: solid; border-width: 15px 0 15px 25px; border-color: transparent transparent transparent #fff; }
+        #play-btn:active { background: rgba(255,255,255,0.1); }
+
     </style>
 </head>
 <body>
 
-<div id="toast-container"></div>
+<div id="game-stage">
+    
+    <div class="logo-top"><img src="https://i.ibb.co/image-6.png" alt="Avia Masters Logo"></div>
 
-<div class="container">
-    <div class="card active" id="view-reg">
-        <div class="trust-badge"><i class="fas fa-shield-alt"></i> CONEXIÓN ENCRIPTADA SSL</div>
-        <div class="header-pro"><h1>REGISTRO VIP</h1></div>
-        <div class="rating">⭐⭐⭐⭐⭐ 4.98/5 (Verificado)</div>
-        <div class="input-box">
-            <label>Usuario</label>
-            <input type="text" id="reg-u" placeholder="Ej: Benja_Socio">
+    <div id="main-scene">
+        <div id="clouds"></div>
+        <div id="ocean"></div>
+        <div id="carrier"></div>
+
+        <div id="plane-container">
+            <div id="plane-label">500,00 ARS</div>
+            <div id="plane"></div>
         </div>
-        <div class="input-box">
-            <label>Contraseña</label>
-            <input type="password" id="reg-p" placeholder="••••••••">
-        </div>
-        <button class="btn btn-main" onclick="register()">CREAR CUENTA Y RECLAMAR BONO</button>
-        <p style="text-align:center; font-size:0.8rem; color:#444; margin-top:15px;" onclick="sw('view-log')">¿Ya eres socio? <b>Entrar</b></p>
     </div>
 
-    <div class="card" id="view-log">
-        <div class="header-pro"><h1>ACCESO SOCIO</h1></div>
-        <div class="input-box"><label>Usuario</label><input type="text" id="log-u"></div>
-        <div class="input-box"><label>Contraseña</label><input type="password" id="log-p"></div>
-        <button class="btn btn-main" onclick="login()">VALIDAR CREDENCIALES</button>
-    </div>
+    <div id="ui-bottom">
+        
+        <div id="speed-icons">
+            <div class="speed-icon active">🐢</div> <div class="speed-icon">🚶</div> <div class="speed-icon">🐇</div> <div class="speed-icon">⚡</div> </div>
 
-    <div class="card" id="view-dash">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
-            <span style="font-weight:bold; color:var(--accent);" id="user-display">---</span>
-            <i class="fas fa-power-off" onclick="location.reload()" style="color:#333"></i>
-        </div>
-
-        <div class="balance-card">
-            <span style="font-size:0.6rem; color:var(--gold); font-weight:bold;">MI SALDO DISPONIBLE</span>
-            <div class="bal-val" id="user-bal">$0.00</div>
-            <a href="https://wa.me/5493364546172?text=Recarga" class="btn btn-gold" target="_blank">$ RECARGAR POR TRANSFERENCIA</a>
-        </div>
-
-        <div class="game-nav">
-            <div class="nav-tab active" id="tab-crash" onclick="showGame('crash')">COHETE VIP</div>
-            <div class="nav-tab" id="tab-penalty" onclick="showGame('penalty')">PENALTY PRO</div>
-        </div>
-
-        <div id="game-crash" class="game-box">
-            <div style="font-size:3rem; font-weight:900; color:var(--accent);" id="crash-val">1.00x</div>
-            <p style="font-size:0.7rem; color:#555;">Multiplicador en vuelo</p>
-            <button class="btn btn-main" id="btn-crash" onclick="startCrash()">DESPEGAR ($100)</button>
-        </div>
-
-        <div id="game-penalty" class="game-box" style="display:none;">
-            <div style="font-size:1.2rem; font-weight:900; color:var(--success);" id="pen-status">¡PATEA Y GANA!</div>
-            <div class="penalty-area">
-                <div class="goal"></div>
-                <div class="ball" id="ball"></div>
+        <div id="stats-panel">
+            <div class="stat-col">
+                <div class="stat-label">ALTITUD</div>
+                <div class="stat-val">0,0m</div>
             </div>
-            <button class="btn btn-main" id="btn-pen" onclick="shootPenalty()">PATEAR PENAL ($200)</button>
+            <div class="stat-col">
+                <div class="stat-label">DISTANCIA</div>
+                <div class="stat-val">0,0m</div>
+            </div>
+            <div class="stat-col">
+                <div class="stat-label">MULTIPLICADOR</div>
+                <div class="stat-val">×1,0</div>
+            </div>
         </div>
 
-        <button class="btn btn-outline" onclick="showLegal()">INFORMACIÓN LEGAL Y RETIROS</button>
+        <button id="play-btn"></button>
 
-        <div class="legal-info">
-            Socio Benja VIP © 2026. Todos los derechos reservados.<br>
-            Plataforma auditada. Retiros procesados en < 15 minutos vía CBU/CVU.
-        </div>
     </div>
+
 </div>
 
-<script>
-    let uAct = "";
-    let balance = 0;
-    const ADMIN_USER = "admin_panel1313";
-    const ADMIN_PASS = "2323";
-
-    const nombresFalsos = ["Juan Perez", "Matias G.", "Sofia Lopez", "Lucas Rodriguez", "Thiago Messi", "Valen_04", "Gaby_Capo", "Morena TT", "Santi_Arg", "Flor.22"];
-
-    function sw(id){ document.querySelectorAll('.card').forEach(c=>c.classList.remove('active')); document.getElementById(id).classList.add('active'); }
-
-    function register(){
-        const u=document.getElementById('reg-u').value, p=document.getElementById('reg-p').value;
-        if(u.length<4) return alert("Usuario muy corto");
-        let db=JSON.parse(localStorage.getItem('b_db')||'{}');
-        db[u]={p, b:0};
-        localStorage.setItem('b_db', JSON.stringify(db));
-        alert("¡Registro Exitoso! Bienvenido a la élite."); sw('view-log');
-    }
-
-    function login(){
-        const u=document.getElementById('log-u').value, p=document.getElementById('log-p').value;
-        if(u === ADMIN_USER && p === ADMIN_PASS){
-            uAct = ADMIN_USER;
-            balance = 100000; // SALDO CREIBLE PARA VOS
-            loadDash();
-            return;
-        }
-        let db=JSON.parse(localStorage.getItem('b_db')||'{}');
-        if(db[u] && db[u].p===p){ uAct=u; balance=db[u].b; loadDash(); } else alert("Credenciales incorrectas");
-    }
-
-    function loadDash(){
-        document.getElementById('user-display').innerText = uAct === ADMIN_USER ? "MODO ADMINISTRADOR" : uAct.toUpperCase();
-        updateBal();
-        sw('view-dash');
-        startToasts();
-    }
-
-    function updateBal(){
-        document.getElementById('user-bal').innerText = `$${balance.toLocaleString('es-AR', {minimumFractionDigits:2})}`;
-    }
-
-    function showGame(g){
-        document.getElementById('game-crash').style.display = g==='crash'?'block':'none';
-        document.getElementById('game-penalty').style.display = g==='penalty'?'block':'none';
-        document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
-        document.getElementById('tab-'+g).classList.add('active');
-    }
-
-    // LÓGICA COHETE
-    let f1 = false;
-    function startCrash(){
-        if(f1 || balance < 100) return alert("Saldo insuficiente");
-        balance -= 100; updateBal();
-        f1 = true; let v = 1.0;
-        let l = setInterval(()=>{
-            v += 0.08;
-            document.getElementById('crash-val').innerText = v.toFixed(2) + "x";
-            if(Math.random() < 0.05 || v > 5){
-                clearInterval(l);
-                let win = 100 * v;
-                balance += win;
-                alert("¡CRASH! Multiplicador final: " + v.toFixed(2) + "x\nGanaste: $" + win.toFixed(2));
-                updateBal(); f1 = false;
-            }
-        }, 100);
-    }
-
-    // JUEGO PENALTY
-    let f2 = false;
-    function shootPenalty(){
-        if(f2 || balance < 200) return alert("Saldo insuficiente ($200)");
-        balance -= 200; updateBal();
-        f2 = true;
-        const b = document.getElementById('ball');
-        b.style.bottom = "110px";
-        b.style.left = Math.random() > 0.5 ? "30%" : "70%";
-        
-        setTimeout(()=>{
-            if(Math.random() > 0.4){
-                let win = 500 + (Math.random()*1000);
-                balance += win;
-                document.getElementById('pen-status').innerText = "¡GOOOOL! +$" + win.toFixed(0);
-                updateBal();
-            } else {
-                document.getElementById('pen-status').innerText = "¡LO ATAJÓ!";
-            }
-            setTimeout(()=>{
-                b.style.bottom = "10px"; b.style.left = "50%";
-                f2 = false;
-                document.getElementById('pen-status').innerText = "¡PATEA Y GANA!";
-            }, 1500);
-        }, 600);
-    }
-
-    function showLegal(){
-        alert("INFORMACIÓN LEGAL:\n- Licencia Internacional No. 8832-B\n- Retiro automático 24/7 vía Transferencia Bancaria.\n- Tiempo promedio de pago: 8 minutos.\n- Sitio protegido por SSL 256-bit.");
-    }
-
-    // NOTIFICACIONES FALSAS
-    function startToasts(){
-        setInterval(()=>{
-            const container = document.getElementById('toast-container');
-            const n = nombresFalsos[Math.floor(Math.random()*nombresFalsos.length)];
-            const t = document.createElement('div');
-            t.className = 'toast';
-            const ganancia = (Math.random()*15000 + 1000).toFixed(0);
-            t.innerHTML = `<i class="fas fa-check-circle"></i> <span><b>${n}</b> acaba de retirar <b>$${ganancia}</b> vía CBU</span>`;
-            container.appendChild(t);
-            setTimeout(()=>t.remove(), 4000);
-        }, 8000);
-    }
-</script>
 </body>
 </html>
