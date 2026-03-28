@@ -3,324 +3,245 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Socio Benja | Plataforma de Gestión de Crecimiento</title>
+    <title>Socio Benja | Global Network</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
-            --bg: #030303;
-            --card: #0c0c0c;
-            --accent: #ff1a1a; /* Rojo Neón Benja */
+            --bg: #050505;
+            --card: #0d0d0d;
+            --accent: #ff1a1a;
             --gold: #f1c40f;
-            --text-main: #e0e0e0;
-            --text-sub: #718096;
             --border: #1a1a1a;
-            --success: #2ecc71;
-            --warning: #f1c40f;
+            --text: #ffffff;
+            --subtext: #888;
         }
 
         body {
-            background-color: var(--bg);
-            color: var(--text-main);
-            font-family: 'Inter', -apple-system, sans-serif; /* Fuente tipo Apple, súper profesional */
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Segoe UI', Roboto, sans-serif;
             margin: 0;
-            padding: 0;
             display: flex;
             justify-content: center;
-            align-items: center;
             min-height: 100vh;
-            overflow-x: hidden;
         }
 
-        /* --- CONTENEDOR GENERAL --- */
-        .main-wrapper {
-            width: 100%;
-            max-width: 440px;
-            padding: 15px;
-            box-sizing: border-box;
-        }
-
-        /* --- ESTILOS DE TARJETA (PANEL) --- */
+        .container { width: 100%; max-width: 420px; padding: 20px; box-sizing: border-box; }
+        
         .card {
             background: var(--card);
             border: 1px solid var(--border);
-            border-radius: 28px;
-            padding: 30px;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.8), 0 0 15px rgba(255, 0, 0, 0.1);
-            position: relative;
-            overflow: hidden;
-            display: none; /* Oculto por defecto */
+            border-radius: 24px;
+            padding: 25px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+            display: none;
+            animation: fadeIn 0.4s ease;
         }
 
-        .active-view { display: block; animation: fadeIn 0.4s; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10.5px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* --- HEADER DEL PANEL --- */
-        .header { text-align: center; margin-bottom: 35px; }
-        .header h1 { 
-            font-size: 1.4rem; 
-            letter-spacing: 2px; 
-            text-transform: uppercase; 
-            color: white; 
-            margin: 0; 
-            text-shadow: 0 0 10px var(--accent);
-        }
-        .header p { font-size: 0.8rem; color: var(--text-sub); margin-top: 5px; }
+        /* --- ESTILOS DE ACCESO --- */
+        .access-header { text-align: center; margin-bottom: 30px; }
+        .access-header h1 { font-size: 1.5rem; letter-spacing: 1px; margin: 0; }
+        .access-header p { color: var(--subtext); font-size: 0.8rem; margin-top: 5px; }
 
-        /* --- PANTALLA DE ACCESO PROFESIONAL --- */
-        .access-header { text-align: center; margin-bottom: 40px; }
-        .access-title { font-size: 1.6rem; font-weight: 800; color: white; margin: 0; }
-        .access-subtitle { font-size: 0.85rem; color: var(--text-sub); margin-top: 8px; font-weight: 500;}
-
-        /* --- FORMULARIOS --- */
-        .form-group { margin-bottom: 25px; text-align: left; }
-        label { display: flex; align-items: center; gap: 10px; font-size: 0.75rem; font-weight: 700; color: #ccc; text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1px;}
-        label i { color: var(--accent); font-size: 14px;}
+        .input-group { margin-bottom: 20px; }
+        .input-group label { display: block; font-size: 0.7rem; color: var(--accent); font-weight: 800; text-transform: uppercase; margin-bottom: 8px; }
         input { 
-            width: 100%; padding: 18px; background: #000000; border: 1px solid var(--border); border-radius: 14px; 
-            color: white; font-size: 1.1rem; outline: none; box-sizing: border-box; transition: all 0.3s;
+            width: 100%; padding: 15px; background: #000; border: 1px solid var(--border); border-radius: 12px; 
+            color: white; font-size: 1rem; box-sizing: border-box; outline: none;
         }
-        input:focus { border-color: var(--accent); box-shadow: 0 0 15px rgba(255, 0, 0, 0.15); }
+        input:focus { border-color: var(--accent); }
 
         .btn { 
-            width: 100%; padding: 18px; border: none; border-radius: 16px; font-size: 1.1rem; font-weight: 800; 
-            text-transform: uppercase; cursor: pointer; display: flex; align-items: center; justify-content: center; 
-            gap: 12px; transition: transform 0.2s, box-shadow 0.2s; letter-spacing: 1px;
+            width: 100%; padding: 16px; border: none; border-radius: 14px; font-weight: 800; cursor: pointer;
+            text-transform: uppercase; transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 10px;
         }
-        .btn-main { background: linear-gradient(to right, var(--accent), #aa0000); color: white; }
-        .btn-main:active { transform: scale(0.97); }
-        .btn-wa { background: var(--gold); color: black; font-size: 0.9rem; padding: 14px; border-radius: 12px; margin-top: 15px; }
+        .btn-primary { background: var(--accent); color: white; }
+        .btn-gold { background: var(--gold); color: black; margin-top: 15px; text-decoration: none; font-size: 0.9rem; }
 
-        .link-swap { text-align: center; margin-top: 25px; font-size: 0.85rem; color: var(--text-sub); }
-        .link-swap a { color: var(--accent); text-decoration: none; font-weight: 700; }
+        /* --- DASHBOARD --- */
+        .user-stat { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
+        .avatar { width: 50px; height: 50px; background: #151515; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 1px solid var(--accent); color: var(--accent); }
+        
+        .balance-box { background: #111; border: 1px solid var(--border); border-radius: 20px; padding: 20px; text-align: center; margin-bottom: 25px; }
+        .balance-val { font-size: 2.5rem; font-weight: 800; margin: 5px 0; }
 
-        /* --- DASHBOARD DEL SOCIO --- */
-        .top-bar { display: flex; align-items: center; gap: 15px; background: #111; padding: 15px 20px; border-radius: 18px; margin-bottom: 25px; }
-        .user-avatar { width: 45px; height: 45px; background: #222; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; color: var(--accent); border: 2px solid var(--border); }
-        .user-details h2 { font-size: 1.1rem; margin: 0; color: white; font-weight: 700;}
-        .user-details p { font-size: 0.75rem; color: var(--text-sub); margin: 0; }
+        /* --- APARTADO "SOBRE SOCIO BENJA" --- */
+        .about-section { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 18px; padding: 18px; margin-bottom: 25px; }
+        .about-title { font-size: 0.85rem; font-weight: 800; color: var(--gold); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+        .about-text { font-size: 0.75rem; color: #bbb; line-height: 1.5; }
+        .tag-active { display: inline-block; padding: 3px 8px; background: #003300; color: #00ff00; border-radius: 5px; font-size: 0.6rem; font-weight: 800; margin-top: 10px; }
 
-        /* Tarjeta de Saldo */
-        .balance-card { background: linear-gradient(135deg, #111, #000); border: 1px solid var(--border); border-radius: 18px; padding: 25px; text-align: center; margin-bottom: 30px; }
-        .balance-label { font-size: 0.7rem; color: var(--gold); text-transform: uppercase; letter-spacing: 2px; }
-        .balance-value { font-size: 2.8rem; font-weight: 900; color: white; margin: 5px 0; font-feature-settings: "tnum"; }
-
-        /* JUEGO DEL GLOBO (Estilo Analítico/Avanzado) */
-        .game-area { background: #080808; border: 1px solid var(--border); border-radius: 20px; padding: 20px; margin-bottom: 30px; text-align: center; position: relative;}
-        .game-title { font-size: 0.85rem; color: var(--accent); text-transform: uppercase; font-weight: 700; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center;}
-        .cost-tag { background: rgba(255, 26, 26, 0.1); color: #f55; padding: 3px 10px; border-radius: 8px; font-size: 0.75rem;}
-
-        #balloon-canvas-container { 
-            height: 200px; background: #000; border: 1px solid #1a1a1a; border-radius: 12px; cursor: pointer; position: relative; overflow: hidden;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
+        /* --- JUEGO DEL GLOBO PRO --- */
+        .game-monitor { border: 1px solid var(--border); border-radius: 20px; padding: 15px; position: relative; overflow: hidden; background: #000; }
+        .game-grid { height: 180px; display: flex; justify-content: center; align-items: flex-end; position: relative; border-bottom: 1px solid #1a1a1a; margin-bottom: 10px; }
+        
+        #balloon-visual { 
+            width: 40px; height: 50px; background: var(--accent); border-radius: 50%; 
+            box-shadow: 0 0 20px rgba(255,26,26,0.4); transition: 0.1s; position: relative;
         }
-
-        /* El Globo - Gráfico de Radar */
-        #radar-obj {
-            width: 100px; height: 100px; border-radius: 50%; background: radial-gradient(circle, rgba(255, 26, 26, 0.2) 0%, rgba(0,0,0,0) 70%);
-            border: 2px solid #500; position: relative; transition: all 0.1s ease-out; display: flex; align-items: center; justify-content: center;
-        }
-        #radar-obj::after { content: '🎈'; font-size: 2.5rem; position: relative; }
-        #radar-obj.is-near { border-color: var(--accent); background-color: rgba(255, 26, 26, 0.05); }
-
-        /* Marcadores Analíticos */
-        .analitic-marker { position: absolute; border-top: 1px dashed #222; width: 100%; color: #333; font-size: 0.65rem; left: 0; text-align: left; padding-left: 5px;}
-        .marker-1 { bottom: 25%; }
-        .marker-2 { bottom: 50%; }
-        .marker-3 { bottom: 75%; }
-
-        .game-stats { display: flex; justify-content: space-around; font-size: 0.8rem; color: var(--text-sub); margin-top: 15px; border-top: 1px solid var(--border); pt: 15px;}
-        .stat-val { color: white; font-weight: bold; }
-
-        /* SECCIÓN DE SOPORTE E INFO DETALLADA (Nuevo) */
-        .info-section { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 15px; padding: 20px; text-align: left;}
-        .info-title { font-size: 0.9rem; font-weight: 700; color: white; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; gap: 8px; }
-        .info-title i { color: var(--gold); }
-        .info-list { margin: 0; padding-left: 15px; color: var(--text-sub); font-size: 0.8rem; line-height: 1.6; }
-        .info-list li { margin-bottom: 8px; }
-        .info-list li b { color: white; }
-
-        .footer { text-align: center; font-size: 0.7rem; color: #333; margin-top: 40px; }
+        
+        .game-info { display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--subtext); }
+        .game-info b { color: white; }
     </style>
 </head>
 <body>
 
-<div class="main-wrapper">
+<div class="container">
 
-    <div class="card active-view" id="view-access">
+    <div class="card active" id="view-register">
         <div class="access-header">
-            <div class="access-title">ACCESO AL SISTEMA</div>
-            <div class="access-subtitle">Plataforma de Gestión y Crecimiento VIP</div>
+            <h1>REGISTRO DE SOCIO</h1>
+            <p>Crea una cuenta segura para acceder al sistema</p>
         </div>
-
-        <div class="form-group">
-            <label><i class="fas fa-id-card"></i> Identificador Único</label>
-            <input type="text" id="access-user" placeholder="Ingresa tu identificador...">
+        <div class="input-group">
+            <label>Usuario Único</label>
+            <input type="text" id="reg-user" placeholder="Ej: Benja_01">
         </div>
-        <div class="form-group">
-            <label><i class="fas fa-shield-alt"></i> Contraseña de Acceso</label>
-            <input type="password" id="access-pass" placeholder="••••••••••••">
+        <div class="input-group">
+            <label>Contraseña Segura</label>
+            <input type="password" id="reg-pass" placeholder="••••••••">
         </div>
-
-        <button class="btn btn-main" onclick="access()">
-            <i class="fas fa-sign-in-alt"></i> Validar Acceso
-        </button>
-
-        <p style="text-align:center; font-size:0.8rem; color:var(--text-sub); margin-top:30px;">Si no tienes acceso, consulta con el Administrador.</p>
+        <button class="btn btn-primary" onclick="handleRegister()">Crear Cuenta Ahora</button>
+        <p style="text-align:center; font-size:0.8rem; color:var(--subtext); margin-top:20px;" onclick="sw('view-login')">¿Ya eres socio? <b>Inicia sesión</b></p>
     </div>
 
-    <div class="card" id="view-dashboard">
-        
-        <div class="top-bar">
-            <div class="user-avatar"><i class="fas fa-user-crown"></i></div>
-            <div class="user-details">
-                <h2 id="dashboard-username">SOCIO</h2>
-                <p>Identificación Verificada</p>
+    <div class="card" id="view-login">
+        <div class="access-header">
+            <h1>ACCESO AL SISTEMA</h1>
+            <p>Ingresa tus credenciales verificadas</p>
+        </div>
+        <div class="input-group">
+            <label>Usuario</label>
+            <input type="text" id="log-user">
+        </div>
+        <div class="input-group">
+            <label>Contraseña</label>
+            <input type="password" id="log-pass">
+        </div>
+        <button class="btn btn-primary" onclick="handleLogin()">Acceder al Panel</button>
+        <p style="text-align:center; font-size:0.8rem; color:var(--subtext); margin-top:20px;" onclick="sw('view-register')">¿No tienes cuenta? <b>Regístrate</b></p>
+    </div>
+
+    <div class="card" id="view-dash">
+        <div class="user-stat">
+            <div class="avatar"><i class="fas fa-crown"></i></div>
+            <div>
+                <h2 id="display-name" style="margin:0; font-size:1.1rem;">Usuario</h2>
+                <div class="tag-active"><i class="fas fa-circle" style="font-size:5px"></i> SISTEMA ACTIVO</div>
             </div>
-            <a href="#" onclick="exit()" style="margin-left:auto; color:var(--text-sub); font-size:1.2rem; display:flex; align-items:center; gap:5px;"><i class="fas fa-sign-out-alt"></i><span style="font-size:0.7rem">SALIR</span></a>
+            <i class="fas fa-sign-out-alt" style="margin-left:auto; color:#333" onclick="location.reload()"></i>
         </div>
 
-        <div class="balance-card">
-            <div class="balance-label">DISPONIBILIDAD DE SALDO</div>
-            <div class="balance-value" id="dashboard-balance">$0.00</div>
-            <a href="https://wa.me/5493364546172?text=Hola%20Benja%20quiero%20recargar%20saldo%20en%20Socio%20Benja%20mi%20identificador%20es:" target="_blank" class="btn btn-wa">
-                <i class="fas fa-money-bill-transfer"></i> GESTIONAR RECARGA POR TRANSFERENCIA
+        <div class="balance-box">
+            <span style="font-size:0.7rem; color:var(--gold); font-weight:800; letter-spacing:1px;">SALDO DISPONIBLE</span>
+            <div class="balance-val" id="user-bal">$0.00</div>
+            <a href="https://wa.me/5493364546172?text=Hola%20Benja%20vengo%20del%20panel%20quiero%20cargar%20saldo" target="_blank" class="btn btn-gold">
+                <i class="fas fa-university"></i> RECARGAR POR TRANSFERENCIA
             </a>
         </div>
 
-        <div class="game-area">
-            <div class="game-title">
-                Monitor del Globo VIP <span class="cost-tag">COSTO POR INTENTO: $100</span>
-            </div>
-            
-            <div id="balloon-canvas-container" onclick="inflateBalloon()">
-                <div class="analitic-marker marker-1">2.0x RISK</div>
-                <div class="analitic-marker marker-2">4.0x RISK</div>
-                <div class="analitic-marker marker-3">6.0x RISK</div>
-
-                <div id="radar-obj"></div>
-            </div>
-
-            <div class="game-stats">
-                <div>Intento: <span id="game-clicks" class="stat-val">1.00x</span></div>
-                <div>Récord VIP: <span id="game-record" class="stat-val">1.00x</span></div>
-            </div>
-            <p style="font-size:0.7rem; color:#555; margin-top:10px;">¡Analiza el gráfico! Infla el globo sin romper el sistema para ganar prestigio.</p>
+        <div class="about-section">
+            <div class="about-title"><i class="fas fa-shield-check"></i> ¿QUÉ ES SOCIO BENJA?</div>
+            <p class="about-text">
+                Es una red de alto rendimiento donde cada socio participa en un entorno de crecimiento real. 
+                <b>Contamos con +500 miembros activos</b> que operan diariamente. La seguridad es nuestra prioridad: 
+                los saldos se auto-acreditan mediante validación de transferencia para garantizar transparencia total.
+            </p>
+            <div style="font-size:0.65rem; color:var(--accent); font-weight:700;">MÍNIMO DE RECARGA: $5,000 ARS</div>
         </div>
 
-        <div class="info-section">
-            <div class="info-title"><i class="fas fa-info-circle"></i> SOPORTE E INFORMACIÓN</div>
-            <ul class="info-list">
-                <li>El monto **mínimo** de recarga es de **$5,000 ARS**.</li>
-                <li>Para garantizar la máxima seguridad, las recargas se realizan **vía transferencia bancaria**.</li>
-                <li>Una vez realizada la transferencia, el saldo se **autoacredita** en tu cuenta de Socio Benja en un plazo máximo de 10 minutos.</li>
-                <li>Para consultas técnicas o problemas con la acreditación, utiliza el botón de recarga para contactar directamente.</li>
-            </ul>
+        <div class="game-monitor" onclick="play()">
+            <div style="font-size:0.6rem; color:var(--accent); font-weight:800; margin-bottom:10px;">MONITOR DE PRESIÓN VIP</div>
+            <div class="game-grid">
+                <div id="balloon-visual"></div>
+            </div>
+            <div class="game-info">
+                <span>PRESIÓN: <b id="val-clicks">1.00x</b></span>
+                <span>RÉCORD: <b id="val-record">0.00x</b></span>
+            </div>
         </div>
-
-        <div class="footer">
-            https://njagmzok-ui.github.io | Socio Benja | Gestión VIP © 2024
-        </div>
+        <p style="font-size:9px; color:#222; text-align:center; margin-top:20px;">njagmzok-ui.github.io | Benjamin Delgadillo</p>
     </div>
-
 </div>
 
 <script>
-    // --- GESTIÓN DE VISTAS (Más Fluido) ---
-    function switchView(viewId) {
-        document.querySelectorAll('.card').forEach(card => card.classList.remove('active-view'));
-        document.getElementById(viewId).classList.add('active-view');
+    let currentSocio = "";
+    function sw(id){ document.querySelectorAll('.card').forEach(c=>c.classList.remove('active')); document.getElementById(id).classList.add('active'); }
+
+    // --- LÓGICA DE USUARIOS ---
+    function handleRegister() {
+        const u = document.getElementById('reg-user').value, p = document.getElementById('reg-pass').value;
+        if(u.length < 4 || p.length < 4) return alert("Usuario y contraseña deben tener al menos 4 caracteres");
+        
+        let db = JSON.parse(localStorage.getItem('benja_db') || '{}');
+        if(db[u]) return alert("Este usuario ya existe");
+        
+        db[u] = { pass: p, balance: 0, record: 0 };
+        localStorage.setItem('benja_db', JSON.stringify(db));
+        alert("¡Registro exitoso! Ya puedes iniciar sesión");
+        sw('view-login');
     }
 
-    // --- ACCESO DEL SOCIO ---
-    function access() {
-        const user = document.getElementById('access-user').value.trim();
-        const pass = document.getElementById('access-pass').value;
-
-        if (!user || !pass) { alert("⚠️ Identificador y contraseña obligatorios."); return; }
+    function handleLogin() {
+        const u = document.getElementById('log-user').value, p = document.getElementById('log-pass').value;
+        let db = JSON.parse(localStorage.getItem('benja_db') || '{}');
         
-        // Simulación de validación (Socio Benja VIP)
-        if (user === "Socio Benja" && pass === "VIP") {
-            loadDashboard();
-            switchView('view-dashboard');
+        if(db[u] && db[u].pass === p) {
+            currentSocio = u;
+            updateUI();
+            sw('view-dash');
         } else {
-            alert("❌ Identificador o contraseña incorrectos.\nConsulta con el Administrador de Socio Benja.");
+            alert("Credenciales incorrectas");
         }
     }
 
-    // --- CARGAR DASHBOARD ---
-    function loadDashboard() {
-        document.getElementById('dashboard-username').innerText = "BENJAmaster"; // Simulado
-        document.getElementById('dashboard-balance').innerText = `$0.00`;
-        document.getElementById('game-record').innerText = `1.00x`; // Récord simulado
+    function updateUI() {
+        let db = JSON.parse(localStorage.getItem('benja_db'));
+        document.getElementById('display-name').innerText = currentSocio.toUpperCase();
+        document.getElementById('user-bal').innerText = `$${db[currentSocio].balance.toFixed(2)}`;
+        document.getElementById('val-record').innerText = `${db[currentSocio].record.toFixed(2)}x`;
     }
 
-    // --- LOGOUT ---
-    function exit() {
-        // En un sistema estático en GitHub Pages, simplemente recargamos para borrar la simulación
-        location.reload(); 
-    }
-
-    // --- JUEGO DEL GLOBO AVANZADO (Inflate & Crash) ---
-    let balloonRisk = 1.0;
-    let crashPoint = 0;
-    const maxRisk = 8.0; // Sistema se rompe en 8x
-    const radarObj = document.getElementById('radar-obj');
-
-    function inflateBalloon() {
-        // En un panel estático en GitHub, solo simulamos el juego, sin quitar saldo real.
+    // --- LÓGICA DEL JUEGO ---
+    let pressure = 1.0, isLost = false;
+    function play() {
+        if(isLost) return resetGame();
+        let db = JSON.parse(localStorage.getItem('benja_db'));
         
-        balloonRisk += 0.1; // Aumentar riesgo 0.1x por click
+        if(db[currentSocio].balance < 100) return alert("Saldo insuficiente (Mínimo $100 por intento)");
         
-        // UI Analítica del juego (simulado)
-        document.getElementById('game-clicks').innerText = `${balloonRisk.toFixed(2)}x`;
-        radarObj.style.transform = `scale(${1 + (balloonRisk - 1) * 0.2})`;
-
-        // Cambiar color si está cerca del Crash
-        if (balloonRisk > 6.0) {
-            radarObj.classList.add('is-near');
-        } else {
-            radarObj.classList.remove('is-near');
+        if(pressure === 1.0) { // Primer click descuenta
+            db[currentSocio].balance -= 100;
+            localStorage.setItem('benja_db', JSON.stringify(db));
+            updateUI();
         }
 
-        // Lógica de Crash (Punto de Explosión Simulada)
-        // Simulamos un crash point aleatorio por partida para el panel estático
-        if (crashPoint === 0) {
-            crashPoint = (Math.random() * (maxRisk - 2.0) + 2.0).toFixed(1); // Crash entre 2x y 8x
-        }
+        pressure += 0.15;
+        document.getElementById('val-clicks').innerText = `${pressure.toFixed(2)}x`;
+        document.getElementById('balloon-visual').style.transform = `scale(${pressure})`;
 
-        if (balloonRisk >= crashPoint) {
-            popBalloon();
+        if(Math.random() < 0.1 || pressure > 4.5) { // Probabilidad de explosión
+            isLost = true;
+            document.getElementById('balloon-visual').style.background = "white";
+            alert("💥 PRESIÓN CRÍTICA: El sistema se reinició.");
+            
+            if(pressure > db[currentSocio].record) {
+                db[currentSocio].record = pressure;
+                localStorage.setItem('benja_db', JSON.stringify(db));
+            }
+            updateUI();
         }
     }
 
-    function popBalloon() {
-        // En un panel estático, solo simulamos la explosión.
-        radarObj.innerText = "💥"; // Efecto de explosión simulada
-        radarObj.style.transform = "scale(1)"; // Resetear visualmente
-        radarObj.classList.remove('is-near');
-        
-        // En un panel estático, no guardamos récords reales.
-        const currentRecordText = document.getElementById('game-record').innerText;
-        const currentRecord = parseFloat(currentRecordText.replace('x', ''));
-
-        if (balloonRisk > currentRecord) {
-            document.getElementById('game-record').innerText = `${balloonRisk.toFixed(2)}x`;
-            alert(`💥 CRASH! ¡NUEVO RÉCORD VIP de Socio Benja con ${balloonRisk.toFixed(2)}x de riesgo!`);
-        } else {
-            alert(`💥 CRASH DETECTADO! El gráfico se rompió en ${balloonRisk.toFixed(2)}x.\n¡Mejora tu análisis!`);
-        }
-
-        // Resetear Juego
-        setTimeout(() => {
-            radarObj.innerText = "";
-            balloonRisk = 1.0;
-            crashPoint = 0; // Nuevo punto de crash simulado para la siguiente partida
-            document.getElementById('game-clicks').innerText = "1.00x";
-            radarObj.style.transform = "scale(1)";
-        }, 1800); 
+    function resetGame() {
+        pressure = 1.0; isLost = false;
+        document.getElementById('balloon-visual').style.transform = "scale(1)";
+        document.getElementById('balloon-visual').style.background = "var(--accent)";
+        document.getElementById('val-clicks').innerText = "1.00x";
     }
-
 </script>
-
 </body>
 </html>
