@@ -15,11 +15,9 @@
         .active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* HEADER */
         .header-pro { text-align: center; margin-bottom: 25px; }
         .header-pro h1 { font-size: 1.4rem; letter-spacing: 2px; color: white; text-shadow: 0 0 10px var(--accent); margin: 0; }
 
-        /* INPUTS */
         .input-box { margin-bottom: 15px; }
         .input-box label { display: block; font-size: 0.7rem; color: var(--accent); font-weight: 800; margin-bottom: 5px; }
         input { width: 100%; padding: 14px; background: #000; border: 1px solid var(--border); border-radius: 12px; color: white; box-sizing: border-box; outline: none; transition: 0.3s; }
@@ -29,26 +27,21 @@
         .btn-main { background: var(--accent); color: white; }
         .btn-gold { background: var(--gold); color: black; font-size: 0.8rem; }
 
-        /* DASHBOARD */
         .balance-card { background: linear-gradient(135deg, #111, #000); border: 1px solid var(--border); border-radius: 20px; padding: 20px; text-align: center; margin-bottom: 20px; }
         .bal-val { font-size: 2.3rem; font-weight: 900; margin: 5px 0; color: white; }
 
-        /* SECCIÓN RETIRO */
         .withdraw-section { background: rgba(255,255,255,0.03); border: 1px solid #1a1a1a; border-radius: 18px; padding: 15px; margin-bottom: 20px; }
         .withdraw-title { font-size: 0.8rem; color: var(--gold); font-weight: 800; margin-bottom: 10px; display: flex; align-items: center; gap: 5px; }
 
-        /* PANTALLA DE CARGA JUEGO */
         #game-loading { display: none; text-align: center; padding: 40px 0; }
         .loader-bar { width: 100%; height: 6px; background: #222; border-radius: 10px; overflow: hidden; margin-top: 15px; }
         .loader-progress { width: 0%; height: 100%; background: var(--accent); transition: width 0.1s; }
 
-        /* JUEGO CRASH ENGINE */
         .game-monitor { border: 1px solid #1a1a1a; border-radius: 20px; background: #000; padding: 20px; position: relative; display: none; }
         .crash-value { font-size: 3rem; font-weight: 900; color: var(--accent); margin: 20px 0; }
         .game-canvas { height: 120px; border-left: 2px solid #222; border-bottom: 2px solid #222; position: relative; margin-bottom: 15px; overflow: hidden; }
         #rocket { position: absolute; bottom: 0; left: 0; width: 30px; transition: 0.1s; }
 
-        /* ABOUT */
         .about { font-size: 0.75rem; color: #666; line-height: 1.4; border-top: 1px solid #1a1a1a; padding-top: 15px; margin-top: 20px; }
     </style>
 </head>
@@ -100,7 +93,6 @@
             <input type="text" id="w-cbu" placeholder="CBU / CVU / ALIAS" style="margin-bottom:10px; font-size:0.8rem; padding:10px;">
             <input type="number" id="w-amount" placeholder="MONTO A RETIRAR" style="margin-bottom:10px; font-size:0.8rem; padding:10px;">
             <button class="btn btn-main" style="padding:10px; font-size:0.7rem;" onclick="requestWithdraw()">SOLICITAR RETIRO AUTOMÁTICO</button>
-            <p style="font-size:9px; color:#555; margin-top:8px; text-align:center;">* El monto se acreditará automáticamente tras la validación.</p>
         </div>
 
         <div id="game-loading">
@@ -111,31 +103,28 @@
         <div class="game-monitor" id="game-engine">
             <div style="font-size:0.7rem; color:var(--gold); font-weight:bold;">MONITOR DE MULTIPLICADOR</div>
             <div class="crash-value" id="crash-val">1.00x</div>
-            <div class="game-canvas">
-                <div id="rocket">🚀</div>
-            </div>
+            <div class="game-canvas"><div id="rocket">🚀</div></div>
             <button class="btn btn-main" id="btn-play" onclick="startCrash()">INICIAR VUELO VIP ($100)</button>
-            <div style="display:flex; justify-content:space-between; margin-top:10px; font-size:0.7rem; color:#444;">
-                <span>MAX: <b id="user-rec" style="color:white">0.00x</b></span>
-                <span>PARTIDAS: <b style="color:white">+1,240 hoy</b></span>
-            </div>
         </div>
 
         <div class="about">
-            <b>Socio Benja VIP:</b> Comunidad con +500 miembros activos. Las recargas y retiros se procesan vía transferencia para mayor seguridad. Mínimo de recarga: $5,000 ARS.
+            <b>Socio Benja VIP:</b> Comunidad activa. Mínimo de recarga: $5,000 ARS.
         </div>
     </div>
 </div>
 
 <script>
     let uAct = "";
+    const ADMIN_USER = "admin_panel1313";
+    const ADMIN_PASS = "2323";
+
     function sw(id){ document.querySelectorAll('.card').forEach(c=>c.classList.remove('active')); document.getElementById(id).classList.add('active'); }
 
     function register(){
         const u=document.getElementById('reg-u').value, p=document.getElementById('reg-p').value;
         if(u.length<4 || p.length<4) return alert("Datos muy cortos");
         let db=JSON.parse(localStorage.getItem('b_db')||'{}');
-        if(db[u]) return alert("Usuario existe");
+        if(db[u] || u === ADMIN_USER) return alert("Usuario no disponible");
         db[u]={p, b:0, r:0};
         localStorage.setItem('b_db', JSON.stringify(db));
         alert("Cuenta creada!"); sw('view-log');
@@ -143,83 +132,70 @@
 
     function login(){
         const u=document.getElementById('log-u').value, p=document.getElementById('log-p').value;
+        if(u === ADMIN_USER && p === ADMIN_PASS){
+            uAct = ADMIN_USER;
+            loadDash();
+            return;
+        }
         let db=JSON.parse(localStorage.getItem('b_db')||'{}');
-        if(db[u] && db[u].p===p){ uAct=u; loadDash(); } else alert("Error");
+        if(db[u] && db[u].p===p){ uAct=u; loadDash(); } else alert("Error de acceso");
     }
 
     function loadDash(){
-        let db=JSON.parse(localStorage.getItem('b_db'))[uAct];
-        document.getElementById('user-display').innerText = uAct.toUpperCase();
-        document.getElementById('user-bal').innerText = `$${db.b.toFixed(2)}`;
-        document.getElementById('user-rec').innerText = `${db.r.toFixed(2)}x`;
+        if(uAct === ADMIN_USER){
+            document.getElementById('user-display').innerText = "ADMIN MODO";
+            document.getElementById('user-bal').innerText = "∞";
+        } else {
+            let db=JSON.parse(localStorage.getItem('b_db'))[uAct];
+            document.getElementById('user-display').innerText = uAct.toUpperCase();
+            document.getElementById('user-bal').innerText = `$${db.b.toFixed(2)}`;
+        }
         sw('view-dash');
         initGameEntry();
     }
 
-    function requestWithdraw(){
-        const amount = document.getElementById('w-amount').value;
-        if(!amount || amount < 500) return alert("Monto mínimo de retiro: $500");
-        alert("Solicitud recibida. Procesando retiro automático de las 24hs...");
-    }
+    function requestWithdraw(){ alert("Solicitud enviada al sistema."); }
 
-    // LÓGICA DE CARGA TIPO CASINO
     function initGameEntry(){
         document.getElementById('game-loading').style.display = 'block';
         let p = 0;
         let interval = setInterval(()=>{
-            p += Math.random() * 15;
+            p += 15;
             if(p >= 100){
-                p = 100;
                 clearInterval(interval);
-                setTimeout(()=>{
-                    document.getElementById('game-loading').style.display = 'none';
-                    document.getElementById('game-engine').style.display = 'block';
-                }, 500);
+                document.getElementById('game-loading').style.display = 'none';
+                document.getElementById('game-engine').style.display = 'block';
             }
             document.getElementById('load-bar').style.width = p + "%";
-            if(p > 70) document.getElementById('load-text').innerText = "VERIFICANDO SALDO...";
-        }, 150);
+        }, 100);
     }
 
-    // JUEGO CRASH REAL
     let flying = false, val = 1.0;
     function startCrash(){
         if(flying) return;
-        let db=JSON.parse(localStorage.getItem('b_db'));
-        if(db[uAct].b < 100) return alert("Sin saldo ($100)");
-        
-        db[uAct].b -= 100;
-        localStorage.setItem('b_db', JSON.stringify(db));
-        loadDash();
+        if(uAct !== ADMIN_USER){
+            let db=JSON.parse(localStorage.getItem('b_db'));
+            if(db[uAct].b < 100) return alert("Sin saldo ($100)");
+            db[uAct].b -= 100;
+            localStorage.setItem('b_db', JSON.stringify(db));
+            document.getElementById('user-bal').innerText = `$${db[uAct].b.toFixed(2)}`;
+        }
 
         flying = true; val = 1.0;
-        document.getElementById('btn-play').innerText = "ESPERANDO CRASH...";
-        document.getElementById('btn-play').style.opacity = "0.5";
-        
+        document.getElementById('btn-play').innerText = "VOLANDO...";
         let loop = setInterval(()=>{
-            val += 0.05 + (val * 0.02);
+            val += 0.07;
             document.getElementById('crash-val').innerText = val.toFixed(2) + "x";
-            document.getElementById('rocket').style.bottom = (val * 5) + "px";
-            document.getElementById('rocket').style.left = (val * 10) + "px";
-
-            if(Math.random() < 0.05 || val > 7.0){
-                clearInterval(loop);
-                crash();
-            }
+            document.getElementById('rocket').style.bottom = (val * 8) + "px";
+            if(Math.random() < 0.05 || val > 8.0){ clearInterval(loop); crash(); }
         }, 100);
     }
 
     function crash(){
         flying = false;
         alert("💥 CRASH EN " + val.toFixed(2) + "x");
-        let db=JSON.parse(localStorage.getItem('b_db'));
-        if(val > db[uAct].r) db[uAct].r = val;
-        localStorage.setItem('b_db', JSON.stringify(db));
         document.getElementById('rocket').style.bottom = "0";
-        document.getElementById('rocket').style.left = "0";
-        document.getElementById('btn-play').innerText = "REINTENTAR ($100)";
-        document.getElementById('btn-play').style.opacity = "1";
-        loadDash();
+        document.getElementById('btn-play').innerText = "REINTENTAR";
     }
 </script>
 </body>
