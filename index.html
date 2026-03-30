@@ -3,36 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Socio Benja VIP | Elite Wholesale Panel</title>
+    <title>Socio Benja VIP | Elite Gateway</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
-            --gold: #d4af37; --bg: #030303; --card: #111;
-            --glass: rgba(255, 255, 255, 0.03); --btn-grad: linear-gradient(90deg, #d4af37, #f2d06b);
+            --gold: #d4af37; --bg: #030303; --glass: rgba(255, 255, 255, 0.05);
         }
 
-        body, html { margin: 0; padding: 0; background: var(--bg); color: white; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        body, html {
+            height: 100%; margin: 0; font-family: 'Inter', sans-serif;
+            background: var(--bg); color: white; overflow: hidden;
+        }
+
+        /* FONDO DE SEGURIDAD */
+        .secure-bg {
+            position: fixed; width: 100%; height: 100%;
+            background: radial-gradient(circle at center, #111 0%, #000 100%);
+            z-index: -1;
+        }
 
         /* --- SECCIÓN DE ACCESO --- */
-        #auth-container {
+        #auth-screen {
             display: flex; align-items: center; justify-content: center;
-            height: 100vh; width: 100%; position: fixed; z-index: 9999;
-            background: radial-gradient(circle at center, #111 0%, #000 100%);
+            height: 100vh; width: 100%; padding: 20px; box-sizing: border-box;
             transition: 0.8s ease-in-out;
         }
 
-        .auth-card {
+        .login-card {
             background: rgba(20, 20, 20, 0.8); backdrop-filter: blur(20px);
             border: 1px solid rgba(212, 175, 55, 0.2);
             padding: 40px 30px; border-radius: 30px;
-            width: 90%; max-width: 380px; text-align: center;
+            width: 100%; max-width: 400px; text-align: center;
         }
 
-        .auth-card i.main-icon { font-size: 50px; color: var(--gold); margin-bottom: 20px; }
-        .auth-card h2 { margin: 0; font-weight: 800; letter-spacing: 2px; }
-        .auth-card p { color: #555; font-size: 11px; margin-bottom: 30px; text-transform: uppercase; }
+        .login-card i.main-icon { font-size: 50px; color: var(--gold); margin-bottom: 20px; }
+        .login-card h2 { margin: 0; font-weight: 800; letter-spacing: 2px; }
+        .login-card p { color: #555; font-size: 11px; margin-bottom: 30px; text-transform: uppercase; }
 
-        .input-group { margin-bottom: 15px; position: relative; text-align: left; }
+        .input-group { margin-bottom: 15px; position: relative; }
         .input-group i { position: absolute; left: 15px; top: 18px; color: var(--gold); }
         
         input {
@@ -41,192 +49,150 @@
             box-sizing: border-box; font-size: 14px; outline: none;
         }
 
-        .btn-auth {
+        .btn-access {
             width: 100%; padding: 18px; background: var(--gold); color: black;
             border: none; border-radius: 12px; font-weight: 900; cursor: pointer;
             text-transform: uppercase; margin-top: 10px;
         }
 
-        /* --- SECCIÓN DEL PANEL (OCULTO) --- */
-        #main-panel { display: none; padding: 15px; max-width: 480px; margin: auto; }
-
-        header { text-align: center; padding: 30px 0; }
-        .logo { font-size: 30px; font-weight: 900; }
-        .logo span { color: var(--gold); }
-        .tagline { font-size: 10px; color: #444; letter-spacing: 3px; }
-
-        .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
-        .stat-box { background: var(--card); padding: 15px; border-radius: 15px; border: 1px solid var(--glass); text-align: center; }
-        .stat-box b { color: var(--gold); font-size: 20px; display: block; }
-        .stat-box small { font-size: 9px; color: #555; text-transform: uppercase; }
-
-        /* TABS */
-        .tabs { display: flex; gap: 10px; margin-bottom: 20px; }
-        .tab { flex: 1; background: var(--card); padding: 15px; border-radius: 12px; text-align: center; cursor: pointer; opacity: 0.5; }
-        .tab.active { opacity: 1; border: 1px solid var(--gold); color: var(--gold); }
-
-        /* PRODUCTOS */
-        .product-list { display: none; animation: fadeIn 0.5s ease; }
-        .product-list.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        .card { background: var(--card); border-radius: 20px; padding: 20px; margin-bottom: 15px; border: 1px solid var(--glass); }
-        .card-title { font-size: 20px; font-weight: 800; color: var(--gold); margin: 0; }
-        .card-price { font-size: 18px; color: #888; margin: 10px 0 20px; }
-
-        .btn-buy {
-            display: block; width: 100%; padding: 16px; background: var(--btn-grad);
-            color: black; text-decoration: none; border-radius: 12px;
-            font-weight: 900; text-align: center; font-size: 13px;
+        /* PANTALLA DE CARGA (Ajustada a tu video) */
+        #loading-screen { display: none; text-align: center; }
+        .spinner-vip {
+            width: 50px; height: 50px; border: 3px solid rgba(212, 175, 55, 0.1);
+            border-top-color: var(--gold); border-radius: 50%;
+            animation: spin 1s infinite; margin: auto;
         }
-
-        /* NOTIFICACIÓN */
-        #notif {
-            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
-            background: white; color: black; padding: 12px 20px; border-radius: 50px;
-            font-size: 12px; font-weight: bold; display: flex; align-items: center; gap: 10px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5); z-index: 10000; opacity: 0; transition: 0.5s;
-        }
-
-        #loading { display: none; text-align: center; margin-top: 20px; }
-        .spinner { width: 40px; height: 40px; border: 3px solid rgba(212, 175, 55, 0.1); border-top-color: var(--gold); border-radius: 50%; animation: spin 1s infinite; margin: auto; }
         @keyframes spin { to { transform: rotate(360deg); } }
+        .load-text-vip { color: var(--gold); font-size: 12px; letter-spacing: 2px; margin-top: 20px; }
+
+        /* --- POP-UP DE BIENVENIDA ÉLITE (NUEVO) --- */
+        #welcome-popup {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8); backdrop-filter: blur(10px);
+            z-index: 10000; display: none; align-items: center; justify-content: center;
+            opacity: 0; transition: 0.5s ease;
+        }
+
+        .popup-card {
+            background: var(--bg); border: 2px solid var(--gold);
+            border-radius: 20px; width: 90%; max-width: 400px;
+            padding: 30px; text-align: center;
+        }
+
+        .popup-header i { font-size: 30px; color: var(--gold); margin-bottom: 15px; }
+        .popup-header h3 { margin: 0; color: white; font-weight: 900; letter-spacing: 2px; }
+        
+        .popup-info { color: #888; font-size: 12px; line-height: 1.6; margin: 20px 0; }
+        .popup-info b { color: var(--gold); }
+
+        .payment-box {
+            background: #111; border: 1px dashed var(--gold);
+            padding: 15px; border-radius: 10px; margin-bottom: 25px;
+            font-size: 11px; color: #666; text-align: left;
+        }
+
+        .btn-confirm {
+            width: 100%; padding: 16px; background: var(--gold); color: black;
+            border: none; border-radius: 10px; font-weight: bold; cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        /* EL PANEL PRINCIPAL (OCULTO) */
+        #main-panel { display: none; height: 100vh; }
     </style>
 </head>
 <body>
 
-<div id="auth-container">
-    <div class="auth-card" id="login-form">
-        <i class="fas fa-user-shield main-icon"></i>
+<div class="secure-bg"></div>
+
+<section id="auth-screen">
+    <div class="login-card" id="login-form">
+        <i class="fas fa-id-card main-icon"></i>
         <h2>BENJA VIP</h2>
         <p>Elite Social Wholesale Platform</p>
         
         <div id="auth-inputs">
             <div class="input-group">
                 <i class="fas fa-user"></i>
-                <input type="text" id="user-input" placeholder="Crea tu Usuario">
+                <input type="text" id="user-input" placeholder="Nombre de Usuario">
             </div>
             <div class="input-group">
                 <i class="fas fa-lock"></i>
-                <input type="password" id="pass-input" placeholder="Crea tu Contraseña">
+                <input type="password" id="pass-input" placeholder="Contraseña Maestra">
             </div>
-            <button class="btn-auth" onclick="handleAuth()">INGRESAR AL PANEL</button>
+            <button class="btn-access" onclick="startLoading()">Acceder al Panel</button>
         </div>
 
-        <div id="loading">
-            <div class="spinner"></div>
-            <p id="load-text" style="color: var(--gold); font-size: 12px; margin-top: 15px;">ENCRIPTANDO SESIÓN...</p>
+        <div id="loading-screen">
+            <div class="spinner-vip"></div>
+            <p id="load-text-vip" class="load-text-vip">ENCRIPTANDO SESIÓN...</p>
         </div>
     </div>
-</div>
+</section>
+
+<section id="welcome-popup">
+    <div class="popup-card">
+        <div class="popup-header">
+            <i class="fas fa-crown"></i>
+            <h3>CONEXIÓN ÉLITE</h3>
+        </div>
+        
+        <p class="popup-info">
+            Bienvenido al <b>Panel Mayorista Nº1 de Argentina</b>. Impulsá tu crecimiento y el de tus clientes con nuestra infraestructura social de alta retención. Carga inmediata y estatus garantizado.
+        </p>
+
+        <div class="payment-box">
+            <i class="fas fa-shield-alt" style="color:var(--gold);"></i> 
+            <b>PAGOS BLINDADOS:</b><br>
+            Todos los pagos son seguros. Utilizamos exclusivamente <b>transferencia bancaria directa</b> para garantizar la máxima seguridad y trazabilidad del cliente.
+        </div>
+
+        <button class="btn-confirm" onclick="openPanel()">Entendido, Acceder al Panel</button>
+    </div>
+</section>
 
 <div id="main-panel">
-    <header>
-        <div class="logo">BENJA <span>VIP</span></div>
-        <div class="tagline">GLOBAL REACH PANEL</div>
-    </header>
-
-    <div class="stats-grid">
-        <div class="stat-box"><b>1,255</b><small>Órdenes Hoy</small></div>
-        <div class="stat-box"><b>99.9%</b><small>Uptime Servidor</small></div>
-    </div>
-
-    <div class="tabs">
-        <div class="tab active" onclick="switchTab('ig', this)"><i class="fab fa-instagram"></i></div>
-        <div class="tab" onclick="switchTab('tk', this)"><i class="fab fa-tiktok"></i></div>
-        <div class="tab" onclick="switchTab('wa', this)"><i class="fab fa-whatsapp"></i></div>
-    </div>
-
-    <div id="ig" class="product-list active">
-        <div class="card">
-            <p class="card-title">20.000 SEGUIDORES</p>
-            <p class="card-price">$30.000 AR$</p>
-            <a href="javascript:void(0)" onclick="buy('Pack 20k Instagram')" class="btn-buy">ADQUIRIR ESTE PRODUCTO</a>
-        </div>
-        <div class="card">
-            <p class="card-title">100.000 SEGUIDORES</p>
-            <p class="card-price">$80.000 AR$</p>
-            <a href="javascript:void(0)" onclick="buy('Pack 100k Instagram')" class="btn-buy" style="background: white;">ADQUIRIR ESTE PRODUCTO</a>
-        </div>
-    </div>
-
-    <div id="tk" class="product-list">
-        <div class="card">
-            <p class="card-title">20.000 SEGUIDORES TK</p>
-            <p class="card-price">$35.000 AR$</p>
-            <a href="javascript:void(0)" onclick="buy('Pack 20k TikTok')" class="btn-buy">ADQUIRIR ESTE PRODUCTO</a>
-        </div>
-    </div>
-
-    <div id="wa" class="product-list">
-        <div class="card">
-            <p class="card-title">COMBO REACCIONES</p>
-            <p class="card-price">$65.000 AR$</p>
-            <a href="javascript:void(0)" onclick="buy('Combo Reacciones WhatsApp')" class="btn-buy">ADQUIRIR ESTE PRODUCTO</a>
-        </div>
-    </div>
-</div>
-
-<div id="notif">
-    <i class="fas fa-check-circle" style="color: #2ecc71;"></i>
-    <span id="notif-text">Venta de 20k a @lauty_ok</span>
+    <h1 style="color:white; text-align:center; padding-top:50px;">EL PANEL SE HA CARGADO</h1>
 </div>
 
 <script>
-    // FUNCION DE ACCESO
-    function handleAuth() {
+    function startLoading() {
         const u = document.getElementById('user-input').value;
         const p = document.getElementById('pass-input').value;
-        if(!u || !p) return alert("Crea un usuario y clave primero");
+        if(u === "" || p === "") return alert("Por favor, ingrese sus credenciales VIP.");
 
         document.getElementById('auth-inputs').style.display = 'none';
-        document.getElementById('loading').style.display = 'block';
+        document.getElementById('loading-screen').style.display = 'block';
 
-        const logs = ["VERIFICANDO...", "ACCESO MAYORISTA...", "BIENVENIDO"];
+        const logs = ["VERIFICANDO...", "ESTABLECIENDO TÚNEL...", "BIENVENIDO"];
         let i = 0;
         const interval = setInterval(() => {
-            document.getElementById('load-text').innerText = logs[i];
+            document.getElementById('load-text-vip').innerText = logs[i];
             i++;
             if(i >= logs.length) {
                 clearInterval(interval);
-                document.getElementById('auth-container').style.opacity = '0';
-                setTimeout(() => {
-                    document.getElementById('auth-container').style.display = 'none';
-                    document.getElementById('main-panel').style.display = 'block';
-                    startNotifs();
-                }, 800);
+                showPopup();
             }
+        }, 1000); // Ajustado a 1s por mensaje
+    }
+
+    function showPopup() {
+        document.getElementById('auth-screen').style.opacity = '0';
+        setTimeout(() => {
+            document.getElementById('auth-screen').style.display = 'none';
+            document.getElementById('welcome-popup').style.display = 'flex';
+            setTimeout(() => { document.getElementById('welcome-popup').style.opacity = '1'; }, 100);
         }, 800);
     }
 
-    // TABS
-    function switchTab(id, el) {
-        document.querySelectorAll('.product-list').forEach(l => l.classList.remove('active'));
-        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-        document.getElementById(id).classList.add('active');
-        el.classList.add('active');
-    }
-
-    // COMPRA WHATSAPP
-    function buy(prod) {
-        const id = Math.floor(Math.random() * 9000) + 1000;
-        const msg = `Hola Benja, quiero ADQUIRIR ESTE PRODUCTO: ${prod}. ID DE ORDEN: #${id}`;
-        window.location.href = `https://wa.me/5493364546172?text=${encodeURIComponent(msg)}`;
-    }
-
-    // NOTIFICACIONES DINAMICAS (+1000 nombres)
-    const n = ["Santi", "Valen", "Mateo", "Lauty", "Fran", "Agus", "Sofi", "Martu", "Luci"];
-    const s = ["_ok", ".vip", "22", "07", "_ig", ""];
-    
-    function startNotifs() {
-        setInterval(() => {
-            const user = `@${n[Math.floor(Math.random()*n.length)]}${s[Math.floor(Math.random()*s.length)]}`.toLowerCase();
-            document.getElementById('notif-text').innerText = `Nuevo pedido de ${user}`;
-            const div = document.getElementById('notif');
-            div.style.opacity = '1';
-            div.style.bottom = '40px';
-            setTimeout(() => { div.style.opacity = '0'; div.style.bottom = '20px'; }, 3000);
-        }, 7000);
+    function openPanel() {
+        document.getElementById('welcome-popup').style.opacity = '0';
+        setTimeout(() => {
+            document.getElementById('welcome-popup').style.display = 'none';
+            document.getElementById('main-panel').style.display = 'block';
+            document.body.style.overflow = 'auto';
+            alert("Acceso Élite Concedido. Bienvenido a Benja VIP.");
+        }, 500);
     }
 </script>
 
