@@ -3,223 +3,159 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BENJA VIP | PRO WHOLESALE PANEL</title>
+    <title>Socio Benja VIP | Secure Access</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
-            --accent: #d4af37; --bg: #050505; --card: #111;
-            --glass: rgba(255, 255, 255, 0.03); --btn-grad: linear-gradient(90deg, #d4af37, #f2d06b);
+            --gold: #d4af37; --bg: #030303; --glass: rgba(255, 255, 255, 0.05);
         }
 
-        body {
-            background: var(--bg); color: white; font-family: 'Segoe UI', Roboto, sans-serif;
-            margin: 0; padding: 0; overflow-x: hidden;
+        body, html {
+            height: 100%; margin: 0; font-family: 'Montserrat', sans-serif;
+            background: var(--bg); color: white; overflow: hidden;
         }
 
-        /* FONTO TECNOLÓGICO */
-        .bg-glow {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 50% 0%, #1a1a1a 0%, #050505 100%);
+        /* FONDO DINÁMICO */
+        .auth-bg {
+            position: fixed; width: 100%; height: 100%;
+            background: radial-gradient(circle at center, #111 0%, #000 100%);
             z-index: -1;
         }
 
-        .container { width: 100%; max-width: 480px; margin: auto; padding: 15px; box-sizing: border-box; }
-
-        /* HEADER ELITE */
-        header { text-align: center; padding: 30px 0; border-bottom: 1px solid var(--glass); margin-bottom: 20px; }
-        .logo { font-size: 32px; font-weight: 900; letter-spacing: -1px; }
-        .logo span { color: var(--accent); }
-        .wholesale-tag { font-size: 10px; background: #222; color: var(--accent); padding: 4px 12px; border-radius: 5px; letter-spacing: 2px; border: 1px solid #333; }
-
-        /* STATS */
-        .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
-        .stat-box { background: var(--card); padding: 15px; border-radius: 15px; border: 1px solid var(--glass); text-align: center; }
-        .stat-box small { font-size: 9px; color: #666; text-transform: uppercase; display: block; }
-        .stat-box b { font-size: 20px; color: var(--accent); }
-
-        /* TABS */
-        .tabs { display: flex; gap: 8px; margin-bottom: 25px; }
-        .tab { 
-            flex: 1; padding: 15px; background: var(--card); border-radius: 12px; 
-            text-align: center; cursor: pointer; border: 1px solid transparent; transition: 0.3s;
+        /* CONTENEDOR DE LOGIN */
+        #auth-screen {
+            display: flex; align-items: center; justify-content: center;
+            height: 100vh; width: 100%; padding: 20px; box-sizing: border-box;
+            transition: 0.8s ease-in-out;
         }
-        .tab.active { border-color: var(--accent); background: rgba(212, 175, 55, 0.05); }
-        .tab i { display: block; font-size: 20px; margin-bottom: 5px; color: #555; }
-        .tab.active i { color: var(--accent); }
 
-        /* PRODUCT CARDS */
-        .product-grid { display: none; animation: fadeIn 0.5s ease forwards; }
-        .product-grid.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        .card { 
-            background: var(--card); border-radius: 20px; padding: 20px; 
-            margin-bottom: 15px; border: 1px solid var(--glass); position: relative;
+        .login-card {
+            background: var(--glass); backdrop-filter: blur(20px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            padding: 40px 30px; border-radius: 30px;
+            width: 100%; max-width: 400px; text-align: center;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
         }
-        .card::after { content: 'PRECIO MAYORISTA'; position: absolute; top: 15px; right: 20px; font-size: 8px; color: #444; border: 1px solid #333; padding: 2px 6px; border-radius: 4px; }
+
+        .login-card i.main-icon {
+            font-size: 50px; color: var(--gold); margin-bottom: 20px;
+            filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.5));
+        }
+
+        .login-card h2 { margin: 0; font-weight: 800; letter-spacing: 2px; }
+        .login-card p { color: #666; font-size: 12px; margin-bottom: 30px; text-transform: uppercase; }
+
+        .input-group { margin-bottom: 15px; position: relative; }
+        .input-group i { position: absolute; left: 15px; top: 18px; color: var(--gold); }
         
-        .p-title { font-size: 22px; font-weight: 800; margin: 0; }
-        .p-desc { font-size: 11px; color: #666; margin: 5px 0 15px; }
-        .p-price { font-size: 24px; font-weight: 900; color: var(--accent); margin-bottom: 20px; display: block; }
-
-        .btn-buy { 
-            background: var(--btn-grad); color: black; text-decoration: none;
-            display: flex; align-items: center; justify-content: center; gap: 10px;
-            padding: 18px; border-radius: 12px; font-weight: 800; font-size: 13px;
-            text-transform: uppercase; transition: 0.3s; box-shadow: 0 5px 20px rgba(212, 175, 55, 0.2);
+        input {
+            width: 100%; background: rgba(0,0,0,0.3); border: 1px solid #222;
+            padding: 15px 15px 15px 45px; border-radius: 12px; color: white;
+            box-sizing: border-box; font-size: 14px; outline: none; transition: 0.3s;
         }
-        .btn-buy:active { transform: scale(0.96); }
+        input:focus { border-color: var(--gold); box-shadow: 0 0 15px rgba(212, 175, 55, 0.1); }
 
-        /* NOTIFICACIONES DINÁMICAS PRO */
-        #sales-notif {
-            position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%);
-            background: white; color: black; padding: 12px 25px; border-radius: 50px;
-            font-size: 12px; font-weight: bold; display: flex; align-items: center; gap: 12px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.8); z-index: 1000;
-            opacity: 0; transition: 0.5s ease; width: max-content;
+        .btn-login {
+            width: 100%; padding: 18px; background: var(--gold); color: black;
+            border: none; border-radius: 12px; font-weight: 900; cursor: pointer;
+            text-transform: uppercase; letter-spacing: 1px; margin-top: 10px;
+            transition: 0.3s;
         }
-        #sales-notif i { color: #2ecc71; font-size: 16px; }
+        .btn-login:hover { transform: translateY(-2px); filter: brightness(1.1); }
 
-        footer { text-align: center; color: #333; font-size: 11px; padding: 40px 0; }
+        /* PANTALLA DE CARGA */
+        #loader {
+            display: none; text-align: center;
+        }
+        .spinner {
+            width: 50px; height: 50px; border: 3px solid rgba(212, 175, 55, 0.1);
+            border-top-color: var(--gold); border-radius: 50%;
+            animation: spin 1s linear infinite; margin: auto;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* EL PANEL (OCULTO AL INICIO) */
+        #main-panel {
+            display: none; height: 100vh; overflow-y: auto;
+        }
     </style>
 </head>
 <body>
 
-<div class="bg-glow"></div>
+<div class="auth-bg"></div>
 
-<div class="container">
-    <header>
-        <div class="logo">BENJA <span>VIP</span></div>
-        <div class="wholesale-tag">PRO MAYORISTA & ECONÓMICO</div>
-    </header>
-
-    <div class="stats">
-        <div class="stat-box">
-            <small>Órdenes Hoy</small>
-            <b id="orders-count">2,415</b>
+<section id="auth-screen">
+    <div class="login-card" id="login-form">
+        <i class="fas fa-fingerprint main-icon"></i>
+        <h2>BIENVENIDO</h2>
+        <p>Elite Growth Gateway V5.0</p>
+        
+        <div class="input-group">
+            <i class="fas fa-user"></i>
+            <input type="text" id="user" placeholder="Nombre de Usuario">
         </div>
-        <div class="stat-box">
-            <small>Usuarios Online</small>
-            <b id="online-count">482</b>
+        <div class="input-group">
+            <i class="fas fa-lock"></i>
+            <input type="password" id="pass" placeholder="Contraseña de Acceso">
         </div>
+        
+        <button class="btn-login" onclick="startAuth()">Acceder al Panel</button>
+        <div style="margin-top: 20px; font-size: 10px; color: #444;">ACCESO RESTRINGIDO A SOCIOS VIP</div>
     </div>
 
-    <div class="tabs">
-        <div class="tab active" onclick="switchTab('ig', this)"><i class="fab fa-instagram"></i></div>
-        <div class="tab" onclick="switchTab('tk', this)"><i class="fab fa-tiktok"></i></div>
-        <div class="tab" onclick="switchTab('wa', this)"><i class="fab fa-whatsapp"></i></div>
+    <div id="loader">
+        <div class="spinner"></div>
+        <h3 id="loader-text" style="color: var(--gold); margin-top: 20px; letter-spacing: 2px;">VERIFICANDO...</h3>
+        <p style="font-size: 10px; color: #444;">SECURE TUNNEL ESTABLISHED</p>
     </div>
+</section>
 
-    <div id="ig" class="product-grid active">
-        <div class="card">
-            <p class="p-title">20k SEGUIDORES</p>
-            <p class="p-desc">Alta retención • Entrega inmediata • Sistema mayorista</p>
-            <span class="p-price">$30.000 AR$</span>
-            <a href="javascript:void(0)" onclick="sendToWA('Pack 20k Instagram')" class="btn-buy">
-                ADQUIRIR ESTE PRODUCTO
-            </a>
-        </div>
-        <div class="card">
-            <p class="p-title">100k SEGUIDORES</p>
-            <p class="p-desc">Pack Influencer • El más económico del mercado</p>
-            <span class="p-price">$80.000 AR$</span>
-            <a href="javascript:void(0)" onclick="sendToWA('Pack 100k Instagram (ELITE)')" class="btn-buy" style="background: white;">
-                ADQUIRIR ESTE PRODUCTO
-            </a>
-        </div>
+<div id="main-panel">
+    <iframe src="tu_panel_principal.html" style="width:100%; height:100vh; border:none;"></iframe>
     </div>
-
-    <div id="tk" class="product-grid">
-        <div class="card">
-            <p class="p-title">20k SEGUIDORES TK</p>
-            <p class="p-desc">Perfiles reales • Sin caídas • Precio Mayorista</p>
-            <span class="p-price">$35.000 AR$</span>
-            <a href="javascript:void(0)" onclick="sendToWA('Pack 20k TikTok')" class="btn-buy">
-                ADQUIRIR ESTE PRODUCTO
-            </a>
-        </div>
-    </div>
-
-    <div id="wa" class="product-grid">
-        <div class="card">
-            <p class="p-title">COMBO REACCIONES</p>
-            <p class="p-desc">100k + 70k Extra • Especial Canales</p>
-            <span class="p-price">$65.000 AR$</span>
-            <a href="javascript:void(0)" onclick="sendToWA('Combo Reacciones WA')" class="btn-buy">
-                ADQUIRIR ESTE PRODUCTO
-            </a>
-        </div>
-    </div>
-
-    <footer>
-        <p>SISTEMA DE DISTRIBUCIÓN MAYORISTA BENJA VIP</p>
-        <p>CONEXIÓN ENCRIPTADA CON SERVIDORES GLOBALES</p>
-    </footer>
-</div>
-
-<div id="sales-notif">
-    <i class="fas fa-shopping-cart"></i>
-    <span id="notif-text">Venta de 20k a @santi_gomez</span>
-</div>
 
 <script>
-    const whatsappNumber = "5493364546172";
+    function startAuth() {
+        const u = document.getElementById('user').value;
+        const p = document.getElementById('pass').value;
 
-    // GENERADOR DE NOMBRES (+1000 combinaciones posibles)
-    const nombres = ["Santi", "Valen", "Thiago", "Mateo", "Lauty", "Juani", "Nico", "Fran", "Agus", "Benja", "Mati", "Emma", "Sofi", "Martu", "Luci", "Flor", "Mica", "Cande"];
-    const apellidos = ["Gomez", "Rodriguez", "Perez", "Fernandez", "Lopez", "Martinez", "Diaz", "Sosa", "Gonzalez", "Romero", "Alvarez", "Torres", "Ruiz", "Silva"];
-    const separadores = ["_", ".", "", "07", "22", "ok", "vip"];
+        if(u === "" || p === "") {
+            alert("Por favor, ingrese sus credenciales VIP.");
+            return;
+        }
 
-    function getRandomUser() {
-        const n = nombres[Math.floor(Math.random() * nombres.length)];
-        const a = apellidos[Math.floor(Math.random() * apellidos.length)];
-        const s = separadores[Math.floor(Math.random() * separadores.length)];
-        return `@${n}${s}${a}`.toLowerCase();
+        // OCULTAR FORMULARIO Y MOSTRAR LOADER
+        document.getElementById('login-form').style.display = 'none';
+        document.getElementById('loader').style.display = 'block';
+
+        const mensajes = [
+            "VERIFICANDO CREDENCIALES...",
+            "ESTABLECIENDO CONEXIÓN SEGURA...",
+            "OPTIMIZANDO PROTOCOLO SOCIAL...",
+            "BIENVENIDO, SOCIO VIP"
+        ];
+
+        let i = 0;
+        const interval = setInterval(() => {
+            document.getElementById('loader-text').innerText = mensajes[i];
+            i++;
+            if(i >= mensajes.length) {
+                clearInterval(interval);
+                unlockPanel();
+            }
+        }, 800);
     }
 
-    // WHATSAPP REDIRECT CON ORDEN ÚNICA
-    function sendToWA(producto) {
-        const orderId = Math.floor(Math.random() * 90000) + 10000;
-        const text = `SISTEMA MAYORISTA: Hola Benja, deseo ADQUIRIR ESTE PRODUCTO: *${producto}*. \n\nID DE ORDEN: #${orderId} \nESTADO: Pendiente de pago.`;
-        window.location.href = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`;
-    }
-
-    // TABS SWITCH
-    function switchTab(id, el) {
-        document.querySelectorAll('.product-grid').forEach(g => g.classList.remove('active'));
-        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-        document.getElementById(id).classList.add('active');
-        el.classList.add('active');
-    }
-
-    // NOTIFICACIONES DINÁMICAS REALES
-    const productos = ["20k Instagram", "50k Instagram", "100k Instagram", "20k TikTok", "Reacciones WA"];
-    
-    function showNotif() {
-        const div = document.getElementById('sales-notif');
-        const user = getRandomUser();
-        const prod = productos[Math.floor(Math.random() * productos.length)];
-        document.getElementById('notif-text').innerText = `Nuevo pedido de ${prod} para ${user}`;
-        
-        div.style.opacity = '1';
-        div.style.bottom = '40px';
-        
+    function unlockPanel() {
+        document.getElementById('auth-screen').style.opacity = '0';
         setTimeout(() => {
-            div.style.opacity = '0';
-            div.style.bottom = '25px';
-        }, 3500);
+            document.getElementById('auth-screen').style.display = 'none';
+            document.getElementById('main-panel').style.display = 'block';
+            document.body.style.overflow = 'auto';
+            // Aquí puedes disparar una notificación de bienvenida
+            alert("Acceso Concedido. Bienvenido a Benja VIP.");
+        }, 800);
     }
-
-    setInterval(showNotif, 7000);
-
-    // CONTADORES VIVOS
-    setInterval(() => {
-        const orders = document.getElementById('orders-count');
-        orders.innerText = (parseInt(orders.innerText.replace(',','')) + Math.floor(Math.random()*2)).toLocaleString();
-        
-        const online = document.getElementById('online-count');
-        online.innerText = Math.floor(Math.random() * (520 - 450) + 450);
-    }, 4000);
 </script>
 
 </body>
