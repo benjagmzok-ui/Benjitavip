@@ -3,200 +3,230 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Benja VIP | Secure Gateway</title>
+    <title>Socio Benja VIP | Elite Wholesale Panel</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
-            --gold: #d4af37; --bg: #050505; --glass: rgba(255, 255, 255, 0.03);
-            --grad: linear-gradient(135deg, #d4af37 0%, #f2d06b 100%);
+            --gold: #d4af37; --bg: #030303; --card: #111;
+            --glass: rgba(255, 255, 255, 0.03); --btn-grad: linear-gradient(90deg, #d4af37, #f2d06b);
         }
 
-        body, html {
-            height: 100%; margin: 0; font-family: 'Inter', sans-serif;
-            background: var(--bg); color: white; overflow: hidden;
-        }
+        body, html { margin: 0; padding: 0; background: var(--bg); color: white; font-family: 'Inter', sans-serif; overflow-x: hidden; }
 
-        /* FONDO DE SEGURIDAD */
-        .secure-bg {
-            position: fixed; width: 100%; height: 100%;
-            background-image: 
-                radial-gradient(circle at 20% 30%, rgba(212, 175, 55, 0.05) 0%, transparent 50%),
-                radial-gradient(circle at 80% 70%, rgba(212, 175, 55, 0.05) 0%, transparent 50%);
-            z-index: -1;
-        }
-
+        /* --- SECCIÓN DE ACCESO --- */
         #auth-container {
             display: flex; align-items: center; justify-content: center;
-            height: 100vh; padding: 20px; box-sizing: border-box;
+            height: 100vh; width: 100%; position: fixed; z-index: 9999;
+            background: radial-gradient(circle at center, #111 0%, #000 100%);
+            transition: 0.8s ease-in-out;
         }
 
         .auth-card {
-            background: rgba(15, 15, 15, 0.8); backdrop-filter: blur(25px);
-            border: 1px solid rgba(212, 175, 55, 0.15);
-            padding: 40px 30px; border-radius: 25px;
-            width: 100%; max-width: 400px; text-align: center;
-            box-shadow: 0 40px 100px rgba(0,0,0,0.8);
-            position: relative; animation: slideIn 0.6s ease;
+            background: rgba(20, 20, 20, 0.8); backdrop-filter: blur(20px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            padding: 40px 30px; border-radius: 30px;
+            width: 90%; max-width: 380px; text-align: center;
         }
 
-        @keyframes slideIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        .auth-card i.main-icon { font-size: 50px; color: var(--gold); margin-bottom: 20px; }
+        .auth-card h2 { margin: 0; font-weight: 800; letter-spacing: 2px; }
+        .auth-card p { color: #555; font-size: 11px; margin-bottom: 30px; text-transform: uppercase; }
 
-        .auth-header i { font-size: 45px; color: var(--gold); margin-bottom: 15px; }
-        .auth-header h2 { margin: 0; font-weight: 900; letter-spacing: 3px; font-size: 24px; }
-        .auth-header p { font-size: 10px; color: #555; letter-spacing: 2px; margin: 10px 0 30px; }
-
-        /* INPUTS PRO */
-        .input-box { margin-bottom: 20px; position: relative; }
-        .input-box i { position: absolute; left: 18px; top: 18px; color: #444; transition: 0.3s; }
+        .input-group { margin-bottom: 15px; position: relative; text-align: left; }
+        .input-group i { position: absolute; left: 15px; top: 18px; color: var(--gold); }
         
         input {
-            width: 100%; background: #0a0a0a; border: 1px solid #1a1a1a;
-            padding: 18px 18px 18px 50px; border-radius: 15px; color: white;
-            box-sizing: border-box; font-size: 14px; outline: none; transition: 0.3s;
-        }
-        input:focus { border-color: var(--gold); background: #000; }
-        input:focus + i { color: var(--gold); }
-
-        /* BOTONES */
-        .btn-main {
-            width: 100%; padding: 18px; background: var(--grad); color: black;
-            border: none; border-radius: 15px; font-weight: 900; cursor: pointer;
-            text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px;
-            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.2);
+            width: 100%; background: #000; border: 1px solid #222;
+            padding: 16px 15px 16px 45px; border-radius: 12px; color: white;
+            box-sizing: border-box; font-size: 14px; outline: none;
         }
 
-        .btn-switch {
-            background: transparent; color: var(--gold); border: none;
-            font-size: 12px; cursor: pointer; text-decoration: underline;
+        .btn-auth {
+            width: 100%; padding: 18px; background: var(--gold); color: black;
+            border: none; border-radius: 12px; font-weight: 900; cursor: pointer;
+            text-transform: uppercase; margin-top: 10px;
         }
 
-        /* PANTALLA DE PROCESAMIENTO */
-        #loading-screen {
-            display: none; text-align: center;
+        /* --- SECCIÓN DEL PANEL (OCULTO) --- */
+        #main-panel { display: none; padding: 15px; max-width: 480px; margin: auto; }
+
+        header { text-align: center; padding: 30px 0; }
+        .logo { font-size: 30px; font-weight: 900; }
+        .logo span { color: var(--gold); }
+        .tagline { font-size: 10px; color: #444; letter-spacing: 3px; }
+
+        .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+        .stat-box { background: var(--card); padding: 15px; border-radius: 15px; border: 1px solid var(--glass); text-align: center; }
+        .stat-box b { color: var(--gold); font-size: 20px; display: block; }
+        .stat-box small { font-size: 9px; color: #555; text-transform: uppercase; }
+
+        /* TABS */
+        .tabs { display: flex; gap: 10px; margin-bottom: 20px; }
+        .tab { flex: 1; background: var(--card); padding: 15px; border-radius: 12px; text-align: center; cursor: pointer; opacity: 0.5; }
+        .tab.active { opacity: 1; border: 1px solid var(--gold); color: var(--gold); }
+
+        /* PRODUCTOS */
+        .product-list { display: none; animation: fadeIn 0.5s ease; }
+        .product-list.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .card { background: var(--card); border-radius: 20px; padding: 20px; margin-bottom: 15px; border: 1px solid var(--glass); }
+        .card-title { font-size: 20px; font-weight: 800; color: var(--gold); margin: 0; }
+        .card-price { font-size: 18px; color: #888; margin: 10px 0 20px; }
+
+        .btn-buy {
+            display: block; width: 100%; padding: 16px; background: var(--btn-grad);
+            color: black; text-decoration: none; border-radius: 12px;
+            font-weight: 900; text-align: center; font-size: 13px;
         }
-        .matrix-loader {
-            width: 60px; height: 60px; border: 2px solid transparent;
-            border-top-color: var(--gold); border-bottom-color: var(--gold);
-            border-radius: 50%; animation: spin 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
-            margin: 0 auto 25px;
+
+        /* NOTIFICACIÓN */
+        #notif {
+            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+            background: white; color: black; padding: 12px 20px; border-radius: 50px;
+            font-size: 12px; font-weight: bold; display: flex; align-items: center; gap: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5); z-index: 10000; opacity: 0; transition: 0.5s;
         }
+
+        #loading { display: none; text-align: center; margin-top: 20px; }
+        .spinner { width: 40px; height: 40px; border: 3px solid rgba(212, 175, 55, 0.1); border-top-color: var(--gold); border-radius: 50%; animation: spin 1s infinite; margin: auto; }
         @keyframes spin { to { transform: rotate(360deg); } }
-
-        /* EL PANEL (AQUÍ PEGARÁS TU PANEL ANTERIOR) */
-        #final-panel { display: none; height: 100vh; overflow-y: auto; }
     </style>
 </head>
 <body>
 
-<div class="secure-bg"></div>
-
 <div id="auth-container">
-    <div class="auth-card" id="login-view">
-        <div class="auth-header">
-            <i class="fas fa-shield-alt"></i>
-            <h2>BIENVENIDO</h2>
-            <p>ELITE GROWTH GATEWAY V5.0</p>
-        </div>
+    <div class="auth-card" id="login-form">
+        <i class="fas fa-user-shield main-icon"></i>
+        <h2>BENJA VIP</h2>
+        <p>Elite Social Wholesale Platform</p>
         
-        <div class="input-box">
-            <i class="fas fa-user-circle"></i>
-            <input type="text" id="login-user" placeholder="Usuario o Email">
+        <div id="auth-inputs">
+            <div class="input-group">
+                <i class="fas fa-user"></i>
+                <input type="text" id="user-input" placeholder="Crea tu Usuario">
+            </div>
+            <div class="input-group">
+                <i class="fas fa-lock"></i>
+                <input type="password" id="pass-input" placeholder="Crea tu Contraseña">
+            </div>
+            <button class="btn-auth" onclick="handleAuth()">INGRESAR AL PANEL</button>
         </div>
-        <div class="input-box">
-            <i class="fas fa-fingerprint"></i>
-            <input type="password" id="login-pass" placeholder="Contraseña Maestra">
-        </div>
-        
-        <button class="btn-main" onclick="processAuth('login')">Acceder al Panel</button>
-        <button class="btn-switch" onclick="toggleView('register')">¿No tienes cuenta? Regístrate aquí</button>
-    </div>
 
-    <div class="auth-card" id="register-view" style="display: none;">
-        <div class="auth-header">
-            <i class="fas fa-user-plus"></i>
-            <h2>NUEVO SOCIO</h2>
-            <p>CREA TU ACCESO MAYORISTA</p>
+        <div id="loading">
+            <div class="spinner"></div>
+            <p id="load-text" style="color: var(--gold); font-size: 12px; margin-top: 15px;">ENCRIPTANDO SESIÓN...</p>
         </div>
-        
-        <div class="input-box">
-            <i class="fas fa-user"></i>
-            <input type="text" id="reg-user" placeholder="Define tu Usuario">
-        </div>
-        <div class="input-box">
-            <i class="fas fa-lock"></i>
-            <input type="password" id="reg-pass" placeholder="Crea tu Contraseña">
-        </div>
-        
-        <button class="btn-main" onclick="processAuth('register')">Crear mi Cuenta VIP</button>
-        <button class="btn-switch" onclick="toggleView('login')">Ya soy socio, iniciar sesión</button>
-    </div>
-
-    <div class="auth-card" id="loading-screen">
-        <div class="matrix-loader"></div>
-        <h3 id="status-text" style="color: var(--gold); letter-spacing: 2px;">INICIANDO TÚNEL...</h3>
-        <p style="font-size: 10px; color: #444;">SECURITY PROTOCOL ACTIVE</p>
     </div>
 </div>
 
-<div id="final-panel">
-    <h1 style="text-align:center; margin-top:50px;">EL PANEL SE HA CARGADO CON ÉXITO</h1>
+<div id="main-panel">
+    <header>
+        <div class="logo">BENJA <span>VIP</span></div>
+        <div class="tagline">GLOBAL REACH PANEL</div>
+    </header>
+
+    <div class="stats-grid">
+        <div class="stat-box"><b>1,255</b><small>Órdenes Hoy</small></div>
+        <div class="stat-box"><b>99.9%</b><small>Uptime Servidor</small></div>
+    </div>
+
+    <div class="tabs">
+        <div class="tab active" onclick="switchTab('ig', this)"><i class="fab fa-instagram"></i></div>
+        <div class="tab" onclick="switchTab('tk', this)"><i class="fab fa-tiktok"></i></div>
+        <div class="tab" onclick="switchTab('wa', this)"><i class="fab fa-whatsapp"></i></div>
+    </div>
+
+    <div id="ig" class="product-list active">
+        <div class="card">
+            <p class="card-title">20.000 SEGUIDORES</p>
+            <p class="card-price">$30.000 AR$</p>
+            <a href="javascript:void(0)" onclick="buy('Pack 20k Instagram')" class="btn-buy">ADQUIRIR ESTE PRODUCTO</a>
+        </div>
+        <div class="card">
+            <p class="card-title">100.000 SEGUIDORES</p>
+            <p class="card-price">$80.000 AR$</p>
+            <a href="javascript:void(0)" onclick="buy('Pack 100k Instagram')" class="btn-buy" style="background: white;">ADQUIRIR ESTE PRODUCTO</a>
+        </div>
+    </div>
+
+    <div id="tk" class="product-list">
+        <div class="card">
+            <p class="card-title">20.000 SEGUIDORES TK</p>
+            <p class="card-price">$35.000 AR$</p>
+            <a href="javascript:void(0)" onclick="buy('Pack 20k TikTok')" class="btn-buy">ADQUIRIR ESTE PRODUCTO</a>
+        </div>
+    </div>
+
+    <div id="wa" class="product-list">
+        <div class="card">
+            <p class="card-title">COMBO REACCIONES</p>
+            <p class="card-price">$65.000 AR$</p>
+            <a href="javascript:void(0)" onclick="buy('Combo Reacciones WhatsApp')" class="btn-buy">ADQUIRIR ESTE PRODUCTO</a>
+        </div>
+    </div>
+</div>
+
+<div id="notif">
+    <i class="fas fa-check-circle" style="color: #2ecc71;"></i>
+    <span id="notif-text">Venta de 20k a @lauty_ok</span>
 </div>
 
 <script>
-    let registeredUser = "Benja1313"; // Por defecto
-    let registeredPass = "12345";
+    // FUNCION DE ACCESO
+    function handleAuth() {
+        const u = document.getElementById('user-input').value;
+        const p = document.getElementById('pass-input').value;
+        if(!u || !p) return alert("Crea un usuario y clave primero");
 
-    function toggleView(view) {
-        document.getElementById('login-view').style.display = view === 'login' ? 'block' : 'none';
-        document.getElementById('register-view').style.display = view === 'register' ? 'block' : 'none';
-    }
+        document.getElementById('auth-inputs').style.display = 'none';
+        document.getElementById('loading').style.display = 'block';
 
-    function processAuth(type) {
-        if(type === 'register') {
-            registeredUser = document.getElementById('reg-user').value;
-            registeredPass = document.getElementById('reg-pass').value;
-            if(!registeredUser || !registeredPass) return alert("Completa los datos");
-        } else {
-            const u = document.getElementById('login-user').value;
-            const p = document.getElementById('login-pass').value;
-            if(u !== registeredUser || p !== registeredPass) {
-                return alert("Credenciales incorrectas o usuario no registrado.");
-            }
-        }
-
-        startLoading();
-    }
-
-    function startLoading() {
-        document.getElementById('login-view').style.display = 'none';
-        document.getElementById('register-view').style.display = 'none';
-        document.getElementById('loading-screen').style.display = 'block';
-
-        const logs = [
-            "GENERANDO LLAVES CRIPTOGRÁFICAS...",
-            "VERIFICANDO ESTATUS MAYORISTA...",
-            "CONECTANDO CON SERVIDORES API...",
-            "ACCESO CONCEDIDO: BIENVENIDO"
-        ];
-
-        let step = 0;
+        const logs = ["VERIFICANDO...", "ACCESO MAYORISTA...", "BIENVENIDO"];
+        let i = 0;
         const interval = setInterval(() => {
-            document.getElementById('status-text').innerText = logs[step];
-            step++;
-            if(step >= logs.length) {
+            document.getElementById('load-text').innerText = logs[i];
+            i++;
+            if(i >= logs.length) {
                 clearInterval(interval);
-                finishAuth();
+                document.getElementById('auth-container').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('auth-container').style.display = 'none';
+                    document.getElementById('main-panel').style.display = 'block';
+                    startNotifs();
+                }, 800);
             }
-        }, 1000);
+        }, 800);
     }
 
-    function finishAuth() {
-        document.getElementById('auth-container').style.opacity = '0';
-        setTimeout(() => {
-            document.getElementById('auth-container').style.display = 'none';
-            document.getElementById('final-panel').style.display = 'block';
-            alert("Bienvenido, " + registeredUser + ". Tu sesión está activa.");
-        }, 500);
+    // TABS
+    function switchTab(id, el) {
+        document.querySelectorAll('.product-list').forEach(l => l.classList.remove('active'));
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+        el.classList.add('active');
+    }
+
+    // COMPRA WHATSAPP
+    function buy(prod) {
+        const id = Math.floor(Math.random() * 9000) + 1000;
+        const msg = `Hola Benja, quiero ADQUIRIR ESTE PRODUCTO: ${prod}. ID DE ORDEN: #${id}`;
+        window.location.href = `https://wa.me/5493364546172?text=${encodeURIComponent(msg)}`;
+    }
+
+    // NOTIFICACIONES DINAMICAS (+1000 nombres)
+    const n = ["Santi", "Valen", "Mateo", "Lauty", "Fran", "Agus", "Sofi", "Martu", "Luci"];
+    const s = ["_ok", ".vip", "22", "07", "_ig", ""];
+    
+    function startNotifs() {
+        setInterval(() => {
+            const user = `@${n[Math.floor(Math.random()*n.length)]}${s[Math.floor(Math.random()*s.length)]}`.toLowerCase();
+            document.getElementById('notif-text').innerText = `Nuevo pedido de ${user}`;
+            const div = document.getElementById('notif');
+            div.style.opacity = '1';
+            div.style.bottom = '40px';
+            setTimeout(() => { div.style.opacity = '0'; div.style.bottom = '20px'; }, 3000);
+        }, 7000);
     }
 </script>
 
