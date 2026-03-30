@@ -3,158 +3,200 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Socio Benja VIP | Secure Access</title>
+    <title>Benja VIP | Secure Gateway</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
-            --gold: #d4af37; --bg: #030303; --glass: rgba(255, 255, 255, 0.05);
+            --gold: #d4af37; --bg: #050505; --glass: rgba(255, 255, 255, 0.03);
+            --grad: linear-gradient(135deg, #d4af37 0%, #f2d06b 100%);
         }
 
         body, html {
-            height: 100%; margin: 0; font-family: 'Montserrat', sans-serif;
+            height: 100%; margin: 0; font-family: 'Inter', sans-serif;
             background: var(--bg); color: white; overflow: hidden;
         }
 
-        /* FONDO DINÁMICO */
-        .auth-bg {
+        /* FONDO DE SEGURIDAD */
+        .secure-bg {
             position: fixed; width: 100%; height: 100%;
-            background: radial-gradient(circle at center, #111 0%, #000 100%);
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(212, 175, 55, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(212, 175, 55, 0.05) 0%, transparent 50%);
             z-index: -1;
         }
 
-        /* CONTENEDOR DE LOGIN */
-        #auth-screen {
+        #auth-container {
             display: flex; align-items: center; justify-content: center;
-            height: 100vh; width: 100%; padding: 20px; box-sizing: border-box;
-            transition: 0.8s ease-in-out;
+            height: 100vh; padding: 20px; box-sizing: border-box;
         }
 
-        .login-card {
-            background: var(--glass); backdrop-filter: blur(20px);
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            padding: 40px 30px; border-radius: 30px;
+        .auth-card {
+            background: rgba(15, 15, 15, 0.8); backdrop-filter: blur(25px);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            padding: 40px 30px; border-radius: 25px;
             width: 100%; max-width: 400px; text-align: center;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            box-shadow: 0 40px 100px rgba(0,0,0,0.8);
+            position: relative; animation: slideIn 0.6s ease;
         }
 
-        .login-card i.main-icon {
-            font-size: 50px; color: var(--gold); margin-bottom: 20px;
-            filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.5));
-        }
+        @keyframes slideIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
-        .login-card h2 { margin: 0; font-weight: 800; letter-spacing: 2px; }
-        .login-card p { color: #666; font-size: 12px; margin-bottom: 30px; text-transform: uppercase; }
+        .auth-header i { font-size: 45px; color: var(--gold); margin-bottom: 15px; }
+        .auth-header h2 { margin: 0; font-weight: 900; letter-spacing: 3px; font-size: 24px; }
+        .auth-header p { font-size: 10px; color: #555; letter-spacing: 2px; margin: 10px 0 30px; }
 
-        .input-group { margin-bottom: 15px; position: relative; }
-        .input-group i { position: absolute; left: 15px; top: 18px; color: var(--gold); }
+        /* INPUTS PRO */
+        .input-box { margin-bottom: 20px; position: relative; }
+        .input-box i { position: absolute; left: 18px; top: 18px; color: #444; transition: 0.3s; }
         
         input {
-            width: 100%; background: rgba(0,0,0,0.3); border: 1px solid #222;
-            padding: 15px 15px 15px 45px; border-radius: 12px; color: white;
+            width: 100%; background: #0a0a0a; border: 1px solid #1a1a1a;
+            padding: 18px 18px 18px 50px; border-radius: 15px; color: white;
             box-sizing: border-box; font-size: 14px; outline: none; transition: 0.3s;
         }
-        input:focus { border-color: var(--gold); box-shadow: 0 0 15px rgba(212, 175, 55, 0.1); }
+        input:focus { border-color: var(--gold); background: #000; }
+        input:focus + i { color: var(--gold); }
 
-        .btn-login {
-            width: 100%; padding: 18px; background: var(--gold); color: black;
-            border: none; border-radius: 12px; font-weight: 900; cursor: pointer;
-            text-transform: uppercase; letter-spacing: 1px; margin-top: 10px;
-            transition: 0.3s;
+        /* BOTONES */
+        .btn-main {
+            width: 100%; padding: 18px; background: var(--grad); color: black;
+            border: none; border-radius: 15px; font-weight: 900; cursor: pointer;
+            text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px;
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.2);
         }
-        .btn-login:hover { transform: translateY(-2px); filter: brightness(1.1); }
 
-        /* PANTALLA DE CARGA */
-        #loader {
+        .btn-switch {
+            background: transparent; color: var(--gold); border: none;
+            font-size: 12px; cursor: pointer; text-decoration: underline;
+        }
+
+        /* PANTALLA DE PROCESAMIENTO */
+        #loading-screen {
             display: none; text-align: center;
         }
-        .spinner {
-            width: 50px; height: 50px; border: 3px solid rgba(212, 175, 55, 0.1);
-            border-top-color: var(--gold); border-radius: 50%;
-            animation: spin 1s linear infinite; margin: auto;
+        .matrix-loader {
+            width: 60px; height: 60px; border: 2px solid transparent;
+            border-top-color: var(--gold); border-bottom-color: var(--gold);
+            border-radius: 50%; animation: spin 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+            margin: 0 auto 25px;
         }
         @keyframes spin { to { transform: rotate(360deg); } }
 
-        /* EL PANEL (OCULTO AL INICIO) */
-        #main-panel {
-            display: none; height: 100vh; overflow-y: auto;
-        }
+        /* EL PANEL (AQUÍ PEGARÁS TU PANEL ANTERIOR) */
+        #final-panel { display: none; height: 100vh; overflow-y: auto; }
     </style>
 </head>
 <body>
 
-<div class="auth-bg"></div>
+<div class="secure-bg"></div>
 
-<section id="auth-screen">
-    <div class="login-card" id="login-form">
-        <i class="fas fa-fingerprint main-icon"></i>
-        <h2>BIENVENIDO</h2>
-        <p>Elite Growth Gateway V5.0</p>
+<div id="auth-container">
+    <div class="auth-card" id="login-view">
+        <div class="auth-header">
+            <i class="fas fa-shield-alt"></i>
+            <h2>BIENVENIDO</h2>
+            <p>ELITE GROWTH GATEWAY V5.0</p>
+        </div>
         
-        <div class="input-group">
+        <div class="input-box">
+            <i class="fas fa-user-circle"></i>
+            <input type="text" id="login-user" placeholder="Usuario o Email">
+        </div>
+        <div class="input-box">
+            <i class="fas fa-fingerprint"></i>
+            <input type="password" id="login-pass" placeholder="Contraseña Maestra">
+        </div>
+        
+        <button class="btn-main" onclick="processAuth('login')">Acceder al Panel</button>
+        <button class="btn-switch" onclick="toggleView('register')">¿No tienes cuenta? Regístrate aquí</button>
+    </div>
+
+    <div class="auth-card" id="register-view" style="display: none;">
+        <div class="auth-header">
+            <i class="fas fa-user-plus"></i>
+            <h2>NUEVO SOCIO</h2>
+            <p>CREA TU ACCESO MAYORISTA</p>
+        </div>
+        
+        <div class="input-box">
             <i class="fas fa-user"></i>
-            <input type="text" id="user" placeholder="Nombre de Usuario">
+            <input type="text" id="reg-user" placeholder="Define tu Usuario">
         </div>
-        <div class="input-group">
+        <div class="input-box">
             <i class="fas fa-lock"></i>
-            <input type="password" id="pass" placeholder="Contraseña de Acceso">
+            <input type="password" id="reg-pass" placeholder="Crea tu Contraseña">
         </div>
         
-        <button class="btn-login" onclick="startAuth()">Acceder al Panel</button>
-        <div style="margin-top: 20px; font-size: 10px; color: #444;">ACCESO RESTRINGIDO A SOCIOS VIP</div>
+        <button class="btn-main" onclick="processAuth('register')">Crear mi Cuenta VIP</button>
+        <button class="btn-switch" onclick="toggleView('login')">Ya soy socio, iniciar sesión</button>
     </div>
 
-    <div id="loader">
-        <div class="spinner"></div>
-        <h3 id="loader-text" style="color: var(--gold); margin-top: 20px; letter-spacing: 2px;">VERIFICANDO...</h3>
-        <p style="font-size: 10px; color: #444;">SECURE TUNNEL ESTABLISHED</p>
+    <div class="auth-card" id="loading-screen">
+        <div class="matrix-loader"></div>
+        <h3 id="status-text" style="color: var(--gold); letter-spacing: 2px;">INICIANDO TÚNEL...</h3>
+        <p style="font-size: 10px; color: #444;">SECURITY PROTOCOL ACTIVE</p>
     </div>
-</section>
+</div>
 
-<div id="main-panel">
-    <iframe src="tu_panel_principal.html" style="width:100%; height:100vh; border:none;"></iframe>
-    </div>
+<div id="final-panel">
+    <h1 style="text-align:center; margin-top:50px;">EL PANEL SE HA CARGADO CON ÉXITO</h1>
+</div>
 
 <script>
-    function startAuth() {
-        const u = document.getElementById('user').value;
-        const p = document.getElementById('pass').value;
+    let registeredUser = "Benja1313"; // Por defecto
+    let registeredPass = "12345";
 
-        if(u === "" || p === "") {
-            alert("Por favor, ingrese sus credenciales VIP.");
-            return;
-        }
-
-        // OCULTAR FORMULARIO Y MOSTRAR LOADER
-        document.getElementById('login-form').style.display = 'none';
-        document.getElementById('loader').style.display = 'block';
-
-        const mensajes = [
-            "VERIFICANDO CREDENCIALES...",
-            "ESTABLECIENDO CONEXIÓN SEGURA...",
-            "OPTIMIZANDO PROTOCOLO SOCIAL...",
-            "BIENVENIDO, SOCIO VIP"
-        ];
-
-        let i = 0;
-        const interval = setInterval(() => {
-            document.getElementById('loader-text').innerText = mensajes[i];
-            i++;
-            if(i >= mensajes.length) {
-                clearInterval(interval);
-                unlockPanel();
-            }
-        }, 800);
+    function toggleView(view) {
+        document.getElementById('login-view').style.display = view === 'login' ? 'block' : 'none';
+        document.getElementById('register-view').style.display = view === 'register' ? 'block' : 'none';
     }
 
-    function unlockPanel() {
-        document.getElementById('auth-screen').style.opacity = '0';
+    function processAuth(type) {
+        if(type === 'register') {
+            registeredUser = document.getElementById('reg-user').value;
+            registeredPass = document.getElementById('reg-pass').value;
+            if(!registeredUser || !registeredPass) return alert("Completa los datos");
+        } else {
+            const u = document.getElementById('login-user').value;
+            const p = document.getElementById('login-pass').value;
+            if(u !== registeredUser || p !== registeredPass) {
+                return alert("Credenciales incorrectas o usuario no registrado.");
+            }
+        }
+
+        startLoading();
+    }
+
+    function startLoading() {
+        document.getElementById('login-view').style.display = 'none';
+        document.getElementById('register-view').style.display = 'none';
+        document.getElementById('loading-screen').style.display = 'block';
+
+        const logs = [
+            "GENERANDO LLAVES CRIPTOGRÁFICAS...",
+            "VERIFICANDO ESTATUS MAYORISTA...",
+            "CONECTANDO CON SERVIDORES API...",
+            "ACCESO CONCEDIDO: BIENVENIDO"
+        ];
+
+        let step = 0;
+        const interval = setInterval(() => {
+            document.getElementById('status-text').innerText = logs[step];
+            step++;
+            if(step >= logs.length) {
+                clearInterval(interval);
+                finishAuth();
+            }
+        }, 1000);
+    }
+
+    function finishAuth() {
+        document.getElementById('auth-container').style.opacity = '0';
         setTimeout(() => {
-            document.getElementById('auth-screen').style.display = 'none';
-            document.getElementById('main-panel').style.display = 'block';
-            document.body.style.overflow = 'auto';
-            // Aquí puedes disparar una notificación de bienvenida
-            alert("Acceso Concedido. Bienvenido a Benja VIP.");
-        }, 800);
+            document.getElementById('auth-container').style.display = 'none';
+            document.getElementById('final-panel').style.display = 'block';
+            alert("Bienvenido, " + registeredUser + ". Tu sesión está activa.");
+        }, 500);
     }
 </script>
 
