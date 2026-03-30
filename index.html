@@ -3,206 +3,235 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BENJA VIP | Official Elite Panel</title>
+    <title>Benja VIP | Elite Growth Platform</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
     <style>
-        :root { --gold: #d4af37; --gold-dark: #aa8c2c; --bg: #050505; --card: #0d0d0d; }
-        body, html { margin: 0; padding: 0; background: var(--bg); color: white; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        :root {
+            --gold-vip: #b8860b; /* Un oro más de lujo (Champagne Gold) */
+            --green-active: #2ecc71; /* El verde que ya te gustó */
+            --dark-bg: #030303; /* Negro casi absoluto */
+            --card-bg: #111; /* Tarjetas oscuras */
+            --border-glass: rgba(255, 255, 255, 0.03); /* Glassmorphism */
+            --inst: #E1306C; --tik: #00f2ea; --wha: #25D366; /* Colores de red */
+        }
 
-        /* --- ACCESO Y REGISTRO (TUS FAVORITOS) --- */
-        #auth-container { display: flex; align-items: center; justify-content: center; height: 100vh; position: fixed; width: 100%; z-index: 10000; background: #000; transition: 0.8s; }
-        .auth-card { background: rgba(15,15,15,0.9); border: 1px solid var(--gold); border-radius: 25px; width: 90%; max-width: 380px; padding: 35px; text-align: center; backdrop-filter: blur(15px); }
-        .auth-tabs { display: flex; gap: 10px; margin: 25px 0; border-bottom: 1px solid #222; }
-        .tab-btn { flex: 1; background: none; border: none; color: #444; padding: 10px; cursor: pointer; font-weight: 900; font-size: 12px; }
-        .tab-btn.active { color: var(--gold); border-bottom: 2px solid var(--gold); }
-        .input-group { position: relative; margin-bottom: 15px; }
-        .input-group i { position: absolute; left: 15px; top: 16px; color: var(--gold); }
-        input { width: 100%; background: #000; border: 1px solid #1a1a1a; padding: 15px 15px 15px 45px; border-radius: 12px; color: white; box-sizing: border-box; }
-        .btn-main { width: 100%; padding: 18px; background: var(--gold); border: none; border-radius: 12px; font-weight: 900; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; }
+        body {
+            background-color: var(--dark-bg);
+            color: white;
+            font-family: 'Poppins', 'Segoe UI', sans-serif; /* Poppins es muy profesional */
+            margin: 0; padding: 0;
+            overflow-x: hidden;
+            display: flex; justify-content: center; align-items: center; min-height: 100vh;
+            background-image: radial-gradient(circle at 50% 10%, #111 0%, #000 70%);
+        }
 
-        /* --- MENSAJE DE BIENVENIDA --- */
-        #info-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 11000; display: none; align-items: center; justify-content: center; text-align: center; }
-        .modal-box { width: 85%; max-width: 400px; padding: 30px; border: 1px solid var(--gold); border-radius: 20px; }
-        .alert-gold { background: rgba(212, 175, 55, 0.05); padding: 15px; border-radius: 10px; border-left: 4px solid var(--gold); text-align: left; font-size: 11px; margin: 20px 0; line-height: 1.5; }
+        .container {
+            width: 100%;
+            max-width: 420px; /* Tamaño ideal para móvil profesional ÉLITE V5.0 */
+            padding: 10px;
+            box-sizing: border-box;
+        }
 
-        /* --- EL MEJOR PANEL DEL MUNDO --- */
-        #main-panel { display: none; padding: 20px; max-width: 500px; margin: auto; animation: fadeInUp 1s ease; }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        /* HEADER SUPREMO */
+        header { text-align: center; margin-bottom: 20px; }
+        h1 { font-size: 28px; font-weight: 800; text-transform: uppercase; margin: 0; line-height: 1.2; }
+        h1 span { color: var(--gold-vip); text-shadow: 0 0 10px rgba(212, 175, 55, 0.3); }
+        .tagline { color: #444; font-size: 10px; text-transform: uppercase; letter-spacing: 3px; margin-top: 5px; }
 
-        .header-elite { text-align: center; padding: 40px 0; }
-        .header-elite h1 { font-family: 'Syncopate', sans-serif; font-size: 28px; margin: 0; letter-spacing: 5px; }
-        .header-elite h1 span { color: var(--gold); }
+        /* TABS TECNOLÓGICAS ÉLITE V5.0 */
+        .tabs { display: flex; gap: 8px; margin-bottom: 20px; background: var(--card-bg); border-radius: 12px; padding: 4px; border: 1px solid #1a1a1a; }
+        .tab { flex: 1; text-align: center; padding: 12px; cursor: pointer; border-radius: 8px; transition: 0.3s; color: #444; }
+        .tab.active { font-weight: bold; }
+        .tab i { font-size: 18px; display: block; margin-bottom: 3px; }
+        .tab-text { font-size: 9px; text-transform: uppercase; letter-spacing: 1px; }
+
+        .tab[data-tab="ig"].active { color: var(--inst); background: rgba(225, 48, 108, 0.05); border: 1px solid var(--inst); }
+        .tab[data-tab="tk"].active { color: #EE1D52; background: rgba(238, 29, 82, 0.05); border: 1px solid #EE1D52; }
+        .tab[data-tab="wa"].active { color: var(--wha); background: rgba(37, 211, 102, 0.05); border: 1px solid var(--wha); }
+
+        /* MÓDULO ALCANCE GLOBAL (NUEVO) */
+        .global-module {
+            background: var(--card-bg); backdrop-filter: blur(10px);
+            border-radius: 20px; border: 1px solid var(--border-glass);
+            padding: 15px; margin-bottom: 20px;
+            text-align: center; position: relative;
+        }
+        .global-title { font-size: 10px; color: #666; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 15px; font-weight: 800; }
+        .map-static { width: 100%; height: 120px; opacity: 0.2; }
         
-        .status-bar { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 30px; }
-        .status-item { background: var(--card); padding: 15px; border-radius: 15px; border: 1px solid #1a1a1a; text-align: center; }
-        .status-item span { display: block; font-size: 20px; font-weight: 900; color: var(--gold); }
-        .status-item small { font-size: 9px; color: #555; text-transform: uppercase; letter-spacing: 1px; }
+        .map-stats { display: flex; justify-content: space-around; margin-top: -20px; position: relative; }
+        .map-stat-item { text-align: center; color: var(--gold-vip); }
+        .map-stat-num { font-size: 16px; font-weight: bold; }
+        .map-stat-desc { font-size: 8px; text-transform: uppercase; color: #444; }
 
-        .nav-services { display: flex; gap: 10px; margin-bottom: 25px; overflow-x: auto; padding-bottom: 10px; }
-        .nav-btn { min-width: 100px; padding: 15px; background: var(--card); border-radius: 15px; border: 1px solid #1a1a1a; cursor: pointer; transition: 0.3s; text-align: center; }
-        .nav-btn.active { border-color: var(--gold); background: rgba(212, 175, 55, 0.05); }
-        .nav-btn i { font-size: 20px; display: block; margin-bottom: 5px; }
+        /* TARJETAS DE SERVICIO ÉLITE MUNDIAL CON EFECTO GLASS V5.0 */
+        .service-list { display: none; grid-template-columns: 1fr 1fr; gap: 10px; animation: slideUp 0.4s ease forwards; }
+        .service-list.active { display: grid; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        .product-grid { display: none; grid-template-columns: 1fr; gap: 15px; }
-        .product-grid.active { display: grid; }
-
-        .card-product { background: var(--card); border-radius: 25px; padding: 25px; border: 1px solid #1a1a1a; position: relative; overflow: hidden; }
-        .card-product::after { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: linear-gradient(45deg, transparent, rgba(212, 175, 55, 0.03), transparent); transform: rotate(45deg); pointer-events: none; }
+        .card-vip {
+            background: var(--card-bg); backdrop-filter: blur(8px);
+            border-radius: 15px; border: 1px solid #1a1a1a;
+            padding: 15px; margin-bottom: 10px;
+            transition: 0.3s;
+            position: relative; overflow: hidden;
+            border: 1px solid transparent;
+        }
         
-        .card-product h3 { margin: 0; font-size: 22px; font-weight: 900; letter-spacing: 1px; }
-        .card-product .price { font-size: 20px; color: #888; margin: 10px 0 25px; display: block; }
-        .card-product .price b { color: white; }
+        /* Hover de lujo Élite */
+        .card-vip:hover { border-color: rgba(212, 175, 55, 0.2); box-shadow: 0 5px 20px rgba(212, 175, 55, 0.05); }
 
-        .btn-buy { display: block; width: 100%; padding: 18px; background: #fff; color: #000; text-decoration: none; border-radius: 15px; font-weight: 900; text-align: center; font-size: 13px; text-transform: uppercase; transition: 0.3s; }
-        .btn-buy.premium { background: var(--gold); }
+        /* Cartel de "MÁS VENDIDO" Élite */
+        .badge-best-seller {
+            position: absolute; top: 0; right: 0;
+            background: linear-gradient(135deg, var(--inst), var(--gold-vip));
+            color: black; font-size: 7px; font-weight: 800; text-transform: uppercase;
+            padding: 4px 10px; border-bottom-left-radius: 8px; letter-spacing: 1px;
+            animation: pulse-best 1.5s infinite;
+        }
+        @keyframes pulse-best { 0% { opacity: 0.8; } 50% { opacity: 1; } 100% { opacity: 0.8; } }
 
-        /* NOTIFICACIÓN FLOTANTE */
-        #notif-box { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: white; color: black; padding: 12px 20px; border-radius: 50px; font-size: 11px; font-weight: 900; display: flex; align-items: center; gap: 10px; box-shadow: 0 15px 40px rgba(0,0,0,0.5); z-index: 12000; opacity: 0; transition: 0.5s; }
+        .card-tag { font-size: 8px; color: #444; text-transform: uppercase; letter-spacing: 2px; }
+        .card-title { font-size: 18px; font-weight: bold; color: var(--gold-vip); margin: 6px 0 2px 0; }
+        .card-price { font-size: 14px; color: #888; font-family: monospace; margin-bottom: 15px; }
+
+        /* Botón de Conversión Blindado Élite */
+        .btn-acquire {
+            display: inline-block; width: 100%; padding: 14px;
+            background: linear-gradient(45deg, #1aa35c, var(--green-active));
+            color: white; border: none; border-radius: 10px;
+            font-weight: 800; font-size: 12px; text-transform: uppercase;
+            cursor: pointer; transition: transform 0.2s, filter 0.2s;
+            text-decoration: none; text-align: center;
+        }
+        .btn-acquire:active { transform: scale(0.97); }
+
+        /* SECCIÓN INFORMACIÓN DE GRADO ÉLITE MAX MAX DEFINITIVO V5.0 */
+        .elite-info-section {
+            background: var(--card-bg); border-radius: 15px; border: 1px solid var(--border-glass);
+            padding: 20px; margin-top: 30px; text-align: center;
+        }
+        .info-header { color: var(--gold-vip); font-size: 11px; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 20px; font-weight: 800; }
+        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .info-box { display: flex; align-items: center; gap: 12px; color: #777; text-align: left; }
+        .info-box i { font-size: 18px; color: var(--gold-vip); }
+        .info-title { font-size: 10px; font-weight: bold; color: #aaa; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 3px; display: block; }
+        .info-desc { font-size: 9px; line-height: 1.4; color:#555; }
+
+        /* Footer Élite Mundlal Maximo */
+        footer { text-align: center; color: #333; font-size: 10px; margin-top: 30px; padding: 15px 0; text-transform: uppercase; letter-spacing: 2px; }
+
     </style>
 </head>
 <body>
 
-<section id="auth-container">
-    <div class="auth-card">
-        <i class="fas fa-crown" style="font-size: 40px; color: var(--gold); margin-bottom: 20px;"></i>
-        <h2>BENJA VIP</h2>
-        <p style="color: #444; font-size: 10px; letter-spacing: 2px;">ELITE SOCIAL SYSTEMS</p>
-        
-        <div class="auth-tabs">
-            <button class="tab-btn active" onclick="switchAuth('login')">INICIAR SESIÓN</button>
-            <button class="tab-btn" onclick="switchAuth('reg')">NUEVA CUENTA</button>
-        </div>
+<div class="container">
 
-        <div id="inputs-box">
-            <div class="input-group"><i class="fas fa-user"></i><input type="text" id="user-val" placeholder="Nombre de Socio"></div>
-            <div class="input-group"><i class="fas fa-lock"></i><input type="password" id="pass-val" placeholder="Clave de Acceso"></div>
-            <button class="btn-main" onclick="processEntry()">Acceder al Panel</button>
-        </div>
-    </div>
-</section>
-
-<section id="info-modal">
-    <div class="modal-box">
-        <h2 style="font-family: 'Syncopate'; font-size: 18px;">BIENVENIDO, <span id="user-display" style="color: var(--gold);">SOCIO</span></h2>
-        <p style="color: #666; font-size: 12px; margin: 20px 0;">Estás ingresando al <b>único panel mayorista de seguidores reales</b>. Aquí cada orden es procesada por servidores dedicados para garantizar la máxima velocidad del mercado.</p>
-        
-        <div class="alert-gold">
-            <i class="fas fa-shield-alt"></i> <b>PROTOCOLO DE PAGO SEGURO:</b><br>
-            Para tu tranquilidad, todos los pagos se gestionan exclusivamente vía <b>Transferencia Bancaria</b>. Este es el método más seguro para compras mayoristas, evitando estafas y protegiendo tu inversión.
-        </div>
-        
-        <button class="btn-main" onclick="launchPanel()">ENTRAR AL PANEL SUPREMO</button>
-    </div>
-</section>
-
-<div id="main-panel">
-    <header class="header-elite">
-        <h1>BENJA <span>VIP</span></h1>
-        <p style="font-size: 9px; color: #444; letter-spacing: 4px; margin-top: 10px;">GLOBAL REACH SOLUTIONS</p>
+    <header>
+        <h1>Benja <span>VIP</span></h1>
+        <div class="tagline">ELITE SOCIAL GROWTH PLATFORM V5.0</div>
     </header>
 
-    <div class="status-bar">
-        <div class="status-item"><span>1,482</span><small>Órdenes Hoy</small></div>
-        <div class="status-item"><span>99.9%</span><small>Server Uptime</small></div>
-    </div>
-
-    <div class="nav-services">
-        <div class="nav-btn active" onclick="showCat('ig', this)"><i class="fab fa-instagram"></i> INSTAGRAM</div>
-        <div class="nav-btn" onclick="showCat('tk', this)"><i class="fab fa-tiktok"></i> TIKTOK</div>
-        <div class="nav-btn" onclick="showCat('wa', this)"><i class="fab fa-whatsapp"></i> WHATSAPP</div>
-    </div>
-
-    <div id="ig" class="product-grid active">
-        <div class="card-product">
-            <h3>20.000 SEGUIDORES</h3>
-            <span class="price">Precio Socio: <b>$30.000 AR$</b></span>
-            <a href="javascript:void(0)" onclick="buy('20k Seguidores Instagram')" class="btn-buy">ADQUIRIR PACK</a>
+    <div class="tabs">
+        <div class="tab active" data-tab="ig" onclick="showTab('ig', this)">
+            <i class="fab fa-instagram"></i><span class="tab-text">Insta VIP</span>
         </div>
-        <div class="card-product">
-            <h3>50.000 SEGUIDORES</h3>
-            <span class="price">Precio Socio: <b>$60.000 AR$</b></span>
-            <a href="javascript:void(0)" onclick="buy('50k Seguidores Instagram')" class="btn-buy">ADQUIRIR PACK</a>
+        <div class="tab" data-tab="tk" onclick="showTab('tk', this)">
+            <i class="fab fa-tiktok"></i><span class="tab-text">Tiktok Elite</span>
         </div>
-        <div class="card-product" style="border-color: var(--gold);">
-            <h3 style="color: var(--gold);">100.000 SEGUIDORES</h3>
-            <span class="price">Pack Elite: <b>$80.000 AR$</b></span>
-            <a href="javascript:void(0)" onclick="buy('100k Seguidores Instagram Elite')" class="btn-buy premium">RECLAMAR PACK ELITE</a>
+        <div class="tab" data-tab="wa" onclick="showTab('wa', this)">
+            <i class="fab fa-whatsapp"></i><span class="tab-text">WA Combo</span>
         </div>
     </div>
 
-    <div id="tk" class="product-grid">
-        <div class="card-product">
-            <h3>20.000 SEGUIDORES TK</h3>
-            <span class="price">Precio Socio: <b>$35.000 AR$</b></span>
-            <a href="javascript:void(0)" onclick="buy('20k Seguidores TikTok')" class="btn-buy">ADQUIRIR PACK</a>
+    <div id="ig" class="service-list active">
+        
+        <div class="card-vip">
+            <div class="badge-best-seller"><i class="fas fa-trophy"></i> Más Vendido</div>
+            <div class="card-tag">High Retention Pack</div>
+            <div class="card-title">20.000 SEGUIDORES</div>
+            <div class="card-price">$30.000 <span style="font-size:10px">AR$</span></div>
+            <a href="https://wa.me/5493364546172?text=SISTEMA:%20Solicito%20Pack%2020k%20Instagram%20Élite%20(Ref:#ORD-BEST-20K)" class="btn-acquire">
+                <i class="fab fa-whatsapp"></i> ADQUIRIR PACK
+            </a>
+        </div>
+
+        <div class="card-vip" style="border: 2px solid var(--gold-vip);">
+            <div class="card-tag" style="color:var(--gold-vip)">Pack Élite MAX</div>
+            <div class="card-title">100.000 SEGUIDORES</div>
+            <div class="card-price" style="color:white"><b>$80.000</b> <span style="font-size:10px">AR$</span></div>
+            <a href="https://wa.me/5493364546172?text=SISTEMA:%20Solicito%20Pack%20Élite%20MAX%20de%20100k%20(Ref:#ORD-MAX-100K)" class="btn-acquire" style="background: var(--gold-vip); color: black;">
+                <i class="fas fa-crown"></i> RECLAMAR PACK ELITE
+            </a>
         </div>
     </div>
 
-    <div id="wa" class="product-grid">
-        <div class="card-product">
-            <h3>100k + 70k REACCIONES</h3>
-            <span class="price">Combo Super: <b>$65.000 AR$</b></span>
-            <a href="javascript:void(0)" onclick="buy('Combo 100k+70k Reacciones')" class="btn-buy premium">ADQUIRIR COMBO 🔥</a>
+    <div id="tk" class="service-list">
+        <div class="card-vip" style="border: 2px solid #EE1D52; border-style: dashed; padding-top: 25px;">
+            <div class="card-tag" style="color:#EE1D52">TikTok Élite</div>
+            <div class="card-title">20.000 SEGUIDORES</div>
+            <div class="card-price">$35.000 <span style="font-size:10px">AR$</span></div>
+            <a href="https://wa.me/5493364546172?text=SISTEMA:%20Solicito%20Pack%20TikTok%20VIP%20(Ref:#TK-5511)" class="btn-acquire" style="background:#EE1D52">
+                <i class="fab fa-whatsapp"></i> ADQUIRIR PACK
+            </a>
         </div>
     </div>
-</div>
 
-<div id="notif-box">
-    <i class="fas fa-check-circle" style="color: #d4af37;"></i>
-    <span id="notif-text">Venta de 100k a @Socio_VIP</span>
+    <div id="wa" class="service-list" style="grid-template-columns: 1fr;">
+        <div class="card-vip" style="border: 2px solid var(--wha);">
+            <div class="card-tag" style="color:var(--wha)">Canales WhatsApp</div>
+            <div class="card-title">100k + 70k REACCIONES</div>
+            <div class="card-price">$65.000 <span style="font-size:10px">AR$</span></div>
+            <a href="https://wa.me/5493364546172?text=SISTEMA:%20Solicito%20Super%20Combo%20Reacciones%20(Ref:#WA-8812)" class="btn-acquire" style="background:#25D366">
+                <i class="fas fa-bolt"></i> ADQUIRIR SUPER COMBO 🔥
+            </a>
+        </div>
+    </div>
+
+    <div class="elite-info-section">
+        <div class="info-header">Garantía Benja VIP</div>
+        
+        <div class="info-grid">
+            <div class="info-box">
+                <i class="fas fa-user-shield"></i>
+                <div>
+                    <span class="info-title">Sin Contraseñas</span>
+                    <span class="info-desc">Cero riesgos. Solo necesitamos tu nombre de usuario.</span>
+                </div>
+            </div>
+            <div class="info-box">
+                <i class="fas fa-lock"></i>
+                <div>
+                    <span class="info-title">Seguridad Total</span>
+                    <span class="info-desc">Métodos seguros y encriptados. Cero bloqueos.</span>
+                </div>
+            </div>
+            <div class="info-box">
+                <i class="fas fa-arrow-up"></i>
+                <div>
+                    <span class="info-title">Sin Caídas</span>
+                    <span class="info-desc">Garantía VIP de recarga gratuita ante cualquier caída.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        Sistema de Carga VIP 🇦🇷 | Elite Growth Platform V5.0
+    </footer>
+
 </div>
 
 <script>
-    let uStored = "Benja_1313"; let pStored = "12345";
+    // CAMBIO DE PESTAÑAS FLUIDO ÉLITE V5.0
+    function showTab(id, el) {
+        // Quitar active de todo
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.service-list').forEach(l => l.classList.remove('active'));
 
-    function switchAuth(mode) {
-        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-        event.target.classList.add('active');
-        if(mode === 'reg') alert("Modo Registro Activo. Define tus nuevas credenciales.");
-    }
-
-    function processEntry() {
-        const u = document.getElementById('user-val').value;
-        const p = document.getElementById('pass-val').value;
-        if(!u || !p) return alert("Completa tus datos de socio.");
-        
-        document.getElementById('user-display').innerText = u.toUpperCase();
-        document.getElementById('auth-container').style.opacity = '0';
-        setTimeout(() => {
-            document.getElementById('auth-container').style.display = 'none';
-            document.getElementById('info-modal').style.display = 'flex';
-        }, 800);
-    }
-
-    function launchPanel() {
-        document.getElementById('info-modal').style.display = 'none';
-        document.getElementById('main-panel').style.display = 'block';
-        startFakeSales();
-    }
-
-    function showCat(id, btn) {
-        document.querySelectorAll('.product-grid').forEach(g => g.classList.remove('active'));
-        document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+        // Poner active
+        el.classList.add('active');
         document.getElementById(id).classList.add('active');
-        btn.classList.add('active');
-    }
-
-    function buy(pack) {
-        const id = Math.floor(Math.random() * 8999) + 1000;
-        const msg = `Hola Benja, soy socio del panel. Deseo adquirir el ${pack}. ID ORDEN: #${id}`;
-        window.location.href = `https://wa.me/5493364546172?text=${encodeURIComponent(msg)}`;
-    }
-
-    function startFakeSales() {
-        const users = ["Lauty_ok", "Sofi.vip", "Mateo22", "Agus_ig", "Martu_f"];
-        setInterval(() => {
-            const user = users[Math.floor(Math.random()*users.length)];
-            document.getElementById('notif-text').innerText = `Nuevo pedido de @${user}`;
-            const box = document.getElementById('notif-box');
-            box.style.opacity = '1'; box.style.bottom = '40px';
-            setTimeout(() => { box.style.opacity = '0'; box.style.bottom = '20px'; }, 3000);
-        }, 8000);
     }
 </script>
 
