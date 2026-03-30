@@ -3,22 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Socio Benja VIP | Elite System</title>
+    <title>Socio Benja VIP | Elite Growth System</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
-            --gold: #d4af37;
-            --green: #2ecc71;
-            --dark-bg: #050505;
-            --card-bg: #111;
-            --text-main: white;
-            --text-gold: #d4af37;
+            --gold-vip: #b8860b; /* Un oro más de lujo (Champagne Gold) */
+            --green-vip: #1aa35c; /* El verde que ya te gustó */
+            --dark-bg: #030303; /* Casi negro absoluto */
+            --card-bg: #111; /* Tarjetas oscuras */
+            --text-gold: #d4af37; /* Oro brillante para textos */
+            --text-main: #fff; /* Blanco */
         }
 
         body {
             background-color: var(--dark-bg);
             color: var(--text-main);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Poppins es muy profesional */
             margin: 0;
             padding: 0;
             display: flex;
@@ -29,21 +29,23 @@
 
         .container {
             width: 100%;
-            max-width: 450px; /* Tamaño ideal para móvil */
-            padding: 20px;
+            max-width: 480px; /* Tamaño ideal para móvil profesional */
+            padding: 15px;
             box-sizing: border-box;
         }
 
-        /* Encabezado Élite */
+        /* Encabezado Élite MÁXIMO */
         header {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
+            position: relative;
         }
 
         h1 {
-            font-size: 32px;
+            font-size: 30px;
             margin: 0;
             line-height: 1.2;
+            font-weight: 800;
         }
 
         h1 span {
@@ -51,12 +53,36 @@
         }
 
         .tagline {
-            color: #555;
-            font-size: 14px;
+            color: #444;
+            font-size: 11px;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
             margin-top: 5px;
         }
+
+        /* Barra de Confianza Dorada (NUEVO) */
+        .trust-bar {
+            background-color: var(--card-bg);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #d4af37; /* El oro de texto */
+            font-size: 11px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .trust-item i { font-size: 14px; }
 
         /* Sistema de Pestañas (Tabs) */
         .tabs-container {
@@ -75,7 +101,7 @@
             padding: 15px;
             cursor: pointer;
             border-radius: 10px;
-            color: #555;
+            color: #444;
             transition: 0.3s;
             display: flex;
             flex-direction: column;
@@ -83,16 +109,11 @@
             gap: 5px;
         }
 
-        .tab i { font-size: 24px; } /* Iconos grandes */
-        .tab-text { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; }
+        .tab i { font-size: 20px; } /* Iconos grandes */
+        .tab-text { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; }
 
         /* Estilo para la pestaña ACTIVA */
-        .tab.active {
-            color: var(--gold);
-            font-weight: bold;
-        }
-
-        /* Pestañas individuales (Personalización de iconos) */
+        .tab.active { font-weight: bold; }
         .tab[data-tab="instagram"].active { color: #E1306C; }
         .tab[data-tab="tiktok"].active { color: #EE1D52; }
         .tab[data-tab="whatsapp"].active { color: #25D366; }
@@ -105,7 +126,7 @@
         /* Muestra el contenedor ACTIVO */
         .services-container.active {
             display: block;
-            animation: fadeIn 0.5s ease; /* Efecto de aparición suave */
+            animation: fadeIn 0.4s ease; /* Efecto suave */
         }
 
         @keyframes fadeIn {
@@ -113,59 +134,59 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Tarjeta de Servicio Profesional */
+        /* Tarjeta de Servicio Profesional VIP */
         .service-card {
             background-color: var(--card-bg);
             border-radius: 20px;
-            padding: 25px;
+            padding: 22px;
             margin-bottom: 20px;
-            border: 1px solid #222;
+            border: 1px solid #1a1a1a;
             transition: 0.3s;
             position: relative;
             overflow: hidden;
         }
 
-        /* Efecto sutil de brillo en Hover */
+        /* Hover sutil de élite */
         .service-card:hover {
-            border-color: var(--gold);
-            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.1);
+            border-color: rgba(212, 175, 55, 0.2);
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.05);
         }
 
         .service-type {
-            font-size: 10px;
+            font-size: 9px;
             color: #555;
             text-transform: uppercase;
             letter-spacing: 2px;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
 
         .service-title {
-            font-size: 22px;
+            font-size: 21px;
             font-weight: bold;
-            color: var(--gold);
-            margin-bottom: 5px;
+            color: var(--text-gold);
+            margin-bottom: 4px;
         }
 
         .service-price {
             font-size: 18px;
-            color: #aaa;
-            margin-bottom: 20px;
+            color: #888;
+            margin-bottom: 18px;
         }
 
-        /* Botón Élite */
+        /* Botón Élite con Efecto Lujo */
         .btn-buy {
             display: inline-block;
             width: 100%;
             padding: 16px;
-            background: linear-gradient(45deg, #1aa35c, var(--green));
+            background: linear-gradient(45deg, var(--green-vip), #2ecc71);
             color: white;
             border: none;
             border-radius: 12px;
             font-weight: bold;
-            font-size: 16px;
+            font-size: 15px;
             text-transform: uppercase;
             cursor: pointer;
-            transition: transform 0.2s;
+            transition: transform 0.2s, filter 0.2s;
             text-decoration: none;
             text-align: center;
         }
@@ -177,11 +198,48 @@
 
         .btn-buy i { margin-right: 10px; }
 
+        /* Sección de Información "Por Qué Nosotros" (NUEVO) */
+        .info-section {
+            background-color: var(--card-bg);
+            border-radius: 20px;
+            padding: 25px;
+            margin-top: 40px;
+            border: 1px solid rgba(212, 175, 55, 0.05);
+            text-align: center;
+        }
+
+        .info-header {
+            color: var(--text-gold);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 25px;
+            font-weight: 800;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 15px;
+        }
+
+        .info-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            color: #777;
+        }
+
+        .info-box i { font-size: 22px; color: var(--gold-vip); }
+        .info-title { font-size: 10px; font-weight: bold; color: #aaa; text-transform: uppercase; letter-spacing: 1px;}
+        .info-desc { font-size: 9px; line-height: 1.4; color:#666; }
+
         /* Footer Élite */
         footer {
             text-align: center;
             color: #333;
-            font-size: 12px;
+            font-size: 11px;
             margin-top: 40px;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -195,8 +253,23 @@
 
     <header>
         <h1>Socio <span>Benja VIP</span></h1>
-        <div class="tagline">Elite Social Growth Systems</div>
+        <div class="tagline">Elite Social Growth System</div>
     </header>
+
+    <div class="trust-bar">
+        <div class="trust-item">
+            <i class="fas fa-users"></i>
+            <span>+500 Clientes</span>
+        </div>
+        <div class="trust-item">
+            <i class="fas fa-check-circle"></i>
+            <span>100% Seguro</span>
+        </div>
+        <div class="trust-item">
+            <i class="fas fa-bolt"></i>
+            <span>Velocidad VIP</span>
+        </div>
+    </div>
 
     <div class="tabs-container">
         <div class="tab active" data-tab="instagram">
@@ -219,7 +292,7 @@
             <div class="service-type">Instagram VIP</div>
             <div class="service-title">20.000 SEGUIDORES</div>
             <div class="service-price">$30.000 <span style="font-size:12px">AR$</span></div>
-            <a href="https://wa.me/+5491100000000?text=Hola%20Benja%20VIP!%20Quiero%20el%20Pack%20de%2020k%20Seguidores" class="btn-buy">
+            <a href="https://wa.me/5493364546172?text=Hola%20Benja%20VIP!%20Quiero%20el%20Pack%20de%2020k%20Seguidores%20Élite" class="btn-buy">
                 <i class="fab fa-whatsapp"></i> Comprar Ahora
             </a>
         </div>
@@ -228,16 +301,16 @@
             <div class="service-type">Instagram VIP</div>
             <div class="service-title">50.000 SEGUIDORES</div>
             <div class="service-price">$60.000 <span style="font-size:12px">AR$</span></div>
-            <a href="https://wa.me/+5491100000000?text=Hola%20Benja%20VIP!%20Quiero%20el%20Pack%20de%2050k%20Seguidores" class="btn-buy">
+            <a href="https://wa.me/5493364546172?text=Hola%20Benja%20VIP!%20Quiero%20el%20Pack%20de%2050k%20Seguidores%20Élite" class="btn-buy">
                 <i class="fab fa-whatsapp"></i> Comprar Ahora
             </a>
         </div>
 
         <div class="service-card">
-            <div class="service-type">Pack Elite</div>
+            <div class="service-type">Pack Élite MAX</div>
             <div class="service-title">100.000 SEGUIDORES</div>
             <div class="service-price">$80.000 <span style="font-size:12px">AR$</span></div>
-            <a href="https://wa.me/+5491100000000?text=Hola%20Benja%20VIP!%20Quiero%20el%20Pack%20Elite%20de%20100k%20Seguidores" class="btn-buy">
+            <a href="https://wa.me/5493364546172?text=Hola%20Benja%20VIP!%20Quiero%20el%20Pack%20Elite%20MAX%20de%20100k%20Seguidores" class="btn-buy">
                 <i class="fab fa-whatsapp"></i> Comprar Ahora
             </a>
         </div>
@@ -245,10 +318,10 @@
 
     <div id="tiktok" class="services-container">
         <div class="service-card" style="border-color: #EE1D52; border-style: dashed;">
-            <div class="service-type" style="color:#EE1D52">TikTok VIP</div>
+            <div class="service-type" style="color:#EE1D52">TikTok Élite</div>
             <div class="service-title">20.000 SEGUIDORES</div>
             <div class="service-price">$35.000 <span style="font-size:12px">AR$</span></div>
-            <a href="https://wa.me/+5491100000000?text=Hola%20Benja%20VIP!%20Quiero%20el%20Pack%20TikTok%20de%2020k%20Seguidores" class="btn-buy" style="background:#EE1D52">
+            <a href="https://wa.me/5493364546172?text=Hola%20Benja%20VIP!%20Quiero%20el%20Pack%20TikTok%20de%2020k%20Seguidores" class="btn-buy" style="background:#EE1D52">
                 <i class="fab fa-whatsapp"></i> Comprar Ahora
             </a>
         </div>
@@ -259,14 +332,40 @@
             <div class="service-type" style="color:#25D366">Canales WhatsApp</div>
             <div class="service-title">100k + 70k REACCIONES</div>
             <div class="service-price">$65.000 <span style="font-size:12px">AR$</span></div>
-            <a href="https://wa.me/+5491100000000?text=Hola%20Benja%20VIP!%20Quiero%20el%20Super%20Combo%20de%20WhatsApp" class="btn-buy" style="background:#25D366">
+            <a href="https://wa.me/5493364546172?text=Hola%20Benja%20VIP!%20Quiero%20el%20Super%20Combo%20de%20WhatsApp" class="btn-buy" style="background:#25D366">
                 <i class="fas fa-bolt"></i> Comprar Super Combo 🔥
             </a>
         </div>
     </div>
 
+    <div class="info-section">
+        <div class="info-header">Garantía Benja VIP</div>
+        
+        <div class="info-grid">
+            
+            <div class="info-box">
+                <i class="fas fa-user-shield"></i>
+                <span class="info-title">Sin Contraseñas</span>
+                <span class="info-desc">Cero riesgos. Solo necesitamos tu nombre de usuario.</span>
+            </div>
+            
+            <div class="info-box">
+                <i class="fas fa-lock"></i>
+                <span class="info-title">Seguridad Total</span>
+                <span class="info-desc">Métodos seguros y encriptados. Cero bloqueos.</span>
+            </div>
+            
+            <div class="info-box">
+                <i class="fas fa-arrow-up"></i>
+                <span class="info-title">Sin Caídas</span>
+                <span class="info-desc">Garantía VIP de recarga gratuita ante cualquier caída.</span>
+            </div>
+        
+        </div>
+    </div>
+
     <footer>
-        100% Seguro y Real 🇦🇷 | Elite Growth Systems
+        Sistema de Carga VIP 🇦🇷 | Elite Growth Systems
     </footer>
 
 </div>
